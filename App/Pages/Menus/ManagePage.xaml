@@ -1,0 +1,182 @@
+﻿<Page
+    x:Class="App.Pages.Menus.ManagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:formatting="using:Windows.Globalization.NumberFormatting"
+    xmlns:local="using:App"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    xmlns:vm="using:App.ViewModels"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="MainGrid"
+        Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
+        SizeChanged="OnMainGridSizeChanged">
+
+        <Grid x:Name="ItemsGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ListView
+                x:Name="LvItems"
+                ui:ListViewExtensions.AlternateColor="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                SelectionChanged="OnItemsListViewSelectionChanged">
+                <ListView.Header>
+                    <Grid
+                        Padding="9,5"
+                        BorderBrush="#808080"
+                        BorderThickness="0,0,0,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.65*" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.4*" />
+                            <ColumnDefinition Width="0.4*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="Name" />
+                        <TextBlock
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Image" />
+                        <TextBlock
+                            Grid.Column="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Price" />
+                        <TextBlock
+                            Grid.Column="3"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Stock" />
+                        <TextBlock
+                            Grid.Column="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Sales" />
+                    </Grid>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ManageItemViewModel">
+                        <Grid Height="40" Margin="0,10,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.65*" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="0.4*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind Name, Mode=OneWay}"
+                                TextTrimming="CharacterEllipsis" />
+                            <Border
+                                Grid.Column="1"
+                                Width="40"
+                                Height="40"
+                                CornerRadius="10">
+                                <Image ImageFailed="OnImageFailed" Source="{x:Bind Image, Mode=OneWay}" Stretch="UniformToFill" />
+                            </Border>
+                            <TextBlock
+                                Grid.Column="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind PriceText, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind StockQuantityText, Mode=OneWay}" />
+                            <TextBlock
+                                Grid.Column="4"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{x:Bind SalesQuantityText, Mode=OneWay}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <CommandBar
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                Background="{ThemeResource LayerOnMicaBaseAltFillColorTertiaryBrush}"
+                DefaultLabelPosition="Right">
+                <AppBarButton
+                    Click="OnAddItemAppBarButtonClicked"
+                    Icon="Add"
+                    Label="Add" />
+                <AppBarButton
+                    x:Name="AbbDelete"
+                    Click="OnDeleteItemAppBarButtonClicked"
+                    Icon="Delete"
+                    IsEnabled="False"
+                    Label="Delete" />
+            </CommandBar>
+        </Grid>
+
+        <ScrollViewer
+            x:Name="SvItem"
+            MinWidth="300"
+            Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}"
+            Visibility="Collapsed">
+            <StackPanel Padding="10" Spacing="5">
+                <Grid
+                    Width="100"
+                    Height="100"
+                    Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
+                    CornerRadius="10">
+                    <Image x:Name="ImgItem" Stretch="UniformToFill" />
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="OnSetupImageButtonClicked">
+                        <SymbolIcon Opacity="0.25" Symbol="Pictures" />
+                    </Button>
+                </Grid>
+                <TextBox
+                    x:Name="TbxName"
+                    Header="Name"
+                    PlaceholderText="Item Name" />
+                <TextBox
+                    x:Name="TbxPrice"
+                    Header="Price"
+                    PlaceholderText="Item Price"
+                    TextChanged="OnMoneyTextBoxTextChanged" />
+                <NumberBox
+                    x:Name="NbxStockQuantity"
+                    Header="Stock"
+                    LargeChange="1"
+                    PlaceholderText="Item Stock Quantity"
+                    SmallChange="1"
+                    SpinButtonPlacementMode="Inline">
+                    <NumberBox.NumberFormatter>
+                        <formatting:DecimalFormatter
+                            FractionDigits="0"
+                            IsDecimalPointAlwaysDisplayed="False"
+                            IsGrouped="True"
+                            SignificantDigits="0" />
+                    </NumberBox.NumberFormatter>
+
+                </NumberBox>
+                <Button
+                    x:Name="BtSave"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Stretch"
+                    Click="OnSaveItemButtonClicked"
+                    Content="Save" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

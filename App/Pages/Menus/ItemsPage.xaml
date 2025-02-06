@@ -1,0 +1,228 @@
+﻿<Page
+    x:Class="App.Pages.Menus.ItemsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:App.Pages.Menus"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:App.ViewModels"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid x:Name="MainGrid" SizeChanged="OnMainGridSizeChanged">
+        <ItemsRepeater x:Name="IrItems" Margin="0,5,0,5">
+            <ItemsRepeater.Layout>
+                <controls:StaggeredLayout ItemsStretch="Fill" />
+            </ItemsRepeater.Layout>
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate x:DataType="vm:ItemViewModel">
+                    <Grid
+                        Height="80"
+                        Margin="5"
+                        ColumnSpacing="10"
+                        Tapped="OnItemTapped"
+                        ToolTipService.ToolTip="{x:Bind Name}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Column="0"
+                            Width="80"
+                            Height="80"
+                            CornerRadius="10">
+                            <Image
+                                ImageFailed="OnImageFailed"
+                                Source="{x:Bind Image, Mode=OneWay}"
+                                Stretch="UniformToFill" />
+                        </Border>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock
+                                FontSize="17"
+                                FontWeight="SemiBold"
+                                Text="{x:Bind Name}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind PriceText, Mode=OneWay}" />
+                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind QuantityText, Mode=OneWay}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+
+        <Grid
+            x:Name="GdPay"
+            Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
+            CornerRadius="10,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Padding="10,5,0,5"
+                    Background="{ThemeResource LayerOnMicaBaseAltFillColorTertiaryBrush}"
+                    ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.65*" />
+                        <ColumnDefinition x:Name="QuantityColumnDefinition" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Text="Name" />
+                    <TextBlock
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Text="Quantity" />
+                    <TextBlock
+                        Grid.Column="2"
+                        HorizontalAlignment="Center"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Text="Price" />
+                    <TextBlock
+                        Grid.Column="3"
+                        HorizontalAlignment="Center"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        Text="Total" />
+                </Grid>
+
+                <ScrollViewer Grid.Row="1" Padding="10,5,0,0">
+                    <ItemsRepeater x:Name="IrTransactions" VerticalAlignment="Stretch">
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="vm:TransactionViewModel">
+                                <Grid
+                                    Margin="0,0,0,5"
+                                    ColumnSpacing="8"
+                                    Unloaded="{x:Bind OnUnloaded}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.65*" />
+                                        <ColumnDefinition Width="{x:Bind QuantityColumnDefinition, Mode=OneWay}" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="0.5*" />
+                                        <ColumnDefinition Width="50" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0,0,5,0"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind ItemName}"
+                                        TextTrimming="CharacterEllipsis" />
+                                    <NumberBox
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Center"
+                                        Minimum="1"
+                                        SpinButtonPlacementMode="{x:Bind SpinButtonPlacementMode, Mode=OneWay}"
+                                        Style="{StaticResource NumberBoxWithNoDeleteButtonStyle}"
+                                        ValueChanged="{x:Bind OnQuantityNumberBoxValueChanged}"
+                                        Value="{x:Bind Quantity, Mode=TwoWay}" />
+                                    <TextBlock
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind ItemPriceText}" />
+                                    <TextBlock
+                                        Grid.Column="3"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="{x:Bind TotalPriceText, Mode=OneWay}" />
+                                    <Button
+                                        Grid.Column="4"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Click="{x:Bind OnDeleteButtonClicked}">
+                                        <SymbolIcon Symbol="Delete" />
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
+                </ScrollViewer>
+
+                <Grid
+                    Grid.Row="2"
+                    Padding="10,5,0,0"
+                    Background="{ThemeResource LayerOnMicaBaseAltFillColorTertiaryBrush}"
+                    ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.65*" />
+                        <ColumnDefinition Width="{Binding ElementName=QuantityColumnDefinition, Path=Width, Mode=OneWay}" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Total" />
+                    <TextBlock
+                        x:Name="TbTotalQuantity"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center" />
+                    <TextBlock
+                        x:Name="TbTotalPrice"
+                        Grid.Column="3"
+                        HorizontalAlignment="Center" />
+                    <Button
+                        Grid.Column="4"
+                        Padding="0,0,0,5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="OnClearItemsButtonClicked">
+                        <SymbolIcon Symbol="Clear" />
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <StackPanel
+                Grid.Row="1"
+                Padding="10"
+                Background="{ThemeResource LayerOnMicaBaseAltFillColorSecondaryBrush}"
+                Spacing="10">
+                <Grid ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        x:Name="TbxReceivedMoney"
+                        Grid.Column="0"
+                        Header="Received Money"
+                        InputScope="Number"
+                        TextChanged="OnReceivedMoneyTextBoxTextChanged" />
+                    <Button
+                        x:Name="BtPay"
+                        Grid.Column="1"
+                        VerticalAlignment="Bottom"
+                        Click="OnPayButtonClicked"
+                        Content="Pay"
+                        IsEnabled="False" />
+                </Grid>
+                <StackPanel>
+                    <TextBlock Margin="0,0,0,7.5" Text="Change" />
+                    <TextBox
+                        x:Name="TbxChange"
+                        IsEnabled="False"
+                        PlaceholderText="The change will be displayed here (read-only)" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

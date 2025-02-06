@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="App.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ic="using:FluentIcons.WinUI"
+    xmlns:local="using:App"
+    xmlns:utu="using:Uno.Toolkit.UI"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <NavigationView
+        x:Name="MainNavigationView"
+        utu:SafeArea.Insets="All"
+        utu:SafeArea.Mode="Margin"
+        IsBackButtonVisible="Collapsed"
+        IsSettingsVisible="False"
+        PaneDisplayMode="LeftCompact"
+        PaneTitle="AT Simple POS System"
+        SelectionChanged="OnNavigationViewSelectionChanged">
+        <NavigationView.MenuItems>
+            <NavigationViewItem
+                x:Name="ItemsNavigationViewItem"
+                Content="Items"
+                Icon="{ic:SymbolIcon Symbol=ViewDesktop}" />
+            <NavigationViewItem
+                x:Name="ManageNavigationViewItem"
+                Content="Manage"
+                Icon="{ic:SymbolIcon Symbol=Toolbox}" />
+            <NavigationViewItem
+                x:Name="ManageRecordsNavigationViewItem"
+                Content="Report"
+                Icon="{ic:SymbolIcon Symbol=ChartMultiple}" />
+        </NavigationView.MenuItems>
+        <Grid>
+            <Frame x:Name="MainFrame" />
+            <Grid
+                x:Name="LoadingGrid"
+                IsHitTestVisible="False"
+                Visibility="Collapsed">
+                <Rectangle Fill="{ThemeResource AcrylicInAppFillColorDefaultBrush}" IsHitTestVisible="False" />
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    IsHitTestVisible="False"
+                    Spacing="8">
+                    <ProgressRing Width="100" Height="100" />
+                    <TextBlock
+                        x:Name="LoadingTextBlock"
+                        FontWeight="Bold"
+                        TextAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </NavigationView>
+</Page>
