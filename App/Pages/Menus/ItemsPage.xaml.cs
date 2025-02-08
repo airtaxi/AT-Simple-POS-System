@@ -165,7 +165,7 @@ public sealed partial class ItemsPage : Page
         {
             columnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             columnDefinitions.Add(new ColumnDefinition { Width = new GridLength(500, GridUnitType.Pixel) });
-            Grid.SetColumn(IrItems, 0);
+            Grid.SetColumn(SvItems, 0);
             Grid.SetColumn(GdPay, 1);
         }
         else
@@ -173,7 +173,7 @@ public sealed partial class ItemsPage : Page
 
             rowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             rowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
-            Grid.SetRow(IrItems, 0);
+            Grid.SetRow(SvItems, 0);
             Grid.SetRow(GdPay, 1);
         }
 

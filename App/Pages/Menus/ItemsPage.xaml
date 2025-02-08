@@ -11,46 +11,48 @@
     mc:Ignorable="d">
 
     <Grid x:Name="MainGrid" SizeChanged="OnMainGridSizeChanged">
-        <ItemsRepeater x:Name="IrItems" Margin="0,5,0,5">
-            <ItemsRepeater.Layout>
-                <controls:StaggeredLayout ItemsStretch="Fill" />
-            </ItemsRepeater.Layout>
-            <ItemsRepeater.ItemTemplate>
-                <DataTemplate x:DataType="vm:ItemViewModel">
-                    <Grid
-                        Height="80"
-                        Margin="5"
-                        ColumnSpacing="10"
-                        Tapped="OnItemTapped"
-                        ToolTipService.ToolTip="{x:Bind Name}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <Border
-                            Grid.Column="0"
-                            Width="80"
+        <ScrollViewer x:Name="SvItems">
+            <ItemsRepeater x:Name="IrItems" Margin="0,5,0,5">
+                <ItemsRepeater.Layout>
+                    <controls:StaggeredLayout ItemsStretch="Fill" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ItemViewModel">
+                        <Grid
                             Height="80"
-                            CornerRadius="10">
-                            <Image
-                                ImageFailed="OnImageFailed"
-                                Source="{x:Bind Image, Mode=OneWay}"
-                                Stretch="UniformToFill" />
-                        </Border>
+                            Margin="5"
+                            ColumnSpacing="10"
+                            Tapped="OnItemTapped"
+                            ToolTipService.ToolTip="{x:Bind Name}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                                Grid.Column="0"
+                                Width="80"
+                                Height="80"
+                                CornerRadius="10">
+                                <Image
+                                    ImageFailed="OnImageFailed"
+                                    Source="{x:Bind Image, Mode=OneWay}"
+                                    Stretch="UniformToFill" />
+                            </Border>
 
-                        <StackPanel Grid.Column="1">
-                            <TextBlock
-                                FontSize="17"
-                                FontWeight="SemiBold"
-                                Text="{x:Bind Name}"
-                                TextTrimming="CharacterEllipsis" />
-                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind PriceText, Mode=OneWay}" />
-                            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind QuantityText, Mode=OneWay}" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock
+                                    FontSize="17"
+                                    FontWeight="SemiBold"
+                                    Text="{x:Bind Name}"
+                                    TextTrimming="CharacterEllipsis" />
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind PriceText, Mode=OneWay}" />
+                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind QuantityText, Mode=OneWay}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </ScrollViewer>
 
         <Grid
             x:Name="GdPay"
