@@ -217,6 +217,10 @@ public sealed partial class ManagePage : Page
         // Format the number
         var formattedMoneyText = receivedMoney.ToString("N0");
         textBox.Text = formattedMoneyText; // Set the text
+
+        // Set the cursor position to keep the cursor before currency symbol
+        textBox.SelectionStart = formattedMoneyText.Length;
+        textBox.SelectionLength = 0;
     }
 
     [GeneratedRegex("[^0-9]")]
