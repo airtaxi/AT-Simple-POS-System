@@ -12,8 +12,8 @@
     <!-- App Identifier -->
     <ApplicationId>com.kck4156.pos</ApplicationId>
     <!-- Versions -->
-    <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+    <ApplicationVersion>2</ApplicationVersion>
     <!-- Package Publisher -->
     <ApplicationPublisher>airtaxi</ApplicationPublisher>
     <!-- Package Description -->
