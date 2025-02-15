@@ -75,6 +75,33 @@ public sealed partial class ReportPage : Page
         // Create a new workbook
         using var workbook = new XLWorkbook();
 
+        // Record Report
+        {
+            var worksheet = workbook.Worksheets.Add(Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheet"));
+
+            // Set the header
+            worksheet.Cell("A1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetTimestampCellText");
+            worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetPriceCellText");
+            worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetQuantityCellText");
+
+            // Set the data
+            var row = 2;
+            foreach (var recordViewModel in _recordViewModels)
+            {
+                worksheet.Cell($"A{row}").Value = recordViewModel.TimestampText;
+                worksheet.Cell($"B{row}").Value = recordViewModel.TotalPrice;
+                worksheet.Cell($"C{row}").Value = recordViewModel.TotalQuantity;
+                row++;
+            }
+
+            // All Record Total
+            worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetTotalPriceCellText");
+            worksheet.Cell($"B{row}").FormulaA1 = $"SUM(B2:B{row - 1})";
+            worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
+
+            worksheet.Columns().AdjustToContents();
+        }
+
         // Items Report
         {
             var worksheet = workbook.Worksheets.Add(Localization.GetLocalizedString("/ReportPage/ItemsReportWorksheet"));
@@ -92,7 +119,7 @@ public sealed partial class ReportPage : Page
                 worksheet.Cell($"A{row}").Value = itemViewModel.NameText;
                 worksheet.Cell($"B{row}").Value = itemViewModel.PriceText;
                 worksheet.Cell($"C{row}").Value = itemViewModel.QuantityText;
-                worksheet.Cell($"D{row}").Value = itemViewModel.TotalPriceText;
+                worksheet.Cell($"D{row}").Value = itemViewModel.TotalPrice;
                 row++;
             }
 
@@ -100,31 +127,9 @@ public sealed partial class ReportPage : Page
             worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/ItemsReportWorksheetTotalPriceCellText");
             worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
             worksheet.Cell($"D{row}").FormulaA1 = $"SUM(D2:D{row - 1})";
-        }
 
-        // Record Report
-        {
-            var worksheet = workbook.Worksheets.Add(Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheet"));
-
-            // Set the header
-            worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetTimestampCellText");
-            worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetPriceCellText");
-            worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetQuantityCellText");
-
-            // Set the data
-            var row = 2;
-            foreach (var recordViewModel in _recordViewModels)
-            {
-                worksheet.Cell($"A{row}").Value = recordViewModel.TimestampText;
-                worksheet.Cell($"B{row}").Value = recordViewModel.TotalPriceText;
-                worksheet.Cell($"C{row}").Value = recordViewModel.TotalQuantityText;
-                row++;
-            }
-
-            // All Record Total
-            worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetTotalPriceCellText");
-            worksheet.Cell($"B{row}").FormulaA1 = $"SUM(B2:B{row - 1})";
-            worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
+            worksheet.Columns().AdjustToContents();
+            worksheet.Column(1).Width = 25;
         }
 
         // Save the workbook
