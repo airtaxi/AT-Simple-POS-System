@@ -66,6 +66,6 @@ public sealed partial class MainPage : Page
 
         if (selectedItem == ItemsNavigationViewItem) Navigate(typeof(ItemsPage));
         else if (selectedItem == ManageNavigationViewItem) Navigate(typeof(ManagePage));
-        else if (selectedItem == ManageRecordsNavigationViewItem) Navigate(typeof(ManageRecordsPage));
+        else if (selectedItem == ManageRecordsNavigationViewItem) Navigate(typeof(ReportPage));
     }
 }

@@ -52,8 +52,8 @@
         <PackageReference Include="FluentIcons.WinUI" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Update="Pages\Menus\ManageRecordsPage.xaml.cs">
-            <DependentUpon>ManageRecordsPage.xaml</DependentUpon>
+        <Compile Update="Pages\Menus\ReportPage.xaml.cs">
+            <DependentUpon>ReportPage.xaml</DependentUpon>
         </Compile>
     </ItemGroup>
     <ItemGroup>
@@ -72,14 +72,14 @@
         </Page>
     </ItemGroup>
     <ItemGroup>
-        <Page Update="Pages\Menus\ManageRecordsPage.xaml">
+        <Page Update="Pages\Menus\SettingsPage.xaml">
             <Generator>MSBuild:Compile</Generator>
         </Page>
     </ItemGroup>
     <ItemGroup>
-        <Page Update="Pages\Menus\SettingsPage.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
+      <Page Update="Pages\Menus\ReportPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
     </ItemGroup>
 
 </Project>

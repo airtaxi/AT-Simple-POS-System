@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="App.Pages.Menus.ManageRecordsPage"
+    x:Class="App.Pages.Menus.ReportPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,17 +28,17 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock
-                x:Uid="/ManageRecordsPage/RecodTimestampTextBlock"
+                x:Uid="/ReportPage/RecodTimestampTextBlock"
                 Grid.Column="0"
                 HorizontalAlignment="Left" />
 
             <TextBlock
-                x:Uid="/ManageRecordsPage/RecordPriceTimestampTextBlock"
+                x:Uid="/ReportPage/RecordPriceTimestampTextBlock"
                 Grid.Column="1"
                 HorizontalAlignment="Center" />
 
             <TextBlock
-                x:Uid="/ManageRecordsPage/RecordQuantityTextBlock"
+                x:Uid="/ReportPage/RecordQuantityTextBlock"
                 Grid.Column="2"
                 HorizontalAlignment="Center" />
         </Grid>
@@ -90,12 +90,12 @@
             DefaultLabelPosition="Right"
             OverflowButtonVisibility="Collapsed">
             <AppBarButton
-                x:Uid="/ManageRecordsPage/ClearAppBarButton"
+                x:Uid="/ReportPage/ClearAppBarButton"
                 Click="OnClearAppBarButtonClicked"
                 Foreground="Red"
                 Icon="Clear" />
             <AppBarButton
-                x:Uid="/ManageRecordsPage/ExportExcelAppBarButton"
+                x:Uid="/ReportPage/ExportExcelAppBarButton"
                 Click="OnExportToExcelAppBarButtonClicked"
                 Icon="Share" />
         </CommandBar>
