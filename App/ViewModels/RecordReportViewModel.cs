@@ -7,6 +7,8 @@ public partial class RecordReportViewModel(Record record)
     public string RecordId { get; } = record.Id;
     public event EventHandler Deleted;
 
+    public IEnumerable<RecordReportItemsViewModel> RecordReportItemsViewModels { get; } = record.Transactions.Select(x => new RecordReportItemsViewModel(x));
+
     public string TimestampText { get; } = record.Timestamp.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss.fff");
     public int TotalPrice { get; } = record.TotalPrice;
     public int TotalQuantity { get; } = record.TotalQuantity;

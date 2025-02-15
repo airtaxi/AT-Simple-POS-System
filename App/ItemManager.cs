@@ -11,6 +11,16 @@ public static class ItemManager
 		return items;
 	}
 
+	public static Item GetItem(string itemId)
+	{
+        // Get the items from the configuration or return null
+        var items = Configuration.GetValue<List<Item>>("Items");
+        if (items == null) return null;
+
+        // Find the item. If the item is not found, return null
+        return items.FirstOrDefault(x => x.Id == itemId);
+	}
+
 	private static void AddItem(Item item)
 	{
 		var items = GetItems();

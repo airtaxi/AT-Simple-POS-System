@@ -34,7 +34,7 @@ public sealed partial class ItemsPage : Page
         TbTotalQuantity.Text = $"{totalQuantity}";
 
         // Update the total price
-        var totalPrice = TransactionViewModels.Sum(x => x.Item.Price * x.Quantity);
+        var totalPrice = TransactionViewModels.Sum((Func<TransactionViewModel, int>)(x => (int)(x.Item.Price * x.Quantity)));
         TbTotalPrice.Text = $"{totalPrice:N0}";
 
         // Parse the received money text
@@ -106,7 +106,7 @@ public sealed partial class ItemsPage : Page
         var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
         _ = long.TryParse(numberOnlyText, out long moneyReceivd);
 
-        var totalPrice = TransactionViewModels.Sum(x => x.Item.Price * x.Quantity);
+        var totalPrice = TransactionViewModels.Sum((Func<TransactionViewModel, int>)(x => (int)(x.Item.Price * x.Quantity)));
 
         if (moneyReceivd < totalPrice)
         {
@@ -117,7 +117,7 @@ public sealed partial class ItemsPage : Page
         // Setup the record
         var timestamp = DateTime.UtcNow; // Uses UTC time to prevent time zone issues
         var recordId = Guid.NewGuid().ToString("N");
-        var transactions = TransactionViewModels.Select(x => new Transaction(recordId, x.Item.Id, x.Quantity, timestamp));
+        var transactions = TransactionViewModels.Select((Func<TransactionViewModel, Transaction>)(x => new Transaction(recordId, x.Item.Id, (int)x.Quantity, timestamp)));
         TransactionManager.AddTransactions(transactions); // Add the transactions to the database
 
         // Clear the transaction view models

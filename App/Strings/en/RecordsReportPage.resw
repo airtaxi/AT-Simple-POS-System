@@ -129,4 +129,10 @@
   <data name="TotalTextBlock.Text" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="ItemNameTextBlock.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ItemQuantityTextBlock.Text" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
 </root>

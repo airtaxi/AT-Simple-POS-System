@@ -129,4 +129,10 @@
   <data name="TotalTextBlock.Text" xml:space="preserve">
     <value>계</value>
   </data>
+  <data name="ItemNameTextBlock.Text" xml:space="preserve">
+    <value>품목명</value>
+  </data>
+  <data name="ItemQuantityTextBlock.Text" xml:space="preserve">
+    <value>수량</value>
+  </data>
 </root>
