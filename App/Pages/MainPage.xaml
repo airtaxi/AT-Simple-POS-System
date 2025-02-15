@@ -8,7 +8,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <NavigationView
         x:Name="MainNavigationView"
-        utu:SafeArea.Insets="All"
+        utu:SafeArea.Insets="VisibleBounds"
         utu:SafeArea.Mode="Margin"
         IsBackButtonVisible="Collapsed"
         IsSettingsVisible="True"
@@ -30,7 +30,10 @@
                 Icon="{ic:SymbolIcon Symbol=ChartMultiple}" />
         </NavigationView.MenuItems>
         <Grid>
-            <Frame x:Name="MainFrame" />
+            <Frame
+                x:Name="MainFrame"
+                utu:SafeArea.Insets="SoftInput"
+                utu:SafeArea.Mode="Padding" />
             <Grid
                 x:Name="LoadingGrid"
                 IsHitTestVisible="False"
