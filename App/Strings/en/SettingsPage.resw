@@ -126,4 +126,25 @@
   <data name="MessageDialogLanguageChangeConfirmationMessage" xml:space="preserve">
     <value>You need to restart to change the language. Do you want to continue?</value>
   </data>
+  <data name="ExportSettingsCard.Header" xml:space="preserve">
+    <value>Export Settings</value>
+  </data>
+  <data name="ExportSettingsCard.Description" xml:space="preserve">
+    <value>You can export the settings and import them to another device, or create a backup.</value>
+  </data>
+  <data name="ImportSettingsCard.Header" xml:space="preserve">
+    <value>Import Settings</value>
+  </data>
+  <data name="ImportSettingsCard.Description" xml:space="preserve">
+    <value>You can import settings and apply them to the current device.</value>
+  </data>
+  <data name="ExportSettingsButton.Content" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ImportSettingsButton.Content" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="AppConfigFileTypeChoice" xml:space="preserve">
+    <value>Configuration file</value>
+  </data>
 </root>

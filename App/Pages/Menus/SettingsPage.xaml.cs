@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using App.Enums;
+using Windows.Storage.Pickers;
 
 namespace App.Pages.Menus;
 
@@ -30,5 +31,46 @@ public sealed partial class SettingsPage : Page
         Localization.SetLanguage(selectedLanguage.ToString());
         Configuration.WriteBuffer();
         Process.GetCurrentProcess().Kill();
+    }
+
+    private async void OnExportSettingsButtonClicked(object sender, RoutedEventArgs e)
+    {
+        var savePicker = new FileSavePicker();
+#if WINDOWS
+
+        // Get the current window's HWND by passing a Window object
+        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+        // Associate the HWND with the file picker
+        WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+        savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+#endif
+        savePicker.FileTypeChoices.Add(Localization.GetLocalizedString("/SettingsPage/AppConfigFileTypeChoice"), [".atspconfig"]);
+        savePicker.SuggestedFileName = "Settings";
+
+        var file = await savePicker.PickSaveFileAsync();
+        if (file == null) return;
+
+        var jsonText = Configuration.Export();
+        await FileIO.WriteTextAsync(file, jsonText);
+    }
+
+    private async void OnImportSettingsButtonClicked(object sender, RoutedEventArgs e)
+    {
+        var openPicker = new FileOpenPicker();
+
+#if WINDOWS
+
+        // Get the current window's HWND by passing a Window object
+        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+        // Associate the HWND with the file picker
+        WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
+        openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+#endif
+        openPicker.FileTypeFilter.Add(".atspconfig");
+
+        var file = await openPicker.PickSingleFileAsync();
+        if (file == null) return;
+        var jsonText = await FileIO.ReadTextAsync(file);
+        Configuration.Import(jsonText);
     }
 }

@@ -17,7 +17,11 @@
                 <ComboBoxItem Content="한국어" Tag="Korean" />
             </ComboBox>
         </controls:SettingsCard>
-
-
+        <controls:SettingsCard x:Uid="/SettingsPage/ExportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}">
+            <Button x:Uid="/SettingsPage/ExportSettingsButton" Click="OnExportSettingsButtonClicked" />
+        </controls:SettingsCard>
+        <controls:SettingsCard x:Uid="/SettingsPage/ImportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}">
+            <Button x:Uid="/SettingsPage/ImportSettingsButton" Click="OnImportSettingsButtonClicked" />
+        </controls:SettingsCard>
     </StackPanel>
 </Page>
