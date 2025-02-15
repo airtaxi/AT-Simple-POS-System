@@ -38,10 +38,10 @@ public sealed partial class ItemsPage : Page
         TbTotalPrice.Text = $"{totalPrice:N0}";
 
         // Parse the received money text
-        var moneyReceivedText = TbxMoneyReceived.Text;
+        var moneyReceivedText = TbxMoneyReceived.Text.Trim();
         var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
         // Return if the text is not a number
-        if (!long.TryParse(numberOnlyText, out long moneyReceivd))
+        if (string.IsNullOrWhiteSpace(numberOnlyText) || !long.TryParse(numberOnlyText, out long moneyReceivd))
         {
             TbxChange.Text = string.Empty;
             return;
