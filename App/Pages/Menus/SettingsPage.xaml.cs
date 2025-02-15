@@ -30,7 +30,7 @@ public sealed partial class SettingsPage : Page
 
         Localization.SetLanguage(selectedLanguage.ToString());
         Configuration.WriteBuffer();
-        Process.GetCurrentProcess().Kill();
+        Environment.Exit(0);
     }
 
     private async void OnExportSettingsButtonClicked(object sender, RoutedEventArgs e)
