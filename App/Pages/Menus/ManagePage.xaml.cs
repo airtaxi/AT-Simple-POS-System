@@ -123,7 +123,7 @@ public sealed partial class ManagePage : Page
         try
         {
             using var memoryStream = new MemoryStream();
-        using var stream = buffer.AsStream();
+            using var stream = buffer.AsStream();
             using var image = new MagickImage(stream);
             image.Resize(0, 192);
             await image.WriteAsync(memoryStream);
