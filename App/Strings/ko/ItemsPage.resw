@@ -159,4 +159,7 @@
   <data name="MessageDialogNoItemsErrorMessage" xml:space="preserve">
     <value>결제할 품목이 없습니다.</value>
   </data>
+  <data name="MessageDialogSoldoutItemsWarningMessage" xml:space="preserve">
+    <value>일부 품목이 품절되었습니다. 계속하시겠습니까?</value>
+  </data>
 </root>

@@ -114,6 +114,14 @@ public sealed partial class ItemsPage : Page
             if (result != ContentDialogResult.Primary) return;
         }
 
+        var hasSoldoutItems = TransactionViewModels.Any(x => x.Item.IsSoldout);
+
+        if (hasSoldoutItems)
+        {
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ItemsPage/MessageDialogSoldoutItemsWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+            if (result != ContentDialogResult.Primary) return;
+        }
+
         // Setup the record
         var timestamp = DateTime.UtcNow; // Uses UTC time to prevent time zone issues
         var recordId = Guid.NewGuid().ToString("N");

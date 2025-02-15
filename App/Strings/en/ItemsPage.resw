@@ -159,4 +159,7 @@
   <data name="MessageDialogNoItemsErrorMessage" xml:space="preserve">
     <value>There are no items to pay for.</value>
   </data>
+  <data name="MessageDialogSoldoutItemsWarningMessage" xml:space="preserve">
+    <value>Some items are sold out. Do you want to continue?</value>
+  </data>
 </root>
