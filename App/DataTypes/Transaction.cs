@@ -1,4 +1,4 @@
-﻿namespace App.DataTypes;
+namespace App.DataTypes;
 
 public class Transaction
 {
