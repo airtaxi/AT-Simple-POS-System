@@ -121,7 +121,7 @@ public sealed partial class ManageRecordsPage : Page
         // Get the current window's HWND by passing a Window object
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
         // Associate the HWND with the file picker
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+        WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
         savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
 #endif
         savePicker.SuggestedFileName = "Report";
