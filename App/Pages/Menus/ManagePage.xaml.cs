@@ -154,7 +154,7 @@ public sealed partial class ManagePage : Page
             }
 
             using var memoryStream = new MemoryStream();
-            resized.Encode(memoryStream, SKEncodedImageFormat.Png, 100);
+            resized.Encode(memoryStream, SKEncodedImageFormat.Jpeg, 90);
 
             memoryStream.Seek(0, SeekOrigin.Begin);
             var bitmapImage = new BitmapImage();
