@@ -166,4 +166,22 @@ Quantity: #P3</value>
   <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to clear all records?</value>
   </data>
+  <data name="ItemsReportWorksheet" xml:space="preserve">
+    <value>Sales report by item</value>
+  </data>
+  <data name="RecordsReportWorksheet" xml:space="preserve">
+    <value>Sales report by records</value>
+  </data>
+  <data name="RecordsReportWorksheetTimestampCellText" xml:space="preserve">
+    <value>Sold At</value>
+  </data>
+  <data name="RecordsReportWorksheetPriceCellText" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="RecordsReportWorksheetQuantityCellText" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="RecordsReportWorksheetTotalPriceCellText" xml:space="preserve">
+    <value>Total</value>
+  </data>
 </root>

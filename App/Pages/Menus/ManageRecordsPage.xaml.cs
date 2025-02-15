@@ -86,33 +86,63 @@ public sealed partial class ManageRecordsPage : Page
 
         // Create a new workbook
         using var workbook = new XLWorkbook();
-        var worksheet = workbook.Worksheets.Add("Sheet 1");
 
-        // Set the header
-        worksheet.Cell("A1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemNameCellText");
-        worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemPriceCellText");
-        worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemQuantityCellText");
-        worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemTotalPriceCellText");
-
-        // Set the data
-        var row = 2;
-        var transactions = TransactionManager.GetTransactions();
-        var items = ItemManager.GetItems();
-        foreach (var item in items)
+        // Items Report
         {
-            var itemTransactions = transactions.Where(x => x.ItemId == item.Id);
-            var totalPrice = itemTransactions.Sum(x => x.Quantity * item.Price);
-            var totalQuantity = itemTransactions.Sum(x => x.Quantity);
-            worksheet.Cell($"A{row}").Value = item.Name;
-            worksheet.Cell($"B{row}").Value = item.Price;
-            worksheet.Cell($"C{row}").Value = totalQuantity;
-            worksheet.Cell($"D{row}").Value = totalPrice;
-            row++;
+            var worksheet = workbook.Worksheets.Add(Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheet"));
+
+            // Set the header
+            worksheet.Cell("A1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemNameCellText");
+            worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemPriceCellText");
+            worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemQuantityCellText");
+            worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemTotalPriceCellText");
+
+            // Set the data
+            var row = 2;
+            var transactions = TransactionManager.GetTransactions();
+            var items = ItemManager.GetItems();
+            foreach (var item in items)
+            {
+                var itemTransactions = transactions.Where(x => x.ItemId == item.Id);
+                var totalPrice = itemTransactions.Sum(x => x.Quantity * item.Price);
+                var totalQuantity = itemTransactions.Sum(x => x.Quantity);
+                worksheet.Cell($"A{row}").Value = item.Name;
+                worksheet.Cell($"B{row}").Value = item.Price;
+                worksheet.Cell($"C{row}").Value = totalQuantity;
+                worksheet.Cell($"D{row}").Value = totalPrice;
+                row++;
+            }
+
+            // All Item Total
+            worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetTotalPriceCellText");
+            worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
+            worksheet.Cell($"D{row}").FormulaA1 = $"SUM(D2:D{row - 1})";
         }
 
-        // All Item Total
-        worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetTotalPriceCellText");
-        worksheet.Cell($"D{row}").FormulaA1 = $"SUM(D2:D{row - 1})";
+        // Record Report
+        {
+            var worksheet = workbook.Worksheets.Add(Localization.GetLocalizedString("/ManageRecordsPage/RecordsReportWorksheet"));
+
+            // Set the header
+            worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ManageRecordsPage/RecordsReportWorksheetTimestampCellText");
+            worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ManageRecordsPage/RecordsReportWorksheetPriceCellText");
+            worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ManageRecordsPage/RecordsReportWorksheetQuantityCellText");
+
+            // Set the data
+            var row = 2;
+            foreach (var recordViewModel in _recordViewModels)
+            {
+                worksheet.Cell($"A{row}").Value = recordViewModel.TimestampText;
+                worksheet.Cell($"B{row}").Value = recordViewModel.PriceText;
+                worksheet.Cell($"C{row}").Value = recordViewModel.QuantityText;
+                row++;
+            }
+
+            // All Record Total
+            worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ManageRecordsPage/RecordsReportWorksheetTotalPriceCellText");
+            worksheet.Cell($"B{row}").FormulaA1 = $"SUM(B2:B{row - 1})";
+            worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
+        }
 
         // Save the workbook
         var savePicker = new FileSavePicker();

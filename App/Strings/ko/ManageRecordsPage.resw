@@ -166,4 +166,22 @@
   <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
     <value>정말로 모든 판매 기록을 삭제하시겠습니까?</value>
   </data>
+  <data name="ItemsReportWorksheet" xml:space="preserve">
+    <value>품목별 판매 실적 보고</value>
+  </data>
+  <data name="RecordsReportWorksheet" xml:space="preserve">
+    <value>거래 기록별 판매 실적 보고</value>
+  </data>
+  <data name="RecordsReportWorksheetTimestampCellText" xml:space="preserve">
+    <value>판매 시간</value>
+  </data>
+  <data name="RecordsReportWorksheetPriceCellText" xml:space="preserve">
+    <value>가격</value>
+  </data>
+  <data name="RecordsReportWorksheetQuantityCellText" xml:space="preserve">
+    <value>수량</value>
+  </data>
+  <data name="RecordsReportWorksheetTotalPriceCellText" xml:space="preserve">
+    <value>계</value>
+  </data>
 </root>
