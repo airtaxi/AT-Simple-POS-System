@@ -99,7 +99,14 @@ public sealed partial class ReportPage : Page
             worksheet.Cell($"B{row}").FormulaA1 = $"SUM(B2:B{row - 1})";
             worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
 
-            worksheet.Columns().AdjustToContents();
+            // Format number (N0)
+            worksheet.Column(2).Style.NumberFormat.Format = "#,##0";
+            worksheet.Column(3).Style.NumberFormat.Format = "#,##0";
+
+            // Adjust the column width
+            worksheet.Column(1).Width = 25;
+            worksheet.Column(2).Width = 15;
+            worksheet.Column(3).Width = 10;
         }
 
         // Items Report
@@ -117,8 +124,8 @@ public sealed partial class ReportPage : Page
             foreach (var itemViewModel in _itemViewModels)
             {
                 worksheet.Cell($"A{row}").Value = itemViewModel.NameText;
-                worksheet.Cell($"B{row}").Value = itemViewModel.PriceText;
-                worksheet.Cell($"C{row}").Value = itemViewModel.QuantityText;
+                worksheet.Cell($"B{row}").Value = itemViewModel.Price;
+                worksheet.Cell($"C{row}").Value = itemViewModel.Quantity;
                 worksheet.Cell($"D{row}").Value = itemViewModel.TotalPrice;
                 row++;
             }
@@ -128,8 +135,16 @@ public sealed partial class ReportPage : Page
             worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
             worksheet.Cell($"D{row}").FormulaA1 = $"SUM(D2:D{row - 1})";
 
-            worksheet.Columns().AdjustToContents();
+            // Format number (N0)
+            worksheet.Column(2).Style.NumberFormat.Format = "#,##0";
+            worksheet.Column(3).Style.NumberFormat.Format = "#,##0";
+            worksheet.Column(4).Style.NumberFormat.Format = "#,##0";
+
+            // Adjust the column width
             worksheet.Column(1).Width = 25;
+            worksheet.Column(2).Width = 15;
+            worksheet.Column(3).Width = 10;
+            worksheet.Column(4).Width = 15;
         }
 
         // Save the workbook
