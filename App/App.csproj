@@ -47,6 +47,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" />
     <PackageReference Include="FluentIcons.WinUI" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Pages\Menus\ManageRecordsPage.xaml.cs">

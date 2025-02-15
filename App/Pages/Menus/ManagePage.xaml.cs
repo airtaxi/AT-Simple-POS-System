@@ -3,6 +3,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using App.ViewModels;
 using CommunityToolkit.WinUI;
+using ImageMagick;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Storage.Pickers;
 
@@ -118,12 +119,24 @@ public sealed partial class ManagePage : Page
 
         var buffer = await FileIO.ReadBufferAsync(file);
 
-        var image = new BitmapImage();
+        MainPage.ShowLoading("Processing image...");
+        try
+        {
+            using var memoryStream = new MemoryStream();
         using var stream = buffer.AsStream();
-        image.SetSource(stream.AsRandomAccessStream());
-        ImgItem.Source = image;
+            using var image = new MagickImage(stream);
+            image.Resize(0, 192);
+            await image.WriteAsync(memoryStream);
 
-        _currentItemImageBinary = buffer.ToArray();
+            var bitmapImage = new BitmapImage();
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            bitmapImage.SetSource(memoryStream.AsRandomAccessStream());
+            ImgItem.Source = bitmapImage;
+
+            memoryStream.Seek(0, SeekOrigin.Begin);
+            _currentItemImageBinary = memoryStream.ToArray();
+        }
+        finally { MainPage.HideLoading(); }
     }
 
     private async void OnItemsListViewSelectionChanged(object sender, SelectionChangedEventArgs e)
