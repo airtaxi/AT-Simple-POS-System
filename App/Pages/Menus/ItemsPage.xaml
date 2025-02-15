@@ -43,14 +43,17 @@
                                     Stretch="UniformToFill" />
                             </Border>
 
-                            <StackPanel Grid.Column="1">
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <TextBlock
                                     FontSize="17"
                                     FontWeight="SemiBold"
                                     Text="{x:Bind Name}"
                                     TextTrimming="CharacterEllipsis" />
                                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind PriceText, Mode=OneWay}" />
-                                <TextBlock Style="{ThemeResource BodyTextBlockStyle}" Text="{x:Bind QuantityText, Mode=OneWay}" />
+                                <TextBlock
+                                    Foreground="{x:Bind QuantityForeground}"
+                                    Style="{ThemeResource BodyTextBlockStyle}"
+                                    Text="{x:Bind QuantityText, Mode=OneWay}" />
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

@@ -55,6 +55,7 @@ public sealed partial class ManagePage : Page
         TbxPrice.Text = "0";
         TbxPrice.Tag = new object();
         NbxStockQuantity.Value = 0;
+        CbxManuallySoldout.IsChecked = false;
         BtSave.Content = Localization.GetLocalizedString("/ManagePage/AddButtonContent");
 
         // Show the item view
@@ -88,6 +89,7 @@ public sealed partial class ManagePage : Page
         var numberOnlyText = NumberOnlyRegex().Replace(priceText, "");
         item.Price = int.Parse(numberOnlyText);
         item.StockQuantity = (int)NbxStockQuantity.Value;
+        item.IsManuallySoldout = CbxManuallySoldout.IsChecked == true;
         ItemManager.SaveItem(item);
 
         if (isAdd)
@@ -201,12 +203,14 @@ public sealed partial class ManagePage : Page
 
         // Setup the UI
         TbxName.Text = selectedItem.Item.Name;
+
         // Set the image if available
         if (selectedItem.Item.ImageBinary != null) ImgItem.Source = Utils.GetBitmapImageFromByteArray(selectedItem.Item.ImageBinary);
 
         TbxPrice.Text = selectedItem.Item.Price.ToString("N0");
         TbxPrice.Tag = new object();
         NbxStockQuantity.Value = selectedItem.Item.StockQuantity;
+        CbxManuallySoldout.IsChecked = selectedItem.Item.IsManuallySoldout;
         BtSave.Content = Localization.GetLocalizedString("/ManagePage/SaveButtonContent");
 
         // Show the item view

@@ -16,5 +16,8 @@ public class Item
         }
     }
 
+    public bool IsManuallySoldout { get; set; }
+    public bool IsSoldout => SalesQuantity >= StockQuantity || IsManuallySoldout;
+
     public byte[] ImageBinary { get; set; }
 }

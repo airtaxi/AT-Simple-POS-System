@@ -177,6 +177,7 @@
                             SignificantDigits="0" />
                     </NumberBox.NumberFormatter>
                 </NumberBox>
+                <CheckBox x:Name="CbxManuallySoldout" x:Uid="/ManagePage/ItemIsManuallySoldoutCheckBox" />
                 <Button
                     x:Name="BtSave"
                     Margin="0,5,0,0"

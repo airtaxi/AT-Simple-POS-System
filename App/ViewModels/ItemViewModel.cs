@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace App.ViewModels;
@@ -31,6 +32,7 @@ public partial class ItemViewModel : ObservableObject
 		PriceText = $"{item.Price:N0}";
         var quantityText = Localization.GetLocalizedString("/ItemsPage/ItemViewModelQuantityTemplateText");
         QuantityText = quantityText.Replace("#P1", item.SalesQuantity.ToString("N0")).Replace("#P2", item.StockQuantity.ToString("N0"));
+        QuantityForeground = item.IsSoldout ? new SolidColorBrush(Colors.Red) : null;
     }
 
     [ObservableProperty]
@@ -44,4 +46,7 @@ public partial class ItemViewModel : ObservableObject
 
     [ObservableProperty]
     public partial string QuantityText { get; set; }
+
+    [ObservableProperty]
+    public partial SolidColorBrush QuantityForeground { get; set; }
 }

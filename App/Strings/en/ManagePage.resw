@@ -180,4 +180,7 @@
   <data name="MessageDialogResizeImageErrorMessage" xml:space="preserve">
     <value>Failed to resize the image. Please try again.</value>
   </data>
+  <data name="ItemIsManuallySoldoutCheckBox.Conent" xml:space="preserve">
+    <value>Set to soldout</value>
+  </data>
 </root>
