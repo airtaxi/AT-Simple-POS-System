@@ -44,6 +44,9 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <ItemGroup>
+      <None Include="ViewModels\ItemReportViewModel.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="ClosedXML" />
         <PackageReference Include="CommunityToolkit.Mvvm" />
         <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
@@ -54,6 +57,12 @@
     <ItemGroup>
         <Compile Update="Pages\Menus\ReportPage.xaml.cs">
             <DependentUpon>ReportPage.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Pages\Menus\Report\ItemsReportPage.xaml.cs">
+          <DependentUpon>ItemsReportPage.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Pages\Menus\Report\RecordsReportPage.xaml.cs">
+          <DependentUpon>RecordsReportPage.xaml</DependentUpon>
         </Compile>
     </ItemGroup>
     <ItemGroup>
@@ -78,6 +87,17 @@
     </ItemGroup>
     <ItemGroup>
       <Page Update="Pages\Menus\ReportPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Pages\Menus\Report\RecordsReportPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Pages\Menus\Report\ItemsReportPage.xaml">
+        <SubType>Designer</SubType>
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>

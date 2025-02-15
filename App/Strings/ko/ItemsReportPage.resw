@@ -117,61 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LanguageSettingsCard.Header" xml:space="preserve">
-    <value>Language</value>
+  <data name="ItemNameTextBlock.Text" xml:space="preserve">
+    <value>품목명</value>
   </data>
-  <data name="LanguageSettingsCard.Description" xml:space="preserve">
-    <value>Set the application language. A restart is recommended after changing the settings.</value>
+  <data name="ItemPriceTimestampTextBlock.Text" xml:space="preserve">
+    <value>가격</value>
   </data>
-  <data name="MessageDialogLanguageChangeConfirmationMessage" xml:space="preserve">
-    <value>You need to restart to change the language. Do you want to continue?</value>
+  <data name="ItemQuantityTextBlock.Text" xml:space="preserve">
+    <value>수량</value>
   </data>
-  <data name="ExportSettingsCard.Header" xml:space="preserve">
-    <value>Export Settings</value>
+  <data name="ItemTotalPriceTimestampTextBlock.Text" xml:space="preserve">
+    <value>총합</value>
   </data>
-  <data name="ExportSettingsCard.Description" xml:space="preserve">
-    <value>You can export the settings and import them to another device, or create a backup.</value>
-  </data>
-  <data name="ImportSettingsCard.Header" xml:space="preserve">
-    <value>Import Settings</value>
-  </data>
-  <data name="ImportSettingsCard.Description" xml:space="preserve">
-    <value>You can import settings and apply them to the current device.</value>
-  </data>
-  <data name="ExportSettingsButton.Content" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="ImportSettingsButton.Content" xml:space="preserve">
-    <value>Import</value>
-  </data>
-  <data name="AppConfigFileTypeChoice" xml:space="preserve">
-    <value>Configuration file</value>
-  </data>
-  <data name="MessageDialogImportSettingsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to load the settings? All currently saved items, transaction history, and other data will be overwritten.</value>
-  </data>
-  <data name="ClearRecordsSettingsCard.Header" xml:space="preserve">
-    <value>Clear All Sales Records</value>
-  </data>
-  <data name="ClearRecordsSettingsCard.Description" xml:space="preserve">
-    <value>Clear all of the sales records for the all items.</value>
-  </data>
-  <data name="ClearRecordsButton.Content" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to clear all sales records?</value>
-  </data>
-  <data name="ClearItemsSettingsCard.Header" xml:space="preserve">
-    <value>Clear All Items</value>
-  </data>
-  <data name="ClearItemsSettingsCard.Description" xml:space="preserve">
-    <value>Clear all of the items and its sales records.</value>
-  </data>
-  <data name="ClearItemsButton.Content" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="MessageDialogClearItemsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to clear items and its all sales records?</value>
+  <data name="TotalTextBlock.Text" xml:space="preserve">
+    <value>계</value>
   </data>
 </root>

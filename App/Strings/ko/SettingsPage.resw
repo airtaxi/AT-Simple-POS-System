@@ -121,7 +121,7 @@
     <value>언어</value>
   </data>
   <data name="LanguageSettingsCard.Description" xml:space="preserve">
-    <value>애플리케이션의 언어를 설정합니다. 설정 변경 시 프로그램을 재시작해야됩니다.</value>
+    <value>애플리케이션의 언어를 설정합니다. 변경 시 프로그램을 재시작해야됩니다.</value>
   </data>
   <data name="MessageDialogLanguageChangeConfirmationMessage" xml:space="preserve">
     <value>언어를 변경하려면 재시작해야됩니다. 계속하시겠습니까?</value>
@@ -148,6 +148,30 @@
     <value>구성 파일</value>
   </data>
   <data name="MessageDialogImportSettingsConfirmationMessage" xml:space="preserve">
-    <value>정말로 설정을 불러오시겠습니까? 현재 저장된 모든 품목, 거래내역 등의 모든 데이터가 덮어씌워집니다.</value>
+    <value>정말로 설정을 불러오시겠습니까? 현재 저장된 모든 품목, 판매 기록 등의 모든 데이터가 덮어씌워집니다.</value>
+  </data>
+  <data name="ClearRecordsSettingsCard.Header" xml:space="preserve">
+    <value>모든 판매 기록 삭제</value>
+  </data>
+  <data name="ClearRecordsSettingsCard.Description" xml:space="preserve">
+    <value>모든 품목에 대한 판매 기록을 모두 삭제합니다.</value>
+  </data>
+  <data name="ClearRecordsButton.Content" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
+    <value>정말로 모든 판매 기록을 삭제하시겠습니까?</value>
+  </data>
+  <data name="ClearItemsSettingsCard.Header" xml:space="preserve">
+    <value>모든 품목 삭제</value>
+  </data>
+  <data name="ClearItemsSettingsCard.Description" xml:space="preserve">
+    <value>모든 품목과 품목에 할당된 모든 판매 기록을 삭제합니다.</value>
+  </data>
+  <data name="ClearItemsButton.Content" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="MessageDialogClearItemsConfirmationMessage" xml:space="preserve">
+    <value>정말로 품목과 품목에 할당된 모든 판매 기록을 삭제하시겠습니까?</value>
   </data>
 </root>

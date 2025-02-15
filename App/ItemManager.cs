@@ -18,7 +18,8 @@ public static class ItemManager
 		// Add the item and save the configuration
 		items.Add(item);
 		Configuration.SetValue("Items", items);
-	}
+        Configuration.WriteBuffer();
+    }
 
 	public static void SaveItem(Item item)
 	{
@@ -37,7 +38,8 @@ public static class ItemManager
 		// If the item is found, replace it. And save the configuration
 		items[index] = item;
 		Configuration.SetValue("Items", items);
-	}
+        Configuration.WriteBuffer();
+    }
 
 	public static void RemoveItem(string itemId)
 	{
@@ -46,5 +48,13 @@ public static class ItemManager
 		// Remove the item and save the configuration
 		items.RemoveAll(x => x.Id == itemId);
 		Configuration.SetValue("Items", items);
-	}
+        Configuration.WriteBuffer();
+    }
+
+	public static void ClearItems()
+	{
+        // Clear the items and save the configuration
+        Configuration.SetValue("Items", new List<Item>());
+        Configuration.WriteBuffer();
+    }
 }

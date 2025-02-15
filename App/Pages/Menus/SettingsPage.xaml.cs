@@ -10,6 +10,11 @@ public sealed partial class SettingsPage : Page
     {
         InitializeComponent();
 
+        SetLanguageComboBoxSelectedItemToCurrentLanguage();
+    }
+
+    private void SetLanguageComboBoxSelectedItemToCurrentLanguage()
+    {
         var currentLanguage = Localization.GetLanguage();
         var languageComboBoxItems = LanguageComboBox.Items.Cast<ComboBoxItem>();
         var languages = languageComboBoxItems.Select(x => Enum.Parse<Language>((string)x.Tag)).ToList();
@@ -26,7 +31,11 @@ public sealed partial class SettingsPage : Page
         if(selectedLanguage == Localization.GetLanguage()) return;
 
         var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/SettingsPage/MessageDialogLanguageChangeConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
-        if (result != ContentDialogResult.Primary) return;
+        if (result != ContentDialogResult.Primary)
+        {
+            SetLanguageComboBoxSelectedItemToCurrentLanguage();
+            return;
+        }
 
         Localization.SetLanguage(selectedLanguage.ToString());
         Configuration.WriteBuffer();
@@ -75,5 +84,22 @@ public sealed partial class SettingsPage : Page
         if (file == null) return;
         var jsonText = await FileIO.ReadTextAsync(file);
         Configuration.Import(jsonText);
+    }
+
+    private async void OnClearRecordsButtonClicked(object sender, RoutedEventArgs e)
+    {
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/SettingsPage/MessageDialogClearRecordsConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+        if (result != ContentDialogResult.Primary) return;
+
+        TransactionManager.ClearTransactions();
+    }
+
+    private async void OnClearItemsButtonClicked(object sender, RoutedEventArgs e)
+    {
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/SettingsPage/MessageDialogClearItemsConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+        if (result != ContentDialogResult.Primary) return;
+
+        ItemManager.ClearItems();
+        TransactionManager.ClearTransactions();
     }
 }

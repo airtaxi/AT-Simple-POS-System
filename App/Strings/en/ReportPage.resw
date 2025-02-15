@@ -117,27 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RecodTimestampTextBlock.Text" xml:space="preserve">
-    <value>Sold At</value>
-  </data>
-  <data name="RecordPriceTimestampTextBlock.Text" xml:space="preserve">
-    <value>Price</value>
-  </data>
-  <data name="RecordQuantityTextBlock.Text" xml:space="preserve">
-    <value>Quantity</value>
-  </data>
-  <data name="ClearAppBarButton.Label" xml:space="preserve">
-    <value>Clear</value>
-  </data>
   <data name="ExportExcelAppBarButton.Label" xml:space="preserve">
     <value>Export to Excel</value>
-  </data>
-  <data name="MessageDialogDeleteRecordConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to delete the record with information below?
-
-Sold At: #P1
-Price: #P2
-Quantity: #P3</value>
   </data>
   <data name="ItemsReportWorksheetItemNameCellText" xml:space="preserve">
     <value>Name</value>
@@ -163,9 +144,6 @@ Quantity: #P3</value>
   <data name="MessageDialogExportToExcelSuccessMessage" xml:space="preserve">
     <value>The report have been exported to an Excel file.</value>
   </data>
-  <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to clear all records?</value>
-  </data>
   <data name="ItemsReportWorksheet" xml:space="preserve">
     <value>Sales report by item</value>
   </data>
@@ -183,5 +161,18 @@ Quantity: #P3</value>
   </data>
   <data name="RecordsReportWorksheetTotalPriceCellText" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="MessageDialogDeleteRecordConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to delete the record with information below?
+
+Sold At: #P1
+Price: #P2
+Quantity: #P3</value>
+  </data>
+  <data name="RecordsReportSelectorBarItem.Text" xml:space="preserve">
+    <value>Sales report by records</value>
+  </data>
+  <data name="ItemsReportSelectorBarItem.Text" xml:space="preserve">
+    <value>Sales report by item</value>
   </data>
 </root>

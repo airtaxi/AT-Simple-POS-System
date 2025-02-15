@@ -20,6 +20,7 @@ public static class TransactionManager
         // Add the transaction and save the configuration
         transactions.Add(transactionToAdd);
         Configuration.SetValue("Transactions", transactions);
+        Configuration.WriteBuffer();
     }
 
     public static void AddTransactions(IEnumerable<Transaction> transactionsToAdd)
@@ -29,6 +30,7 @@ public static class TransactionManager
         // Add the transaction and save the configuration
         transactions.AddRange(transactionsToAdd);
         Configuration.SetValue("Transactions", transactions);
+        Configuration.WriteBuffer();
     }
 
     public static void SaveTransaction(Transaction transactionToSave)
@@ -48,6 +50,7 @@ public static class TransactionManager
         // If the transaction is found, replace it. And save the configuration
         transactions[index] = transactionToSave;
         Configuration.SetValue("Transactions", transactions);
+        Configuration.WriteBuffer();
     }
 
     public static void RemoveTransaction(string transactionId)
@@ -57,6 +60,7 @@ public static class TransactionManager
         // Remove the transaction and save the configuration
         transactions.RemoveAll(x => x.Id == transactionId);
         Configuration.SetValue("Transactions", transactions);
+        Configuration.WriteBuffer();
     }
 
     public static void RemoveTransactionsByRecordId(string recordId)
@@ -66,11 +70,13 @@ public static class TransactionManager
         // Remove the transactions with the specified record id and save the configuration
         transactions.RemoveAll(x => x.RecordId == recordId);
         Configuration.SetValue("Transactions", transactions);
+        Configuration.WriteBuffer();
     }
 
     public static void ClearTransactions()
     {
         // Clear the transactions and save the configuration
         Configuration.SetValue("Transactions", new List<Transaction>());
+        Configuration.WriteBuffer();
     }
 }

@@ -117,61 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LanguageSettingsCard.Header" xml:space="preserve">
-    <value>Language</value>
+  <data name="ExportExcelAppBarButton.Label" xml:space="preserve">
+    <value>엑셀로 내보내기</value>
   </data>
-  <data name="LanguageSettingsCard.Description" xml:space="preserve">
-    <value>Set the application language. A restart is recommended after changing the settings.</value>
+  <data name="ItemsReportWorksheetItemNameCellText" xml:space="preserve">
+    <value>품목명</value>
   </data>
-  <data name="MessageDialogLanguageChangeConfirmationMessage" xml:space="preserve">
-    <value>You need to restart to change the language. Do you want to continue?</value>
+  <data name="ItemsReportWorksheetItemPriceCellText" xml:space="preserve">
+    <value>가격</value>
   </data>
-  <data name="ExportSettingsCard.Header" xml:space="preserve">
-    <value>Export Settings</value>
+  <data name="ItemsReportWorksheetItemQuantityCellText" xml:space="preserve">
+    <value>수량</value>
   </data>
-  <data name="ExportSettingsCard.Description" xml:space="preserve">
-    <value>You can export the settings and import them to another device, or create a backup.</value>
+  <data name="ItemsReportWorksheetItemTotalPriceCellText" xml:space="preserve">
+    <value>총합</value>
   </data>
-  <data name="ImportSettingsCard.Header" xml:space="preserve">
-    <value>Import Settings</value>
+  <data name="ItemsReportWorksheetTotalPriceCellText" xml:space="preserve">
+    <value>계</value>
   </data>
-  <data name="ImportSettingsCard.Description" xml:space="preserve">
-    <value>You can import settings and apply them to the current device.</value>
+  <data name="ReportSuggestedFileName" xml:space="preserve">
+    <value>보고서</value>
   </data>
-  <data name="ExportSettingsButton.Content" xml:space="preserve">
-    <value>Export</value>
+  <data name="ReportXlsxFileTypeChoice" xml:space="preserve">
+    <value>엑셀 파일</value>
   </data>
-  <data name="ImportSettingsButton.Content" xml:space="preserve">
-    <value>Import</value>
+  <data name="MessageDialogExportToExcelSuccessMessage" xml:space="preserve">
+    <value>보고서가 엑셀 파일로 내보내졌습니다.</value>
   </data>
-  <data name="AppConfigFileTypeChoice" xml:space="preserve">
-    <value>Configuration file</value>
+  <data name="ItemsReportWorksheet" xml:space="preserve">
+    <value>품목별 판매 실적 보고</value>
   </data>
-  <data name="MessageDialogImportSettingsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to load the settings? All currently saved items, transaction history, and other data will be overwritten.</value>
+  <data name="RecordsReportWorksheet" xml:space="preserve">
+    <value>거래 기록별 판매 실적 보고</value>
   </data>
-  <data name="ClearRecordsSettingsCard.Header" xml:space="preserve">
-    <value>Clear All Sales Records</value>
+  <data name="RecordsReportWorksheetTimestampCellText" xml:space="preserve">
+    <value>판매 시간</value>
   </data>
-  <data name="ClearRecordsSettingsCard.Description" xml:space="preserve">
-    <value>Clear all of the sales records for the all items.</value>
+  <data name="RecordsReportWorksheetPriceCellText" xml:space="preserve">
+    <value>가격</value>
   </data>
-  <data name="ClearRecordsButton.Content" xml:space="preserve">
-    <value>Clear</value>
+  <data name="RecordsReportWorksheetQuantityCellText" xml:space="preserve">
+    <value>수량</value>
   </data>
-  <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to clear all sales records?</value>
+  <data name="RecordsReportWorksheetTotalPriceCellText" xml:space="preserve">
+    <value>계</value>
   </data>
-  <data name="ClearItemsSettingsCard.Header" xml:space="preserve">
-    <value>Clear All Items</value>
+  <data name="MessageDialogDeleteRecordConfirmationMessage" xml:space="preserve">
+    <value>아래 정보가 있는 판매 기록을 삭제하시겠습니까?
+
+시간: #P1
+가격: #P2
+수량: #P3</value>
   </data>
-  <data name="ClearItemsSettingsCard.Description" xml:space="preserve">
-    <value>Clear all of the items and its sales records.</value>
+  <data name="RecordsReportSelectorBarItem.Text" xml:space="preserve">
+    <value>거래 기록별 판매 실적 보고</value>
   </data>
-  <data name="ClearItemsButton.Content" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="MessageDialogClearItemsConfirmationMessage" xml:space="preserve">
-    <value>Are you sure you want to clear items and its all sales records?</value>
+  <data name="ItemsReportSelectorBarItem.Text" xml:space="preserve">
+    <value>품목별 판매 실적 보고</value>
   </data>
 </root>

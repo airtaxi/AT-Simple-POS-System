@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RecodTimestampTextBlock.Text" xml:space="preserve">
+  <data name="RecordTimestampTextBlock.Text" xml:space="preserve">
     <value>판매 시간</value>
   </data>
   <data name="RecordPriceTimestampTextBlock.Text" xml:space="preserve">
@@ -126,62 +126,7 @@
   <data name="RecordQuantityTextBlock.Text" xml:space="preserve">
     <value>수량</value>
   </data>
-  <data name="ClearAppBarButton.Label" xml:space="preserve">
-    <value>모두 지우기</value>
-  </data>
-  <data name="ExportExcelAppBarButton.Label" xml:space="preserve">
-    <value>엑셀로 내보내기</value>
-  </data>
-  <data name="MessageDialogDeleteRecordConfirmationMessage" xml:space="preserve">
-    <value>아래 정보가 있는 판매 기록을 삭제하시겠습니까?
-
-시간: #P1
-가격: #P2
-수량: #P3</value>
-  </data>
-  <data name="ItemsReportWorksheetItemNameCellText" xml:space="preserve">
-    <value>품목명</value>
-  </data>
-  <data name="ItemsReportWorksheetItemPriceCellText" xml:space="preserve">
-    <value>가격</value>
-  </data>
-  <data name="ItemsReportWorksheetItemQuantityCellText" xml:space="preserve">
-    <value>수량</value>
-  </data>
-  <data name="ItemsReportWorksheetItemTotalPriceCellText" xml:space="preserve">
-    <value>총합</value>
-  </data>
-  <data name="ItemsReportWorksheetTotalPriceCellText" xml:space="preserve">
-    <value>계</value>
-  </data>
-  <data name="ReportSuggestedFileName" xml:space="preserve">
-    <value>보고서</value>
-  </data>
-  <data name="ReportXlsxFileTypeChoice" xml:space="preserve">
-    <value>엑셀 파일</value>
-  </data>
-  <data name="MessageDialogExportToExcelSuccessMessage" xml:space="preserve">
-    <value>보고서가 엑셀 파일로 내보내졌습니다.</value>
-  </data>
-  <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
-    <value>정말로 모든 판매 기록을 삭제하시겠습니까?</value>
-  </data>
-  <data name="ItemsReportWorksheet" xml:space="preserve">
-    <value>품목별 판매 실적 보고</value>
-  </data>
-  <data name="RecordsReportWorksheet" xml:space="preserve">
-    <value>거래 기록별 판매 실적 보고</value>
-  </data>
-  <data name="RecordsReportWorksheetTimestampCellText" xml:space="preserve">
-    <value>판매 시간</value>
-  </data>
-  <data name="RecordsReportWorksheetPriceCellText" xml:space="preserve">
-    <value>가격</value>
-  </data>
-  <data name="RecordsReportWorksheetQuantityCellText" xml:space="preserve">
-    <value>수량</value>
-  </data>
-  <data name="RecordsReportWorksheetTotalPriceCellText" xml:space="preserve">
+  <data name="TotalTextBlock.Text" xml:space="preserve">
     <value>계</value>
   </data>
 </root>

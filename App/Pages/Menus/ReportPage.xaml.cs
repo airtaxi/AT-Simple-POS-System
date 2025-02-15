@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using App.Pages.Menus.Report;
 using App.ViewModels;
 using ClosedXML.Excel;
 using Microsoft.UI.Xaml;
@@ -12,6 +13,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -25,7 +27,8 @@ namespace App.Pages.Menus;
 /// </summary>
 public sealed partial class ReportPage : Page
 {
-    private ObservableCollection<RecordViewModel> _recordViewModels = new();
+    private readonly ObservableCollection<RecordReportViewModel> _recordViewModels = [];
+    private readonly ObservableCollection<ItemReportViewModel> _itemViewModels = [];
 
     public ReportPage()
     {
@@ -35,24 +38,28 @@ public sealed partial class ReportPage : Page
         var records = RecordManager.GetAllRecords();
         foreach (var record in records)
         {
-            var viewModel = new RecordViewModel(record);
+            var viewModel = new RecordReportViewModel(record);
             viewModel.Deleted += OnRecordDeleted;
             _recordViewModels.Add(viewModel);
         }
 
-        // Newer records first
-        _recordViewModels = new(_recordViewModels.OrderByDescending(x => x.Timestamp));
+        var items = ItemManager.GetItems();
+        foreach (var item in items)
+        {
+            var viewModel = new ItemReportViewModel(item);
+            _itemViewModels.Add(viewModel);
+        }
 
-        // Apply the view models
-        IvRecords.ItemsSource = _recordViewModels;
+        // Newer records first
+        _recordViewModels = [.. _recordViewModels.OrderByDescending(x => x.Timestamp)];
     }
 
     private async void OnRecordDeleted(object sender, EventArgs e)
     {
-        var viewModel = sender as RecordViewModel;
+        var viewModel = sender as RecordReportViewModel;
 
         // Ask the user if they want to delete the record
-        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ReportPage/MessageDialogDeleteRecordConfirmationMessage").Replace("#P1", viewModel.TimestampText).Replace("#P2", viewModel.PriceText).Replace("#P3", viewModel.QuantityText), Constants.MessageDialogYes, Constants.MessageDialogNo);
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ReportPage/MessageDialogDeleteRecordConfirmationMessage").Replace("#P1", viewModel.TimestampText).Replace("#P2", viewModel.TotalPriceText).Replace("#P3", viewModel.TotalQuantityText), Constants.MessageDialogYes, Constants.MessageDialogNo);
         if (result != ContentDialogResult.Primary) return;
 
         // Remove the record
@@ -60,30 +67,11 @@ public sealed partial class ReportPage : Page
         TransactionManager.RemoveTransactionsByRecordId(recordId);
 
         // Remove the view model
-        viewModel.Deleted -= OnRecordDeleted;
         _recordViewModels.Remove(viewModel);
-    }
-
-    private void OnUnloaded(object sender, RoutedEventArgs e)
-    {
-        var item = sender as FrameworkElement;
-        var viewModel = item.DataContext as RecordViewModel;
-        viewModel.OnUnloaded(sender, e);
-    }
-
-    private void OnDeleteButtonClicked(object sender, RoutedEventArgs e)
-    {
-        var item = sender as FrameworkElement;
-        var viewModel = item.DataContext as RecordViewModel;
-        viewModel.OnDeleteButtonClicked(sender, e);
     }
 
     private async void OnExportToExcelAppBarButtonClicked(object sender, RoutedEventArgs e)
     {
-        // using ClosedXML
-        // 아이템별 총 판매 내역을 엑셀로 내보내기 (각자가 아님)
-        // 예: 아이템1, 15,000₩, 3개, 45,000₩
-
         // Create a new workbook
         using var workbook = new XLWorkbook();
 
@@ -99,17 +87,12 @@ public sealed partial class ReportPage : Page
 
             // Set the data
             var row = 2;
-            var transactions = TransactionManager.GetTransactions();
-            var items = ItemManager.GetItems();
-            foreach (var item in items)
+            foreach (var itemViewModel in _itemViewModels)
             {
-                var itemTransactions = transactions.Where(x => x.ItemId == item.Id);
-                var totalPrice = itemTransactions.Sum(x => x.Quantity * item.Price);
-                var totalQuantity = itemTransactions.Sum(x => x.Quantity);
-                worksheet.Cell($"A{row}").Value = item.Name;
-                worksheet.Cell($"B{row}").Value = item.Price;
-                worksheet.Cell($"C{row}").Value = totalQuantity;
-                worksheet.Cell($"D{row}").Value = totalPrice;
+                worksheet.Cell($"A{row}").Value = itemViewModel.NameText;
+                worksheet.Cell($"B{row}").Value = itemViewModel.PriceText;
+                worksheet.Cell($"C{row}").Value = itemViewModel.QuantityText;
+                worksheet.Cell($"D{row}").Value = itemViewModel.TotalPriceText;
                 row++;
             }
 
@@ -133,8 +116,8 @@ public sealed partial class ReportPage : Page
             foreach (var recordViewModel in _recordViewModels)
             {
                 worksheet.Cell($"A{row}").Value = recordViewModel.TimestampText;
-                worksheet.Cell($"B{row}").Value = recordViewModel.PriceText;
-                worksheet.Cell($"C{row}").Value = recordViewModel.QuantityText;
+                worksheet.Cell($"B{row}").Value = recordViewModel.TotalPriceText;
+                worksheet.Cell($"C{row}").Value = recordViewModel.TotalQuantityText;
                 row++;
             }
 
@@ -166,12 +149,31 @@ public sealed partial class ReportPage : Page
         await this.ShowMessageDialogAsync(Constants.MessageDialogSuccess, Localization.GetLocalizedString("/ReportPage/MessageDialogExportToExcelSuccessMessage"), Constants.MessageDialogOk);
     }
 
-    private async void OnClearAppBarButtonClicked(object sender, RoutedEventArgs e)
+    private void OnItemsReportSelectorBarSelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
     {
-        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ReportPage/MessageDialogClearRecordsConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
-        if (result != ContentDialogResult.Primary) return;
+        if (sender.SelectedItem != null)
+        {
+            RecordsReportSelectorBar.SelectedItem = null;
 
-        TransactionManager.ClearTransactions();
-        _recordViewModels.Clear();
+#if WINDOWS
+            MainFrame.Navigate(typeof(ItemsReportPage), _itemViewModels, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+#else
+            MainFrame.Navigate(typeof(ItemsReportPage), _itemViewModels);
+#endif
+        }
+    }
+
+    private void OnRecordsReportSelectorBarSelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
+    {
+        if (sender.SelectedItem != null)
+        {
+            ItemsReportSelectorBar.SelectedItem = null;
+
+#if WINDOWS
+            MainFrame.Navigate(typeof(RecordsReportPage), _recordViewModels, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+#else
+            MainFrame.Navigate(typeof(RecordsReportPage), _recordViewModels);
+#endif
+        }
     }
 }

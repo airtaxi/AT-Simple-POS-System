@@ -10,18 +10,50 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
-    <StackPanel Spacing="4">
-        <controls:SettingsCard x:Uid="/SettingsPage/LanguageSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=LocalLanguage}">
-            <ComboBox x:Name="LanguageComboBox" SelectionChanged="OnLanguageComboBoxSelectionChanged">
-                <ComboBoxItem Content="English" Tag="English" />
-                <ComboBoxItem Content="한국어" Tag="Korean" />
-            </ComboBox>
-        </controls:SettingsCard>
-        <controls:SettingsCard x:Uid="/SettingsPage/ExportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}">
-            <Button x:Uid="/SettingsPage/ExportSettingsButton" Click="OnExportSettingsButtonClicked" />
-        </controls:SettingsCard>
-        <controls:SettingsCard x:Uid="/SettingsPage/ImportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}">
-            <Button x:Uid="/SettingsPage/ImportSettingsButton" Click="OnImportSettingsButtonClicked" />
-        </controls:SettingsCard>
+    <StackPanel Spacing="12">
+        <StackPanel Spacing="4">
+            <TextBlock
+                Margin="0,0,0,4"
+                Style="{ThemeResource BodyStrongTextBlockStyle}"
+                Text="애플리케이션" />
+            <controls:SettingsCard x:Uid="/SettingsPage/LanguageSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=LocalLanguage}">
+                <ComboBox x:Name="LanguageComboBox" SelectionChanged="OnLanguageComboBoxSelectionChanged">
+                    <ComboBoxItem Content="English" Tag="English" />
+                    <ComboBoxItem Content="한국어" Tag="Korean" />
+                </ComboBox>
+            </controls:SettingsCard>
+        </StackPanel>
+
+        <StackPanel Spacing="4">
+            <TextBlock
+                Margin="0,0,0,4"
+                Style="{ThemeResource BodyStrongTextBlockStyle}"
+                Text="데이터 삭제" />
+            <controls:SettingsCard x:Uid="/SettingsPage/ClearRecordsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
+                <Button
+                    x:Uid="/SettingsPage/ClearRecordsButton"
+                    Click="OnClearRecordsButtonClicked"
+                    Foreground="Red" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="/SettingsPage/ClearItemsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
+                <Button
+                    x:Uid="/SettingsPage/ClearItemsButton"
+                    Click="OnClearItemsButtonClicked"
+                    Foreground="Red" />
+            </controls:SettingsCard>
+        </StackPanel>
+
+        <StackPanel Spacing="4">
+            <TextBlock
+                Margin="0,0,0,4"
+                Style="{ThemeResource BodyStrongTextBlockStyle}"
+                Text="데이터 관리" />
+            <controls:SettingsCard x:Uid="/SettingsPage/ExportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}">
+                <Button x:Uid="/SettingsPage/ExportSettingsButton" Click="OnExportSettingsButtonClicked" />
+            </controls:SettingsCard>
+            <controls:SettingsCard x:Uid="/SettingsPage/ImportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}">
+                <Button x:Uid="/SettingsPage/ImportSettingsButton" Click="OnImportSettingsButtonClicked" />
+            </controls:SettingsCard>
+        </StackPanel>
     </StackPanel>
 </Page>
