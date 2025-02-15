@@ -160,7 +160,7 @@
   <data name="ReportXlsxFileTypeChoice" xml:space="preserve">
     <value>엑셀 파일</value>
   </data>
-  <data name="MessageDialogExportExcelSuccessMessage" xml:space="preserve">
+  <data name="MessageDialogExportToExcelSuccessMessage" xml:space="preserve">
     <value>보고서가 엑셀 파일로 내보내졌습니다.</value>
   </data>
   <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">

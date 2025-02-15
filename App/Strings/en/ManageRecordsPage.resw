@@ -160,7 +160,7 @@ Quantity: #P3</value>
   <data name="ReportXlsxFileTypeChoice" xml:space="preserve">
     <value>Excel file</value>
   </data>
-  <data name="MessageDialogExportExcelSuccessMessage" xml:space="preserve">
+  <data name="MessageDialogExportToExcelSuccessMessage" xml:space="preserve">
     <value>The report have been exported to an Excel file.</value>
   </data>
   <data name="MessageDialogClearRecordsConfirmationMessage" xml:space="preserve">
