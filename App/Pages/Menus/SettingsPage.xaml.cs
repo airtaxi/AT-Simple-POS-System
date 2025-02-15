@@ -56,6 +56,9 @@ public sealed partial class SettingsPage : Page
 
     private async void OnImportSettingsButtonClicked(object sender, RoutedEventArgs e)
     {
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/SettingsPage/MessageDialogImportSettingsConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+        if (result != ContentDialogResult.Primary) return;
+
         var openPicker = new FileOpenPicker();
 
 #if WINDOWS

@@ -147,4 +147,7 @@
   <data name="AppConfigFileTypeChoice" xml:space="preserve">
     <value>Configuration file</value>
   </data>
+  <data name="MessageDialogImportSettingsConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to load the settings? All currently saved items, transaction history, and other data will be overwritten.</value>
+  </data>
 </root>
