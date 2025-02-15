@@ -199,6 +199,8 @@ public class Configuration
 [JsonSerializable(typeof(List<nint>))]
 [JsonSerializable(typeof(List<short>))]
 [JsonSerializable(typeof(List<ushort>))]
+[JsonSerializable(typeof(JsonElement))]
+[JsonSerializable(typeof(JsonArray))]
 internal partial class SourceGenerationContext : JsonSerializerContext
 {
 }
