@@ -153,4 +153,10 @@
   <data name="ItemViewModelQuantityTemplateText" xml:space="preserve">
     <value>Sold #P1 out of #P2</value>
   </data>
+  <data name="MessageDialogNotEnoughMoneyWarningMessage" xml:space="preserve">
+    <value>The money received is not enough. Do you want to continue?</value>
+  </data>
+  <data name="MessageDialogNoItemsErrorMessage" xml:space="preserve">
+    <value>There are no items to pay for.</value>
+  </data>
 </root>

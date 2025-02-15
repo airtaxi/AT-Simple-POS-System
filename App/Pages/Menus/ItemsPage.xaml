@@ -219,8 +219,7 @@
                         x:Uid="/ItemsPage/PayButton"
                         Grid.Column="1"
                         VerticalAlignment="Bottom"
-                        Click="OnPayButtonClicked"
-                        IsEnabled="False" />
+                        Click="OnPayButtonClicked" />
                 </Grid>
                 <TextBox
                     x:Name="TbxChange"

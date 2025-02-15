@@ -40,19 +40,16 @@ public sealed partial class ItemsPage : Page
         // Parse the received money text
         var moneyReceivedText = TbxMoneyReceived.Text;
         var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
-        if (!long.TryParse(numberOnlyText, out long moneyReceivd)) return; // Return if the text is not a number
+        // Return if the text is not a number
+        if (!long.TryParse(numberOnlyText, out long moneyReceivd))
+        {
+            TbxChange.Text = string.Empty;
+            return;
+        }
 
         // Update the UI
-        if (moneyReceivd >= totalPrice)
-        {
-            BtPay.IsEnabled = true;
-            TbxChange.Text = $"{moneyReceivd - totalPrice:N0}";
-        }
-        else
-        {
-            BtPay.IsEnabled = false;
-            TbxChange.Text = Localization.GetLocalizedString("/ItemsPage/NotEnoughMoneyText");
-        }
+        if (moneyReceivd >= totalPrice) TbxChange.Text = $"{moneyReceivd - totalPrice:N0}";
+        else TbxChange.Text = Localization.GetLocalizedString("/ItemsPage/NotEnoughMoneyText");
     }
 
     private void OnTransactionDeleted(object sender, EventArgs e)
@@ -99,6 +96,29 @@ public sealed partial class ItemsPage : Page
 
     private async void OnPayButtonClicked(object sender, RoutedEventArgs e)
     {
+        if(TransactionViewModels.Count == 0)
+        {
+            await this.ShowMessageDialogAsync(Constants.MessageDialogError, Localization.GetLocalizedString("/ItemsPage/MessageDialogNoItemsErrorMessage"), Constants.MessageDialogOk);
+            return;
+        }
+
+        var moneyReceivedText = TbxMoneyReceived.Text;
+        var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
+        _ = long.TryParse(numberOnlyText, out long moneyReceivd);
+
+        var totalPrice = TransactionViewModels.Sum(x => x.Item.Price * x.Quantity);
+
+        if (moneyReceivd < totalPrice)
+        {
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ItemsPage/MessageDialogNotEnoughMoneyWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+            if (result != ContentDialogResult.Primary) return;
+        }
+
+        // Update the total price
+        var totalPrice = TransactionViewModels.Sum(x => x.Item.Price * x.Quantity);
+        TbTotalPrice.Text = $"{totalPrice:N0}";
+        if (moneyReceivd > )
+
         // Setup the record
         var timestamp = DateTime.UtcNow; // Uses UTC time to prevent time zone issues
         var recordId = Guid.NewGuid().ToString("N");
@@ -118,8 +138,6 @@ public sealed partial class ItemsPage : Page
         TbxMoneyReceived.Text = "";
         TbxChange.Text = "";
         UpdateTotal();
-
-        BtPay.IsEnabled = false;
     }
 
     private void OnItemTapped(object sender, TappedRoutedEventArgs e)
