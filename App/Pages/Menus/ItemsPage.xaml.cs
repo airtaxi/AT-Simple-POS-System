@@ -114,11 +114,6 @@ public sealed partial class ItemsPage : Page
             if (result != ContentDialogResult.Primary) return;
         }
 
-        // Update the total price
-        var totalPrice = TransactionViewModels.Sum(x => x.Item.Price * x.Quantity);
-        TbTotalPrice.Text = $"{totalPrice:N0}";
-        if (moneyReceivd > )
-
         // Setup the record
         var timestamp = DateTime.UtcNow; // Uses UTC time to prevent time zone issues
         var recordId = Guid.NewGuid().ToString("N");
