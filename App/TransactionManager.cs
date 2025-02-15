@@ -73,6 +73,16 @@ public static class TransactionManager
         Configuration.WriteBuffer();
     }
 
+    public static void RemoveTransactionsByItemId(string itemId)
+    {
+        var transactions = GetTransactions();
+
+        // Remove the transactions with the specified record id and save the configuration
+        transactions.RemoveAll(x => x.ItemId == itemId);
+        Configuration.SetValue("Transactions", transactions);
+        Configuration.WriteBuffer();
+    }
+
     public static void ClearTransactions()
     {
         // Clear the transactions and save the configuration

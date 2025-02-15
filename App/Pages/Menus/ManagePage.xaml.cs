@@ -66,7 +66,9 @@ public sealed partial class ManagePage : Page
         var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManagePage/MessageDialogDeleteItemConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
         if (result != ContentDialogResult.Primary) return;
 
-        ItemManager.RemoveItem(_currentItemViewModel.Item.Id);
+        var itemId = _currentItemViewModel.Item.Id;
+        ItemManager.RemoveItem(itemId);
+        TransactionManager.RemoveTransactionsByItemId(itemId);
         _viewModels.Remove(_currentItemViewModel);
     }
 
