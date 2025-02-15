@@ -162,4 +162,7 @@
   <data name="MessageDialogSoldoutItemsWarningMessage" xml:space="preserve">
     <value>일부 품목이 품절되었습니다. 계속하시겠습니까?</value>
   </data>
+  <data name="ItemViewModelSoldOutText" xml:space="preserve">
+    <value>품절</value>
+  </data>
 </root>
