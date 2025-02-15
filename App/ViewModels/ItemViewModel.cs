@@ -32,7 +32,7 @@ public partial class ItemViewModel : ObservableObject
 		PriceText = $"{item.Price:N0}";
         var quantityText = Localization.GetLocalizedString("/ItemsPage/ItemViewModelQuantityTemplateText");
         QuantityText = quantityText.Replace("#P1", item.SalesQuantity.ToString("N0")).Replace("#P2", item.StockQuantity.ToString("N0"));
-        QuantityForeground = item.IsSoldout ? new SolidColorBrush(Colors.Red) : null;
+        QuantityForeground = item.IsSoldout ? new SolidColorBrush(Colors.Red) : (SolidColorBrush)App.Instance.Resources.ThemeDictionaries["DefaultTextForegroundThemeBrush"];
     }
 
     [ObservableProperty]
