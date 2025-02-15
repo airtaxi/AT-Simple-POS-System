@@ -8,12 +8,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <NavigationView
         x:Name="MainNavigationView"
+        x:Uid="/MainPage/MainNavigationView"
         utu:SafeArea.Insets="VisibleBounds"
         utu:SafeArea.Mode="Margin"
         IsBackButtonVisible="Collapsed"
         IsSettingsVisible="True"
         PaneDisplayMode="LeftCompact"
-        PaneTitle="AT Simple POS System"
         SelectionChanged="OnNavigationViewSelectionChanged">
         <NavigationView.MenuItems>
             <NavigationViewItem
@@ -29,11 +29,8 @@
                 x:Uid="/MainPage/ManageRecordsNavigationViewItem"
                 Icon="{ic:SymbolIcon Symbol=ChartMultiple}" />
         </NavigationView.MenuItems>
-        <Grid>
-            <Frame
-                x:Name="MainFrame"
-                utu:SafeArea.Insets="SoftInput"
-                utu:SafeArea.Mode="Padding" />
+        <Grid utu:SafeArea.Insets="SoftInput" utu:SafeArea.Mode="Padding">
+            <Frame x:Name="MainFrame" />
             <Grid
                 x:Name="LoadingGrid"
                 IsHitTestVisible="False"
