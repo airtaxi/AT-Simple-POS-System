@@ -39,30 +39,30 @@
                             <ColumnDefinition Width="0.4*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock
+                            x:Uid="/ManagePage/ItemNameTextBlock"
                             Grid.Column="0"
                             HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Text="Name" />
+                            VerticalAlignment="Center" />
                         <TextBlock
+                            x:Uid="/ManagePage/ItemImageTextBlock"
                             Grid.Column="1"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="Image" />
+                            VerticalAlignment="Center" />
                         <TextBlock
+                            x:Uid="/ManagePage/ItemPriceTextBlock"
                             Grid.Column="2"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="Price" />
+                            VerticalAlignment="Center" />
                         <TextBlock
+                            x:Uid="/ManagePage/ItemStockTextBlock"
                             Grid.Column="3"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="Stock" />
+                            VerticalAlignment="Center" />
                         <TextBlock
+                            x:Uid="/ManagePage/ItemSalesTextBlock"
                             Grid.Column="4"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Text="Sales" />
+                            VerticalAlignment="Center" />
                     </Grid>
                 </ListView.Header>
                 <ListView.ItemTemplate>
@@ -119,15 +119,15 @@
                 Background="{ThemeResource LayerOnMicaBaseAltFillColorTertiaryBrush}"
                 DefaultLabelPosition="Right">
                 <AppBarButton
+                    x:Uid="/ManagePage/AddItemAppBarButton"
                     Click="OnAddItemAppBarButtonClicked"
-                    Icon="Add"
-                    Label="Add" />
+                    Icon="Add" />
                 <AppBarButton
                     x:Name="AbbDelete"
+                    x:Uid="/ManagePage/DeleteItemAppBarButton"
                     Click="OnDeleteItemAppBarButtonClicked"
                     Icon="Delete"
-                    IsEnabled="False"
-                    Label="Delete" />
+                    IsEnabled="False" />
             </CommandBar>
         </Grid>
 
@@ -152,20 +152,15 @@
                         <SymbolIcon Opacity="0.25" Symbol="Pictures" />
                     </Button>
                 </Grid>
-                <TextBox
-                    x:Name="TbxName"
-                    Header="Name"
-                    PlaceholderText="Item Name" />
+                <TextBox x:Name="TbxName" x:Uid="/ManagePage/ItemNameTextBox" />
                 <TextBox
                     x:Name="TbxPrice"
-                    Header="Price"
-                    PlaceholderText="Item Price"
+                    x:Uid="/ManagePage/ItemPriceTextBox"
                     TextChanged="OnMoneyTextBoxTextChanged" />
                 <NumberBox
                     x:Name="NbxStockQuantity"
-                    Header="Stock"
+                    x:Uid="/ManagePage/ItemStockQuantityNumberBox"
                     LargeChange="1"
-                    PlaceholderText="Item Stock Quantity"
                     SmallChange="1"
                     SpinButtonPlacementMode="Inline">
                     <NumberBox.NumberFormatter>
@@ -175,14 +170,12 @@
                             IsGrouped="True"
                             SignificantDigits="0" />
                     </NumberBox.NumberFormatter>
-
                 </NumberBox>
                 <Button
                     x:Name="BtSave"
                     Margin="0,5,0,0"
                     HorizontalAlignment="Stretch"
-                    Click="OnSaveItemButtonClicked"
-                    Content="Save" />
+                    Click="OnSaveItemButtonClicked" />
             </StackPanel>
         </ScrollViewer>
     </Grid>

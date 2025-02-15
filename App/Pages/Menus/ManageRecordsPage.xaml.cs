@@ -52,7 +52,7 @@ public sealed partial class ManageRecordsPage : Page
         var viewModel = sender as RecordViewModel;
 
         // Ask the user if they want to delete the record
-        var result = await this.ShowMessageDialogAsync("Warning", $"Are you sure you want to delete the record with information below?\n\nSold At: {viewModel.TimestampText}\nPrice: {viewModel.PriceText}\nQuantity: {viewModel.QuantityText}", Constants.MessageDialogYes, Constants.MessageDialogNo);
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManageRecordsPage/MessageDialogDeleteRecordConfirmationMessage").Replace("#P1", viewModel.TimestampText).Replace("#P2", viewModel.PriceText).Replace("#P3", viewModel.QuantityText), Constants.MessageDialogYes, Constants.MessageDialogNo);
         if (result != ContentDialogResult.Primary) return;
 
         // Remove the record
@@ -78,7 +78,7 @@ public sealed partial class ManageRecordsPage : Page
         viewModel.OnDeleteButtonClicked(sender, e);
     }
 
-    private async void OnExportExcelAppBarButtonClicked(object sender, RoutedEventArgs e)
+    private async void OnExportToExcelAppBarButtonClicked(object sender, RoutedEventArgs e)
     {
         // using ClosedXML
         // 아이템별 총 판매 내역을 엑셀로 내보내기 (각자가 아님)
@@ -89,10 +89,10 @@ public sealed partial class ManageRecordsPage : Page
         var worksheet = workbook.Worksheets.Add("Sheet 1");
 
         // Set the header
-        worksheet.Cell("A1").Value = "Item";
-        worksheet.Cell("B1").Value = "Price";
-        worksheet.Cell("C1").Value = "Quantity";
-        worksheet.Cell("D1").Value = "Total";
+        worksheet.Cell("A1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemNameCellText");
+        worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemPriceCellText");
+        worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemQuantityCellText");
+        worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetItemTotalPriceCellText");
 
         // Set the data
         var row = 2;
@@ -111,7 +111,7 @@ public sealed partial class ManageRecordsPage : Page
         }
 
         // All Item Total
-        worksheet.Cell($"A{row}").Value = "Total";
+        worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ManageRecordsPage/ItemsReportWorksheetTotalPriceCellText");
         worksheet.Cell($"D{row}").FormulaA1 = $"SUM(D2:D{row - 1})";
 
         // Save the workbook
@@ -124,8 +124,8 @@ public sealed partial class ManageRecordsPage : Page
         WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
         savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
 #endif
-        savePicker.SuggestedFileName = "Report";
-        savePicker.FileTypeChoices.Add("Excel", new List<string>() { ".xlsx" });
+        savePicker.SuggestedFileName = Localization.GetLocalizedString("/ManageRecordsPage/ReportSuggestedFileName");
+        savePicker.FileTypeChoices.Add(Localization.GetLocalizedString("/ManageRecordsPage/ReportXlsxFileTypeChoice"), new List<string>() { ".xlsx" });
 
         var file = await savePicker.PickSaveFileAsync();
         if (file == null) return;
@@ -133,12 +133,12 @@ public sealed partial class ManageRecordsPage : Page
         using (var stream = await file.OpenStreamForWriteAsync()) workbook.SaveAs(stream);
 
         // Show a message
-        await this.ShowMessageDialogAsync("Success", "The report have been exported to an Excel file.", Constants.MessageDialogOk);
+        await this.ShowMessageDialogAsync(Constants.MessageDialogSuccess, Localization.GetLocalizedString("/ManageRecordsPage/MessageDialogExportToExcelSuccessMessage"), Constants.MessageDialogOk);
     }
 
     private async void OnClearAppBarButtonClicked(object sender, RoutedEventArgs e)
     {
-        var result = await this.ShowMessageDialogAsync("Warning", "Are you sure you want to clear all records?", Constants.MessageDialogYes, Constants.MessageDialogNo);
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManageRecordsPage/MessageDialogClearRecordsConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
         if (result != ContentDialogResult.Primary) return;
 
         TransactionManager.ClearTransactions();

@@ -6,8 +6,10 @@ namespace App;
 public static class DialogHelper
 {
     private static ContentDialog s_lastContentDialog;
-    public static ContentDialog GenerateMessageDialog(this UIElement element, string title, string content, string primaryButtonText = Constants.MessageDialogOk, string secondaryButtonText = null)
+    public static ContentDialog GenerateMessageDialog(this UIElement element, string title, string content, string primaryButtonText = null, string secondaryButtonText = null)
     {
+        primaryButtonText ??= Constants.MessageDialogOk;
+
         var dialog = new ContentDialog
         {
             Title = title,
@@ -19,8 +21,10 @@ public static class DialogHelper
         return dialog;
     }
 
-    public static async Task<ContentDialogResult> ShowMessageDialogAsync(this UIElement element, string title, string content, string primaryButtonText = Constants.MessageDialogOk, string secondaryButtonText = null)
+    public static async Task<ContentDialogResult> ShowMessageDialogAsync(this UIElement element, string title, string content, string primaryButtonText = null, string secondaryButtonText = null)
     {
+        primaryButtonText ??= Constants.MessageDialogOk;
+
         var dialog = element.GenerateMessageDialog(title, content, primaryButtonText, secondaryButtonText);
         s_lastContentDialog?.Hide();
         var result = await dialog.ShowAsync();

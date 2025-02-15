@@ -29,8 +29,10 @@ public partial class ItemViewModel : ObservableObject
         else Image = null; // Reset image if it binary is null
 
 		PriceText = $"{item.Price:N0}";
-		QuantityText = $"Sold {item.SalesQuantity} out of {item.StockQuantity}";
-	}
+        var quantityText = Localization.GetLocalizedString("/ItemsPage/ItemViewModelQuantityTemplateText");
+        quantityText.Replace("#P1", item.SalesQuantity.ToString("N0")).Replace("#P2", item.StockQuantity.ToString("N0"));
+        QuantityText = quantityText;
+    }
 
     [ObservableProperty]
     public partial string Name { get; set; }

@@ -11,22 +11,22 @@
         utu:SafeArea.Insets="All"
         utu:SafeArea.Mode="Margin"
         IsBackButtonVisible="Collapsed"
-        IsSettingsVisible="False"
+        IsSettingsVisible="True"
         PaneDisplayMode="LeftCompact"
         PaneTitle="AT Simple POS System"
         SelectionChanged="OnNavigationViewSelectionChanged">
         <NavigationView.MenuItems>
             <NavigationViewItem
                 x:Name="ItemsNavigationViewItem"
-                Content="Items"
+                x:Uid="/MainPage/ItemsNavigationViewItem"
                 Icon="{ic:SymbolIcon Symbol=ViewDesktop}" />
             <NavigationViewItem
                 x:Name="ManageNavigationViewItem"
-                Content="Manage"
+                x:Uid="/MainPage/ManageNavigationViewItem"
                 Icon="{ic:SymbolIcon Symbol=Toolbox}" />
             <NavigationViewItem
                 x:Name="ManageRecordsNavigationViewItem"
-                Content="Report"
+                x:Uid="/MainPage/ManageRecordsNavigationViewItem"
                 Icon="{ic:SymbolIcon Symbol=ChartMultiple}" />
         </NavigationView.MenuItems>
         <Grid>

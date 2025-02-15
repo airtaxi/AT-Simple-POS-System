@@ -31,12 +31,12 @@ public sealed partial class ManagePage : Page
     {
         if (_currentItemViewModel == null && SvItem.Visibility == Visibility.Visible)
         {
-            var result = await this.ShowMessageDialogAsync("Warning", "You're currently adding an item. Do you want to discard the changes?", Constants.MessageDialogYes, Constants.MessageDialogNo);
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManagePage/MessageDialogDiscardAddWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
             if (result != ContentDialogResult.Primary) return;
         }
         else if (_currentItemViewModel != null)
         {
-            var result = await this.ShowMessageDialogAsync("Warning", "You're currently editing an item. Do you want to discard the changes?", Constants.MessageDialogYes, Constants.MessageDialogNo);
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManagePage/MessageDialogDiscardEditWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
             if (result != ContentDialogResult.Primary) return;
         }
 
@@ -53,7 +53,7 @@ public sealed partial class ManagePage : Page
         TbxPrice.Text = "0";
         TbxPrice.Tag = new object();
         NbxStockQuantity.Value = 0;
-        BtSave.Content = "Add";
+        BtSave.Content = Localization.GetLocalizedString("/ManagePage/AddButtonContent");
 
         // Show the item view
         SvItem.Visibility = Visibility.Visible;
@@ -61,7 +61,7 @@ public sealed partial class ManagePage : Page
 
     private async void OnDeleteItemAppBarButtonClicked(object sender, RoutedEventArgs e)
     {
-        var result = await this.ShowMessageDialogAsync("Warning", "Are you sure you want to delete this item?", Constants.MessageDialogYes, Constants.MessageDialogNo);
+        var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManagePage/MessageDialogDeleteItemConfirmationMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
         if (result != ContentDialogResult.Primary) return;
 
         ItemManager.RemoveItem(_currentItemViewModel.Item.Id);
@@ -119,7 +119,7 @@ public sealed partial class ManagePage : Page
 
         var buffer = await FileIO.ReadBufferAsync(file);
 
-        MainPage.ShowLoading("Processing image...");
+        MainPage.ShowLoading(Localization.GetLocalizedString("/ManagePage/ProcessingImageLoadingMessage"));
         try
         {
             using var memoryStream = new MemoryStream();
@@ -143,7 +143,7 @@ public sealed partial class ManagePage : Page
     {
         if (_currentItemViewModel == null && SvItem.Visibility == Visibility.Visible)
         {
-            var result = await this.ShowMessageDialogAsync("Warning", "You're currently adding an item. Do you want to discard the changes?", Constants.MessageDialogYes, Constants.MessageDialogNo);
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ManagePage/MessageDialogDiscardAddWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
             if (result != ContentDialogResult.Primary) return;
         }
 
@@ -176,7 +176,7 @@ public sealed partial class ManagePage : Page
         TbxPrice.Text = selectedItem.Item.Price.ToString("N0");
         TbxPrice.Tag = new object();
         NbxStockQuantity.Value = selectedItem.Item.StockQuantity;
-        BtSave.Content = "Save";
+        BtSave.Content = Localization.GetLocalizedString("/ManagePage/SaveButtonContent");
 
         // Show the item view
         SvItem.Visibility = Visibility.Visible;

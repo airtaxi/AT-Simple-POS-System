@@ -28,19 +28,19 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock
+                x:Uid="/ManageRecordsPage/RecodTimestampTextBlock"
                 Grid.Column="0"
-                HorizontalAlignment="Left"
-                Text="Sold At" />
+                HorizontalAlignment="Left" />
 
             <TextBlock
+                x:Uid="/ManageRecordsPage/RecordPriceTimestampTextBlock"
                 Grid.Column="1"
-                HorizontalAlignment="Center"
-                Text="Price" />
+                HorizontalAlignment="Center" />
 
             <TextBlock
+                x:Uid="/ManageRecordsPage/RecordQuantityTextBlock"
                 Grid.Column="2"
-                HorizontalAlignment="Center"
-                Text="Quantity" />
+                HorizontalAlignment="Center" />
         </Grid>
 
         <ScrollViewer Grid.Row="1" Margin="0,5,0,5">
@@ -90,14 +90,14 @@
             DefaultLabelPosition="Right"
             OverflowButtonVisibility="Collapsed">
             <AppBarButton
+                x:Uid="/ManageRecordsPage/ClearAppBarButton"
                 Click="OnClearAppBarButtonClicked"
                 Foreground="Red"
-                Icon="Clear"
-                Label="Clear" />
+                Icon="Clear" />
             <AppBarButton
-                Click="OnExportExcelAppBarButtonClicked"
-                Icon="Share"
-                Label="Export Excel" />
+                x:Uid="/ManageRecordsPage/ExportExcelAppBarButton"
+                Click="OnExportToExcelAppBarButtonClicked"
+                Icon="Share" />
         </CommandBar>
     </Grid>
 </Page>

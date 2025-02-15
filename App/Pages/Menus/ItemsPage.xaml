@@ -85,21 +85,22 @@
                         <ColumnDefinition Width="50" />
                     </Grid.ColumnDefinitions>
                     <TextBlock
+                        x:Uid="/ItemsPage/ItemNameTextBlock"
                         Grid.Column="0"
                         HorizontalAlignment="Left"
-                        Style="{ThemeResource CaptionTextBlockStyle}"
-                        Text="Name" />
+                        Style="{ThemeResource CaptionTextBlockStyle}" />
                     <TextBlock
+                        x:Uid="/ItemsPage/ItemQuantityTextBlock"
                         Grid.Column="1"
                         HorizontalAlignment="Center"
-                        Style="{ThemeResource CaptionTextBlockStyle}"
-                        Text="Quantity" />
+                        Style="{ThemeResource CaptionTextBlockStyle}" />
                     <TextBlock
+                        x:Uid="/ItemsPage/ItemPriceTextBlock"
                         Grid.Column="2"
                         HorizontalAlignment="Center"
-                        Style="{ThemeResource CaptionTextBlockStyle}"
-                        Text="Price" />
+                        Style="{ThemeResource CaptionTextBlockStyle}" />
                     <TextBlock
+                        x:Uid="/ItemsPage/ItemTotalPriceTextBlock"
                         Grid.Column="3"
                         HorizontalAlignment="Center"
                         Style="{ThemeResource CaptionTextBlockStyle}"
@@ -173,7 +174,7 @@
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="50" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="Total" />
+                    <TextBlock x:Uid="/ItemsPage/TotalPriceTextBlock" />
                     <TextBlock
                         x:Name="TbTotalQuantity"
                         Grid.Column="1"
@@ -183,6 +184,7 @@
                         Grid.Column="3"
                         HorizontalAlignment="Center" />
                     <Button
+                        x:Uid="/ItemsPage/PayButton"
                         Grid.Column="4"
                         Padding="0,0,0,5"
                         HorizontalAlignment="Stretch"
@@ -206,26 +208,23 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        x:Name="TbxReceivedMoney"
+                        x:Name="TbxMoneyReceived"
+                        x:Uid="/ItemsPage/MoneyReceivedTextBox"
                         Grid.Column="0"
-                        Header="Received Money"
                         InputScope="Number"
-                        TextChanged="OnReceivedMoneyTextBoxTextChanged" />
+                        TextChanged="OnMoneyReceivedTextBoxTextChanged" />
                     <Button
                         x:Name="BtPay"
+                        x:Uid="/ItemsPage/PayButton"
                         Grid.Column="1"
                         VerticalAlignment="Bottom"
                         Click="OnPayButtonClicked"
-                        Content="Pay"
                         IsEnabled="False" />
                 </Grid>
-                <StackPanel>
-                    <TextBlock Margin="0,0,0,7.5" Text="Change" />
-                    <TextBox
-                        x:Name="TbxChange"
-                        IsEnabled="False"
-                        PlaceholderText="The change will be displayed here (read-only)" />
-                </StackPanel>
+                <TextBox
+                    x:Name="TbxChange"
+                    x:Uid="/ItemsPage/ChangeTextBox"
+                    IsEnabled="False" />
             </StackPanel>
         </Grid>
     </Grid>

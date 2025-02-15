@@ -11,6 +11,7 @@
     <PackageVersion Include="ClosedXML" Version="0.104.2" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageVersion Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.1.240916" />
+    <PackageVersion Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.1.240916" />
     <PackageVersion Include="CommunityToolkit.WinUI.Extensions" Version="8.1.240916" />
     <PackageVersion Include="DocumentFormat.OpenXml" Version="3.2.0" />
     <PackageVersion Include="FluentIcons.WinUI" Version="1.1.271" />

@@ -38,20 +38,20 @@ public sealed partial class ItemsPage : Page
         TbTotalPrice.Text = $"{totalPrice:N0}";
 
         // Parse the received money text
-        var receivedMoneyText = TbxReceivedMoney.Text;
-        var numberOnlyText = NumberOnlyRegex().Replace(receivedMoneyText, "");
-        if (!long.TryParse(numberOnlyText, out long receivedMoney)) return; // Return if the text is not a number
+        var moneyReceivedText = TbxMoneyReceived.Text;
+        var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
+        if (!long.TryParse(numberOnlyText, out long moneyReceivd)) return; // Return if the text is not a number
 
         // Update the UI
-        if (receivedMoney >= totalPrice)
+        if (moneyReceivd >= totalPrice)
         {
             BtPay.IsEnabled = true;
-            TbxChange.Text = $"{receivedMoney - totalPrice:N0}";
+            TbxChange.Text = $"{moneyReceivd - totalPrice:N0}";
         }
         else
         {
             BtPay.IsEnabled = false;
-            TbxChange.Text = "Not enough money";
+            TbxChange.Text = Localization.GetLocalizedString("/ItemsPage/NotEnoughMoneyText");
         }
     }
 
@@ -69,16 +69,16 @@ public sealed partial class ItemsPage : Page
     private void OnTransactionQuantityChanged(object sender, EventArgs e) => UpdateTotal();
 
     // Format the money text
-    private void OnReceivedMoneyTextBoxTextChanged(object sender, TextChangedEventArgs e)
+    private void OnMoneyReceivedTextBoxTextChanged(object sender, TextChangedEventArgs e)
     {
         var textBox = sender as TextBox;
 
         // Remove non-numeric characters
         var numberOnlyText = NumberOnlyRegex().Replace(textBox.Text, "");
-        if (!long.TryParse(numberOnlyText, out long receivedMoney)) return; // Return if the text is not a number
+        if (!long.TryParse(numberOnlyText, out long moneyReceived)) return; // Return if the text is not a number
 
         // Format the number
-        var formattedMoneyText = receivedMoney.ToString("N0");
+        var formattedMoneyText = moneyReceived.ToString("N0");
         textBox.Text = formattedMoneyText; // Set the text
 
         // Set the cursor position to keep the cursor before currency symbol
@@ -112,10 +112,10 @@ public sealed partial class ItemsPage : Page
         foreach (var itemViewModel in ItemViewModels) itemViewModel.Refresh();
 
         // Show a success dialog
-        await this.ShowMessageDialogAsync("Success", "The transaction has been added to the database.", Constants.MessageDialogOk);
+        await this.ShowMessageDialogAsync(Constants.MessageDialogSuccess, Localization.GetLocalizedString("/ItemsPage/MessageDialogPaySuccessMessage"), Constants.MessageDialogOk);
 
         // Reset the UI
-        TbxReceivedMoney.Text = "";
+        TbxMoneyReceived.Text = "";
         TbxChange.Text = "";
         UpdateTotal();
 

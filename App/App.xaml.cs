@@ -31,6 +31,8 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
+        Localization.SetupDefaultLanguage();
+
         MainWindow = new Window();
 #if DEBUG
         MainWindow.UseStudio();

@@ -56,6 +56,12 @@ public sealed partial class MainPage : Page
 
     private void OnNavigationViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
+        if (args.IsSettingsSelected)
+        {
+            Navigate(typeof(SettingsPage));
+            return;
+        }
+
         var selectedItem = sender.SelectedItem as NavigationViewItem;
 
         if (selectedItem == ItemsNavigationViewItem) Navigate(typeof(ItemsPage));
