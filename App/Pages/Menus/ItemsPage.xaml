@@ -36,6 +36,8 @@
                                 Height="80"
                                 CornerRadius="10">
                                 <Image
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
                                     ImageFailed="OnImageFailed"
                                     Source="{x:Bind Image, Mode=OneWay}"
                                     Stretch="UniformToFill" />

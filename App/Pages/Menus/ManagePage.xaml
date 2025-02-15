@@ -89,6 +89,8 @@
                                 Height="40"
                                 CornerRadius="10">
                                 <Image
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
                                     ImageFailed="OnImageFailed"
                                     Source="{x:Bind Image, Mode=OneWay}"
                                     Stretch="UniformToFill" />
@@ -142,7 +144,11 @@
                     Height="100"
                     Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}"
                     CornerRadius="10">
-                    <Image x:Name="ImgItem" Stretch="UniformToFill" />
+                    <Image
+                        x:Name="ImgItem"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Stretch="UniformToFill" />
                     <Button
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"

@@ -3,8 +3,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using App.ViewModels;
 using CommunityToolkit.WinUI;
-using ImageMagick;
 using Microsoft.UI.Xaml.Media.Imaging;
+using SkiaSharp;
 using Windows.Storage.Pickers;
 
 namespace App.Pages.Menus;
@@ -120,21 +120,39 @@ public sealed partial class ManagePage : Page
         var buffer = await FileIO.ReadBufferAsync(file);
 
         MainPage.ShowLoading(Localization.GetLocalizedString("/ManagePage/ProcessingImageLoadingMessage"));
+        await Task.Delay(100); // Show the loading indicator
         try
         {
-            using var memoryStream = new MemoryStream();
             using var stream = buffer.AsStream();
-            using var image = new MagickImage(stream);
-            image.Resize(0, 192);
-            await image.WriteAsync(memoryStream);
+            
+            using var image = SKImage.FromEncodedData(stream);
+            using var skBitmap = SKBitmap.FromImage(image);
+            if(skBitmap == null)
+            {
+                await this.ShowMessageDialogAsync(Constants.MessageDialogError, Localization.GetLocalizedString("/ManagePage/MessageDialogInvalidImageErrorMessage"), Constants.MessageDialogOk);
+                return;
+            }
 
-            var bitmapImage = new BitmapImage();
+            int newHeight = 192;
+            int newWidth = (int)(skBitmap.Width * ((double)newHeight / skBitmap.Height));
+            using var resized = skBitmap.Resize(new SKImageInfo(newWidth, newHeight), SKSamplingOptions.Default);
+            if(resized == null)
+            {
+                await this.ShowMessageDialogAsync(Constants.MessageDialogError, Localization.GetLocalizedString("/ManagePage/MessageDialogResizeImageErrorMessage"), Constants.MessageDialogOk);
+                return;
+            }
+
+            using var memoryStream = new MemoryStream();
+            resized.Encode(memoryStream, SKEncodedImageFormat.Png, 100);
+
             memoryStream.Seek(0, SeekOrigin.Begin);
+            var bitmapImage = new BitmapImage();
             bitmapImage.SetSource(memoryStream.AsRandomAccessStream());
             ImgItem.Source = bitmapImage;
 
             memoryStream.Seek(0, SeekOrigin.Begin);
             _currentItemImageBinary = memoryStream.ToArray();
+
         }
         finally { MainPage.HideLoading(); }
     }

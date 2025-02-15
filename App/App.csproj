@@ -48,7 +48,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
     <PackageReference Include="CommunityToolkit.WinUI.Extensions" />
     <PackageReference Include="FluentIcons.WinUI" />
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" />
+    <PackageReference Include="SkiaSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Pages\Menus\ManageRecordsPage.xaml.cs">

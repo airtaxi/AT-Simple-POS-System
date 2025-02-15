@@ -30,8 +30,7 @@ public partial class ItemViewModel : ObservableObject
 
 		PriceText = $"{item.Price:N0}";
         var quantityText = Localization.GetLocalizedString("/ItemsPage/ItemViewModelQuantityTemplateText");
-        quantityText.Replace("#P1", item.SalesQuantity.ToString("N0")).Replace("#P2", item.StockQuantity.ToString("N0"));
-        QuantityText = quantityText;
+        QuantityText = quantityText.Replace("#P1", item.SalesQuantity.ToString("N0")).Replace("#P2", item.StockQuantity.ToString("N0"));
     }
 
     [ObservableProperty]
