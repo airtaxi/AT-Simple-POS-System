@@ -41,6 +41,7 @@
             Skia;
             ThemeService;
         </UnoFeatures>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="ClosedXML" />

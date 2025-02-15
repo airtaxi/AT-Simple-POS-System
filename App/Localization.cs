@@ -13,7 +13,7 @@ public static class Localization
 {
     public static Language GetLanguage()
     {
-        var currentLanguage = Configuration.GetValue("Language") as string;
+        var currentLanguage = Configuration.GetValue<string>("Language");
         if (string.IsNullOrEmpty(currentLanguage))
         {
             currentLanguage = GetLocalizedString("LanguageName");
@@ -40,6 +40,9 @@ public static class Localization
 #if HAS_UNO
         if (language == Language.Korean) Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "ko";
         else if (language == Language.English) Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en";
+#else
+        if (language == Language.Korean) Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "ko";
+        else if (language == Language.English) Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en";
 #endif
     }
 

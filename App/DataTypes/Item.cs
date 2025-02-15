@@ -1,4 +1,5 @@
-namespace App.DataTypes;
+
+using App;
 
 public class Item
 {

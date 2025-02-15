@@ -1,10 +1,12 @@
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using App.ViewModels;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SkiaSharp;
+using Uno.UI.Helpers;
 using Windows.Storage.Pickers;
 
 namespace App.Pages.Menus;
@@ -68,13 +70,18 @@ public sealed partial class ManagePage : Page
         _viewModels.Remove(_currentItemViewModel);
     }
 
-    private void OnSaveItemButtonClicked(object sender, RoutedEventArgs e)
+    private async void OnSaveItemButtonClicked(object sender, RoutedEventArgs e)
     {
         var isAdd = _currentItemViewModel == null;
 
         var item = _currentItemViewModel?.Item ?? new();
         item.Name = TbxName.Text;
-        item.ImageBinary = _currentItemImageBinary ?? File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Assets/Placeholder.png"));
+#if HAS_UNO
+        var placeholderImagePath = (await StorageFile.GetFileFromApplicationUriAsync(new("ms-appx:///Assets/Placeholder.png"))).Path;
+#else
+        var placeholderImagePath = Path.Combine(AppContext.BaseDirectory, "Assets", "Placeholder.png");
+#endif
+        item.ImageBinary = _currentItemImageBinary ?? File.ReadAllBytes(placeholderImagePath);
         var priceText = TbxPrice.Text;
         var numberOnlyText = NumberOnlyRegex().Replace(priceText, "");
         item.Price = int.Parse(numberOnlyText);
@@ -87,7 +94,11 @@ public sealed partial class ManagePage : Page
             _viewModels.Add(viewModel);
             _currentItemViewModel = viewModel;
             LvItems.SelectedItem = viewModel;
-            LvItems.SmoothScrollIntoViewWithItemAsync(viewModel);
+#if HAS_UNO
+            LvItems.ScrollIntoView(viewModel);
+#else
+            await LvItems.SmoothScrollIntoViewWithItemAsync(viewModel);
+#endif
         }
         else _currentItemViewModel.SetItem(item);
     }
