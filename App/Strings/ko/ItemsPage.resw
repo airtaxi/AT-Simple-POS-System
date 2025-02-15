@@ -157,6 +157,6 @@
     <value>받은 돈이 부족합니다. 계속하시겠습니까?</value>
   </data>
   <data name="MessageDialogNoItemsErrorMessage" xml:space="preserve">
-    <value>결제할 퓸목이 없습니다.</value>
+    <value>결제할 품목이 없습니다.</value>
   </data>
 </root>
