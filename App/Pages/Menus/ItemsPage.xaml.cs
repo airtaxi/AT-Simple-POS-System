@@ -41,14 +41,10 @@ public sealed partial class ItemsPage : Page
         var moneyReceivedText = TbxMoneyReceived.Text.Trim();
         var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
         // Return if the text is not a number
-        if (string.IsNullOrWhiteSpace(numberOnlyText) || !long.TryParse(numberOnlyText, out long moneyReceivd))
-        {
-            TbxChange.Text = string.Empty;
-            return;
-        }
+        if (!long.TryParse(numberOnlyText, out long moneyReceived)) return;
 
         // Update the UI
-        if (moneyReceivd >= totalPrice) TbxChange.Text = $"{moneyReceivd - totalPrice:N0}";
+        if (moneyReceived >= totalPrice) TbxChange.Text = $"{moneyReceived - totalPrice:N0}";
         else TbxChange.Text = Localization.GetLocalizedString("/ItemsPage/NotEnoughMoneyText");
     }
 
@@ -72,7 +68,13 @@ public sealed partial class ItemsPage : Page
 
         // Remove non-numeric characters
         var numberOnlyText = NumberOnlyRegex().Replace(textBox.Text, "");
-        if (!long.TryParse(numberOnlyText, out long moneyReceived)) return; // Return if the text is not a number
+
+        // Return if the text is not a number
+        if (!long.TryParse(numberOnlyText, out long moneyReceived))
+        {
+            TbxChange.Text = string.Empty;
+            return;
+        }
 
         // Format the number
         var formattedMoneyText = moneyReceived.ToString("N0");
@@ -104,11 +106,11 @@ public sealed partial class ItemsPage : Page
 
         var moneyReceivedText = TbxMoneyReceived.Text;
         var numberOnlyText = NumberOnlyRegex().Replace(moneyReceivedText, "");
-        _ = long.TryParse(numberOnlyText, out long moneyReceivd);
+        _ = long.TryParse(numberOnlyText, out long moneyReceived);
 
         var totalPrice = TransactionViewModels.Sum((Func<TransactionViewModel, int>)(x => (int)(x.Item.Price * x.Quantity)));
 
-        if (moneyReceivd < totalPrice)
+        if (moneyReceived < totalPrice)
         {
             var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ItemsPage/MessageDialogNotEnoughMoneyWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
             if (result != ContentDialogResult.Primary) return;
