@@ -7,7 +7,7 @@ public static class ItemManager
 	public static List<Item> GetItems()
 	{
 		// Get the items from the configuration or create a new one
-		var items = Configuration.GetValue<List<Item>>("Items") ?? new();
+		var items = Configuration.GetValue<List<Item>>("Items") ?? [];
 		return items;
 	}
 
