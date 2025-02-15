@@ -124,8 +124,8 @@ public sealed partial class ManageRecordsPage : Page
         WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
         savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
 #endif
+        savePicker.FileTypeChoices.Add(Localization.GetLocalizedString("/ManageRecordsPage/ReportXlsxFileTypeChoice"), [".xlsx"]);
         savePicker.SuggestedFileName = Localization.GetLocalizedString("/ManageRecordsPage/ReportSuggestedFileName");
-        savePicker.FileTypeChoices.Add(Localization.GetLocalizedString("/ManageRecordsPage/ReportXlsxFileTypeChoice"), new List<string>() { ".xlsx" });
 
         var file = await savePicker.PickSaveFileAsync();
         if (file == null) return;
