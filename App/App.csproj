@@ -1,24 +1,24 @@
 ﻿<Project Sdk="Uno.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.26100;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
+    <PropertyGroup>
+        <TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.26100;net9.0-browserwasm;net9.0-desktop</TargetFrameworks>
 
-    <OutputType>Exe</OutputType>
-    <LangVersion>preview</LangVersion>
-    <Nullable>disable</Nullable>
-    <UnoSingleProject>true</UnoSingleProject>
+        <OutputType>Exe</OutputType>
+        <LangVersion>preview</LangVersion>
+        <Nullable>disable</Nullable>
+        <UnoSingleProject>true</UnoSingleProject>
 
-    <!-- Display name -->
-    <ApplicationTitle>AT Simple POS System</ApplicationTitle>
-    <!-- App Identifier -->
-    <ApplicationId>com.kck4156.pos</ApplicationId>
-    <!-- Versions -->
-    <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
-    <ApplicationVersion>5</ApplicationVersion>
-    <!-- Package Publisher -->
-    <ApplicationPublisher>airtaxi</ApplicationPublisher>
-    <!-- Package Description -->
-    <Description>Simple POS System made by airtaxi</Description>
-    <!--
+        <!-- Display name -->
+        <ApplicationTitle>AT Simple POS System</ApplicationTitle>
+        <!-- App Identifier -->
+        <ApplicationId>com.kck4156.pos</ApplicationId>
+        <!-- Versions -->
+        <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+        <ApplicationVersion>5</ApplicationVersion>
+        <!-- Package Publisher -->
+        <ApplicationPublisher>airtaxi</ApplicationPublisher>
+        <!-- Package Description -->
+        <Description>Simple POS System made by airtaxi</Description>
+        <!--
       If you encounter this error message:
 
         error NETSDK1148: A referenced assembly was compiled using a newer version of Microsoft.Windows.SDK.NET.dll.
@@ -28,57 +28,57 @@
       the "Microsoft.Windows.SDK.BuildTools" package above, and the "revision" version number
       must be the highest found in https://www.nuget.org/packages/Microsoft.Windows.SDK.NET.Ref.
     -->
-    <!-- <WindowsSdkPackageVersion>10.0.22621.28</WindowsSdkPackageVersion> -->
+        <!-- <WindowsSdkPackageVersion>10.0.22621.28</WindowsSdkPackageVersion> -->
 
-    <!--
+        <!--
       UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
       https://aka.platform.uno/singleproject-features
     -->
-    <UnoFeatures>
-      Lottie;
-      MediaElement;
-      Toolkit;
-      ThemeService;
-    </UnoFeatures>
-  </PropertyGroup>
+        <UnoFeatures>
+            Lottie;
+            MediaElement;
+            Toolkit;
+            Skia;
+            ThemeService;
+        </UnoFeatures>
+    </PropertyGroup>
     <ItemGroup>
-    <PackageReference Include="ClosedXML" />
-    <PackageReference Include="CommunityToolkit.Mvvm" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
-    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
-    <PackageReference Include="CommunityToolkit.WinUI.Extensions" />
-    <PackageReference Include="FluentIcons.WinUI" />
-    <PackageReference Include="SkiaSharp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Pages\Menus\ManageRecordsPage.xaml.cs">
-      <DependentUpon>ManageRecordsPage.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="ManagePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\Menus\ManagePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\Menus\ItemsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\Menus\ManageRecordsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\Menus\SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
+        <PackageReference Include="ClosedXML" />
+        <PackageReference Include="CommunityToolkit.Mvvm" />
+        <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
+        <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
+        <PackageReference Include="CommunityToolkit.WinUI.Extensions" />
+        <PackageReference Include="FluentIcons.WinUI" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Pages\Menus\ManageRecordsPage.xaml.cs">
+            <DependentUpon>ManageRecordsPage.xaml</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <Page Update="ManagePage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Page Update="Pages\Menus\ManagePage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Page Update="Pages\Menus\ItemsPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Page Update="Pages\Menus\ManageRecordsPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
+    <ItemGroup>
+        <Page Update="Pages\Menus\SettingsPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
+    </ItemGroup>
 
 </Project>

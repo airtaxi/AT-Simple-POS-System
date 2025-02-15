@@ -135,7 +135,7 @@ public sealed partial class ManagePage : Page
 
             int newHeight = 192;
             int newWidth = (int)(skBitmap.Width * ((double)newHeight / skBitmap.Height));
-            using var resized = skBitmap.Resize(new SKImageInfo(newWidth, newHeight), SKSamplingOptions.Default);
+            using var resized = skBitmap.Resize(new SKImageInfo(newWidth, newHeight), SKFilterQuality.Medium);
             if(resized == null)
             {
                 await this.ShowMessageDialogAsync(Constants.MessageDialogError, Localization.GetLocalizedString("/ManagePage/MessageDialogResizeImageErrorMessage"), Constants.MessageDialogOk);
