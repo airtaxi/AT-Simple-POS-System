@@ -130,6 +130,6 @@
     <value>Settings</value>
   </data>
   <data name="MainNavigationView.PaneTitle" xml:space="preserve">
-    <value>AT Simple POS System</value>
+    <value>AT POS</value>
   </data>
 </root>

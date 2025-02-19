@@ -8,7 +8,7 @@
         <UnoSingleProject>true</UnoSingleProject>
 
         <!-- Display name -->
-        <ApplicationTitle>AT Simple POS System</ApplicationTitle>
+        <ApplicationTitle>AT POS</ApplicationTitle>
         <!-- App Identifier -->
         <ApplicationId>com.kck4156.pos</ApplicationId>
         <!-- Versions -->

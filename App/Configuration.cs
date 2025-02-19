@@ -11,7 +11,7 @@ public class Configuration
     private readonly static Lock LockObject = new();
     private readonly static string BasePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-    private const string ConfigurationDirectoryName = "AT Simple POS System";
+    private const string ConfigurationDirectoryName = "AT POS";
 
     private const string ConfigurationFileName = "settings.json";
 	private const string ConfigurationBackupFileName = "settings.json.bak";
