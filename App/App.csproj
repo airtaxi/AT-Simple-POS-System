@@ -15,7 +15,7 @@
         <ApplicationDisplayVersion>1.1.0</ApplicationDisplayVersion>
         <ApplicationVersion>6</ApplicationVersion>
         <!-- Package Publisher -->
-        <ApplicationPublisher>airtaxi</ApplicationPublisher>
+        <ApplicationPublisher>Arcstar Co., Ltd</ApplicationPublisher>
         <!-- Package Description -->
         <Description>Simple POS System made by airtaxi</Description>
         <!--
