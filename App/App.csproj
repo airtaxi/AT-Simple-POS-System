@@ -43,6 +43,11 @@
         </UnoFeatures>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
+      <CodesignKey>Apple Distribution: Arcstar Co.,Ltd (92FH2738QN)</CodesignKey>
+      <CodesignProvision>AT POS Distribution</CodesignProvision>
+      <ProvisioningType>manual</ProvisioningType>
+    </PropertyGroup>
     <ItemGroup>
       <None Include="ViewModels\ItemReportViewModel.cs" />
     </ItemGroup>
