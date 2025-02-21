@@ -174,4 +174,13 @@
   <data name="MessageDialogClearItemsConfirmationMessage" xml:space="preserve">
     <value>정말로 품목과 품목에 할당된 모든 판매 기록을 삭제하시겠습니까?</value>
   </data>
+  <data name="ApplicationSettingsTextBlock.Text" xml:space="preserve">
+    <value>애플리케이션</value>
+  </data>
+  <data name="DataDeletionSettingsTextBlock.Text" xml:space="preserve">
+    <value>데이터 삭제</value>
+  </data>
+  <data name="DataManagementSettingsTextBlock.Text" xml:space="preserve">
+    <value>데이터 관리</value>
+  </data>
 </root>

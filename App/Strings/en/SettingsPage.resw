@@ -174,4 +174,13 @@
   <data name="MessageDialogClearItemsConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to clear items and its all sales records?</value>
   </data>
+  <data name="ApplicationSettingsTextBlock.Text" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="DataDeletionSettingsTextBlock.Text" xml:space="preserve">
+    <value>Data Deletion</value>
+  </data>
+  <data name="DataManagementSettingsTextBlock.Text" xml:space="preserve">
+    <value>Data Management</value>
+  </data>
 </root>

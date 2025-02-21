@@ -13,9 +13,9 @@
     <StackPanel Spacing="12">
         <StackPanel Spacing="4">
             <TextBlock
+                x:Uid="/SettingsPage/ApplicationSettingsTextBlock"
                 Margin="0,0,0,4"
-                Style="{ThemeResource BodyStrongTextBlockStyle}"
-                Text="애플리케이션" />
+                Style="{ThemeResource BodyStrongTextBlockStyle}" />
             <controls:SettingsCard x:Uid="/SettingsPage/LanguageSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=LocalLanguage}">
                 <ComboBox x:Name="LanguageComboBox" SelectionChanged="OnLanguageComboBoxSelectionChanged">
                     <ComboBoxItem Content="English" Tag="English" />
@@ -26,9 +26,9 @@
 
         <StackPanel Spacing="4">
             <TextBlock
+                x:Uid="/SettingsPage/DataDeletionSettingsTextBlock"
                 Margin="0,0,0,4"
-                Style="{ThemeResource BodyStrongTextBlockStyle}"
-                Text="데이터 삭제" />
+                Style="{ThemeResource BodyStrongTextBlockStyle}" />
             <controls:SettingsCard x:Uid="/SettingsPage/ClearRecordsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
                 <Button
                     x:Uid="/SettingsPage/ClearRecordsButton"
@@ -45,9 +45,9 @@
 
         <StackPanel Spacing="4">
             <TextBlock
+                x:Uid="/SettingsPage/DataManagementSettingsTextBlock"
                 Margin="0,0,0,4"
-                Style="{ThemeResource BodyStrongTextBlockStyle}"
-                Text="데이터 관리" />
+                Style="{ThemeResource BodyStrongTextBlockStyle}" />
             <controls:SettingsCard x:Uid="/SettingsPage/ImportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}">
                 <Button x:Uid="/SettingsPage/ImportSettingsButton" Click="OnImportSettingsButtonClicked" />
             </controls:SettingsCard>
