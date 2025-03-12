@@ -29,17 +29,25 @@
                 x:Uid="/SettingsPage/DataDeletionSettingsTextBlock"
                 Margin="0,0,0,4"
                 Style="{ThemeResource BodyStrongTextBlockStyle}" />
-            <controls:SettingsCard x:Uid="/SettingsPage/ClearRecordsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
+            <controls:SettingsCard
+                x:Uid="/SettingsPage/ClearRecordsSettingsCard"
+                HeaderIcon="{ic:SymbolIcon Symbol=Delete}"
+                Loaded="OnUpdateNeedElementLoaded">
                 <Button
                     x:Uid="/SettingsPage/ClearRecordsButton"
                     Click="OnClearRecordsButtonClicked"
-                    Foreground="Red" />
+                    Foreground="Red"
+                    Loaded="OnUpdateNeedElementLoaded" />
             </controls:SettingsCard>
-            <controls:SettingsCard x:Uid="/SettingsPage/ClearItemsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
+            <controls:SettingsCard
+                x:Uid="/SettingsPage/ClearItemsSettingsCard"
+                HeaderIcon="{ic:SymbolIcon Symbol=Delete}"
+                Loaded="OnUpdateNeedElementLoaded">
                 <Button
                     x:Uid="/SettingsPage/ClearItemsButton"
                     Click="OnClearItemsButtonClicked"
-                    Foreground="Red" />
+                    Foreground="Red"
+                    Loaded="OnUpdateNeedElementLoaded" />
             </controls:SettingsCard>
         </StackPanel>
 
@@ -48,11 +56,23 @@
                 x:Uid="/SettingsPage/DataManagementSettingsTextBlock"
                 Margin="0,0,0,4"
                 Style="{ThemeResource BodyStrongTextBlockStyle}" />
-            <controls:SettingsCard x:Uid="/SettingsPage/ImportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}">
-                <Button x:Uid="/SettingsPage/ImportSettingsButton" Click="OnImportSettingsButtonClicked" />
+            <controls:SettingsCard
+                x:Uid="/SettingsPage/ImportSettingsCard"
+                HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}"
+                Loaded="OnUpdateNeedElementLoaded">
+                <Button
+                    x:Uid="/SettingsPage/ImportSettingsButton"
+                    Click="OnImportSettingsButtonClicked"
+                    Loaded="OnUpdateNeedElementLoaded" />
             </controls:SettingsCard>
-            <controls:SettingsCard x:Uid="/SettingsPage/ExportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}">
-                <Button x:Uid="/SettingsPage/ExportSettingsButton" Click="OnExportSettingsButtonClicked" />
+            <controls:SettingsCard
+                x:Uid="/SettingsPage/ExportSettingsCard"
+                HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}"
+                Loaded="OnUpdateNeedElementLoaded">
+                <Button
+                    x:Uid="/SettingsPage/ExportSettingsButton"
+                    Click="OnExportSettingsButtonClicked"
+                    Loaded="OnUpdateNeedElementLoaded" />
             </controls:SettingsCard>
         </StackPanel>
     </StackPanel>

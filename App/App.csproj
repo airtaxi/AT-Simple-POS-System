@@ -45,7 +45,6 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-android' AND '$(Configuration)' == 'Release'">
         <EnableLLVM>true</EnableLLVM>
-        <AndroidEnableMarshalMethods>true</AndroidEnableMarshalMethods>
         <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">

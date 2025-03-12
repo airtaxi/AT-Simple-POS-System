@@ -102,4 +102,11 @@ public sealed partial class SettingsPage : Page
         ItemManager.ClearItems();
         TransactionManager.ClearTransactions();
     }
+
+    // iOS, Android bug fix
+    private void OnUpdateNeedElementLoaded(object sender, RoutedEventArgs e)
+    {
+        var element = sender as FrameworkElement;
+        element.UpdateLayout();
+    }
 }
