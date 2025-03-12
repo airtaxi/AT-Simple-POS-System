@@ -54,7 +54,7 @@ public class Configuration
         if (s_cache == null)
         {
             var configurationFileContentString = GetConfigurationFileContentString();
-            var convertedFileContent = JsonSerializer.Deserialize<Dictionary<string, object>>(configurationFileContentString, SourceGenerationContext.Default.DictionaryStringObject);
+            var convertedFileContent = JsonSerializer.Deserialize(configurationFileContentString, SourceGenerationContext.Default.DictionaryStringObject);
             s_cache = new Dictionary<string, object>(convertedFileContent);
         }
         return s_cache;
@@ -68,15 +68,15 @@ public class Configuration
             if (!convertedFileContent.TryGetValue(key, out object rawValue)) return default;
             if (rawValue is JsonElement element)
             {
-                var value = element.Deserialize<T>(JsonSerializerOptions);
+                var value = element.Deserialize(jsonTypeInfo: SourceGenerationContext.Default.GetTypeInfo(typeof(T)));
                 convertedFileContent[key] = value;
-                return value;
+                return (T)value;
             }
             else if (rawValue is JsonArray array)
             {
-                var value = array.Deserialize<T>(JsonSerializerOptions);
+                var value = array.Deserialize(jsonTypeInfo: SourceGenerationContext.Default.GetTypeInfo(typeof(T)));
                 convertedFileContent[key] = value;
-                return value;
+                return (T)value;
             }
             else if (rawValue is T value) return value;
             else return default;
