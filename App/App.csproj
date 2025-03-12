@@ -12,8 +12,8 @@
         <!-- App Identifier -->
         <ApplicationId>com.arcstar.atpos</ApplicationId>
         <!-- Versions -->
-        <ApplicationDisplayVersion>1.1.0</ApplicationDisplayVersion>
-        <ApplicationVersion>6</ApplicationVersion>
+        <ApplicationDisplayVersion>1.1.1</ApplicationDisplayVersion>
+        <ApplicationVersion>7</ApplicationVersion>
         <!-- Package Publisher -->
         <ApplicationPublisher>Arcstar Co., Ltd</ApplicationPublisher>
         <!-- Package Description -->
@@ -42,6 +42,11 @@
             ThemeService;
         </UnoFeatures>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-android' AND '$(Configuration)' == 'Release'">
+        <EnableLLVM>true</EnableLLVM>
+        <AndroidEnableMarshalMethods>true</AndroidEnableMarshalMethods>
+        <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
       <CodesignKey>Apple Distribution: Arcstar Co.,Ltd (92FH2738QN)</CodesignKey>
