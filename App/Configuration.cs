@@ -180,6 +180,24 @@ public class Configuration
 [JsonSerializable(typeof(nint))]
 [JsonSerializable(typeof(short))]
 [JsonSerializable(typeof(ushort))]
+[JsonSerializable(typeof(bool?))]
+[JsonSerializable(typeof(int?))]
+[JsonSerializable(typeof(DateTimeOffset?))]
+[JsonSerializable(typeof(DateTime?))]
+[JsonSerializable(typeof(TimeSpan?))]
+[JsonSerializable(typeof(long?))]
+[JsonSerializable(typeof(double?))]
+[JsonSerializable(typeof(uint?))]
+[JsonSerializable(typeof(ulong?))]
+[JsonSerializable(typeof(byte?))]
+[JsonSerializable(typeof(sbyte?))]
+[JsonSerializable(typeof(char?))]
+[JsonSerializable(typeof(decimal?))]
+[JsonSerializable(typeof(float?))]
+[JsonSerializable(typeof(nuint?))]
+[JsonSerializable(typeof(nint?))]
+[JsonSerializable(typeof(short?))]
+[JsonSerializable(typeof(ushort?))]
 [JsonSerializable(typeof(List<bool>))]
 [JsonSerializable(typeof(List<int>))]
 [JsonSerializable(typeof(List<string>))]
@@ -201,6 +219,4 @@ public class Configuration
 [JsonSerializable(typeof(List<ushort>))]
 [JsonSerializable(typeof(JsonElement))]
 [JsonSerializable(typeof(JsonArray))]
-internal partial class SourceGenerationContext : JsonSerializerContext
-{
-}
+internal partial class SourceGenerationContext : JsonSerializerContext;
