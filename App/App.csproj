@@ -13,7 +13,7 @@
         <ApplicationId>com.arcstar.atpos</ApplicationId>
         <!-- Versions -->
         <ApplicationDisplayVersion>1.1.1</ApplicationDisplayVersion>
-        <ApplicationVersion>8</ApplicationVersion>
+        <ApplicationVersion>9</ApplicationVersion>
         <!-- Package Publisher -->
         <ApplicationPublisher>Arcstar Co., Ltd</ApplicationPublisher>
         <!-- Package Description -->
