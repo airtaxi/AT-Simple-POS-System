@@ -19,10 +19,6 @@ public class Configuration
 	private readonly static string ConfigurationDirectoryPath = Path.Combine(BasePath, ConfigurationDirectoryName);
 	private readonly static string ConfigurationFilePath = Path.Combine(ConfigurationDirectoryPath, ConfigurationFileName);
 	private readonly static string ConfigurationBackupFilePath = Path.Combine(ConfigurationDirectoryPath, ConfigurationBackupFileName);
-    private readonly static JsonSerializerOptions JsonSerializerOptions = new()
-    {
-        TypeInfoResolver = SourceGenerationContext.Default
-    };
 
     private static Dictionary<string, object> s_cache;
 
