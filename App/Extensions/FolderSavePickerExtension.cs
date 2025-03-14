@@ -63,7 +63,8 @@ public class FolderSavePickerExtension : IFileSavePickerExtension
                 var item = await dialog.PickedFolder.TryGetItemAsync(fileName);
                 if (item != null)
                 {
-                    var itemExistsDialog = new ContentDialog();
+                    var itemExistsDialog = new ContentDialog() { XamlRoot = App.MainWindow.Content.XamlRoot };
+
                     if (item.IsOfType(StorageItemTypes.Folder))
                     {
                         itemExistsDialog.Title = _resourceLoader.GetString(FolderExistsTitleResource);
