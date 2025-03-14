@@ -78,10 +78,14 @@ public sealed partial class SettingsPage : Page
         // Associate the HWND with the file picker
         WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
         openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-#else
-        Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToMimeMapping.Add(".atspconfig", "application/json");
+#elif IOS
+        Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.TryAdd(".atspconfig", "com.arcstar.pos.atspconfig");
 #endif
+#if !IOS
         openPicker.FileTypeFilter.Add(".atspconfig");
+#else
+        openPicker.FileTypeFilter.Add(".atspconfig");
+#endif
 
         var file = await openPicker.PickSingleFileAsync();
         if (file == null) return;
