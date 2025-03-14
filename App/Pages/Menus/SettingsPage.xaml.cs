@@ -81,11 +81,7 @@ public sealed partial class SettingsPage : Page
 #elif IOS
         Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToUTTypeMapping.TryAdd(".atspconfig", "com.arcstar.pos.atspconfig");
 #endif
-#if !IOS
         openPicker.FileTypeFilter.Add(".atspconfig");
-#else
-        openPicker.FileTypeFilter.Add(".atspconfig");
-#endif
 
         var file = await openPicker.PickSingleFileAsync();
         if (file == null) return;
