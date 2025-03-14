@@ -48,9 +48,9 @@
         <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
-      <CodesignKey>Apple Distribution: Arcstar Co.,Ltd (92FH2738QN)</CodesignKey>
-      <CodesignProvision>AT POS Distribution</CodesignProvision>
-      <ProvisioningType>manual</ProvisioningType>
+      <CodesignKey>Apple Development: Created via API (FXDKK32DDS)</CodesignKey>
+      <CodesignProvision>VS: com.arcstar.atpos Development</CodesignProvision>
+      <ProvisioningType>automatic</ProvisioningType>
     </PropertyGroup>
     <ItemGroup>
       <None Include="ViewModels\ItemReportViewModel.cs" />
@@ -107,6 +107,11 @@
     <ItemGroup>
       <Page Update="Pages\Menus\Report\ItemsReportPage.xaml">
         <SubType>Designer</SubType>
+        <Generator>MSBuild:Compile</Generator>
+      </Page>
+    </ItemGroup>
+    <ItemGroup>
+      <Page Update="Extensions\FolderSavePickerDialog.xaml">
         <Generator>MSBuild:Compile</Generator>
       </Page>
     </ItemGroup>

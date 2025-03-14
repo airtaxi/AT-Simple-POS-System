@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using App.Enums;
 using Windows.Storage.Pickers;
 
@@ -54,7 +53,9 @@ public sealed partial class SettingsPage : Page
         savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
 #endif
         savePicker.FileTypeChoices.Add(Localization.GetLocalizedString("/SettingsPage/AppConfigFileTypeChoice"), [".atspconfig"]);
+#if !IOS
         savePicker.SuggestedFileName = "Settings";
+#endif
 
         var file = await savePicker.PickSaveFileAsync();
         if (file == null) return;
@@ -77,6 +78,8 @@ public sealed partial class SettingsPage : Page
         // Associate the HWND with the file picker
         WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hwnd);
         openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
+#else
+        Uno.WinRTFeatureConfiguration.FileTypes.FileTypeToMimeMapping.Add(".atspconfig", "application/json");
 #endif
         openPicker.FileTypeFilter.Add(".atspconfig");
 
@@ -104,8 +107,10 @@ public sealed partial class SettingsPage : Page
     }
 
     // iOS, Android bug fix
-    private void OnUpdateNeedElementLoaded(object sender, RoutedEventArgs e)
+    private async void OnUpdateNeedElementLoaded(object sender, RoutedEventArgs e)
     {
+        await Task.Delay(500);
+
         var element = sender as FrameworkElement;
         element.UpdateLayout();
     }

@@ -1,8 +1,6 @@
-using System;
-using FluentIcons.WinUI;
-using Microsoft.Extensions.Logging;
 using Uno.Resizetizer;
 using App.Pages;
+using App.Extensions;
 
 namespace App;
 public partial class App : Application
@@ -19,7 +17,9 @@ public partial class App : Application
 
         InitializeComponent();
 
-        this.UseSegoeMetrics();
+#if __IOS__
+        Uno.Foundation.Extensibility.ApiExtensibility.Register(typeof(Uno.Extensions.Storage.Pickers.IFileSavePickerExtension), (picker) => new FolderSavePickerExtension(picker));
+#endif
 
 #if HAS_UNO
         Uno.UI.FeatureConfiguration.Font.IgnoreTextScaleFactor = true;
