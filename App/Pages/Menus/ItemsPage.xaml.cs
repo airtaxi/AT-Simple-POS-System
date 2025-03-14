@@ -34,7 +34,7 @@ public sealed partial class ItemsPage : Page
         TbTotalQuantity.Text = $"{totalQuantity}";
 
         // Update the total price
-        var totalPrice = TransactionViewModels.Sum((Func<TransactionViewModel, int>)(x => (int)(x.Item.Price * x.Quantity)));
+        var totalPrice = TransactionViewModels.Sum((x => (int)(x.Item.Price * x.Quantity)));
         TbTotalPrice.Text = $"{totalPrice:N0}";
 
         // Parse the received money text
