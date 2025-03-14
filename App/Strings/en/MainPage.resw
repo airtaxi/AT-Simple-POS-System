@@ -132,4 +132,16 @@
   <data name="MainNavigationView.PaneTitle" xml:space="preserve">
     <value>AT POS</value>
   </data>
+  <data name="ItemsMenuText" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="ManageMenuText" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="ManageRecordsMenuText" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="SettingsMenuText" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

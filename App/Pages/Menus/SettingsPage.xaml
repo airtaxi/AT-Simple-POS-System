@@ -7,7 +7,7 @@
     xmlns:ic="using:FluentIcons.WinUI"
     xmlns:local="using:App.Pages.Menus"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Padding="4"
+    Padding="8"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
 
@@ -25,55 +25,35 @@
             </controls:SettingsCard>
         </StackPanel>
 
-        <StackPanel Loaded="OnUpdateNeedElementLoaded" Spacing="4">
+        <StackPanel Spacing="4">
             <TextBlock
                 x:Uid="/SettingsPage/DataDeletionSettingsTextBlock"
                 Margin="0,0,0,4"
                 Style="{ThemeResource BodyStrongTextBlockStyle}" />
-            <controls:SettingsCard
-                x:Uid="/SettingsPage/ClearRecordsSettingsCard"
-                HeaderIcon="{ic:SymbolIcon Symbol=Delete}"
-                Loaded="OnUpdateNeedElementLoaded">
+            <controls:SettingsCard x:Uid="/SettingsPage/ClearRecordsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
                 <Button
                     x:Uid="/SettingsPage/ClearRecordsButton"
                     Click="OnClearRecordsButtonClicked"
-                    Foreground="Red"
-                    Loaded="OnUpdateNeedElementLoaded" />
+                    Foreground="Red" />
             </controls:SettingsCard>
-            <controls:SettingsCard
-                x:Uid="/SettingsPage/ClearItemsSettingsCard"
-                HeaderIcon="{ic:SymbolIcon Symbol=Delete}"
-                Loaded="OnUpdateNeedElementLoaded">
+            <controls:SettingsCard x:Uid="/SettingsPage/ClearItemsSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=Delete}">
                 <Button
                     x:Uid="/SettingsPage/ClearItemsButton"
                     Click="OnClearItemsButtonClicked"
-                    Foreground="Red"
-                    Loaded="OnUpdateNeedElementLoaded" />
+                    Foreground="Red" />
             </controls:SettingsCard>
         </StackPanel>
 
-        <StackPanel Loaded="OnUpdateNeedElementLoaded" Spacing="4">
+        <StackPanel Spacing="4">
             <TextBlock
                 x:Uid="/SettingsPage/DataManagementSettingsTextBlock"
                 Margin="0,0,0,4"
                 Style="{ThemeResource BodyStrongTextBlockStyle}" />
-            <controls:SettingsCard
-                x:Uid="/SettingsPage/ImportSettingsCard"
-                HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}"
-                Loaded="OnUpdateNeedElementLoaded">
-                <Button
-                    x:Uid="/SettingsPage/ImportSettingsButton"
-                    Click="OnImportSettingsButtonClicked"
-                    Loaded="OnUpdateNeedElementLoaded" />
+            <controls:SettingsCard x:Uid="/SettingsPage/ImportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowDownload}">
+                <Button x:Uid="/SettingsPage/ImportSettingsButton" Click="OnImportSettingsButtonClicked" />
             </controls:SettingsCard>
-            <controls:SettingsCard
-                x:Uid="/SettingsPage/ExportSettingsCard"
-                HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}"
-                Loaded="OnUpdateNeedElementLoaded">
-                <Button
-                    x:Uid="/SettingsPage/ExportSettingsButton"
-                    Click="OnExportSettingsButtonClicked"
-                    Loaded="OnUpdateNeedElementLoaded" />
+            <controls:SettingsCard x:Uid="/SettingsPage/ExportSettingsCard" HeaderIcon="{ic:SymbolIcon Symbol=ArrowExportUp}">
+                <Button x:Uid="/SettingsPage/ExportSettingsButton" Click="OnExportSettingsButtonClicked" />
             </controls:SettingsCard>
         </StackPanel>
     </StackPanel>

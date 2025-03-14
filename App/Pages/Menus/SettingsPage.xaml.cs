@@ -1,4 +1,5 @@
 using App.Enums;
+using CommunityToolkit.WinUI;
 using Windows.Storage.Pickers;
 
 namespace App.Pages.Menus;
@@ -106,12 +107,16 @@ public sealed partial class SettingsPage : Page
         TransactionManager.ClearTransactions();
     }
 
-    // iOS, Android bug fix
-    private async void OnUpdateNeedElementLoaded(object sender, RoutedEventArgs e)
+    // Android, iOS bugfix
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
-        await Task.Delay(500);
-
-        var element = sender as FrameworkElement;
-        element.UpdateLayout();
+        base.OnNavigatedTo(e);
+        await Task.Delay(20);
+        var textBlocks = (Content as FrameworkElement).FindDescendants().OfType<TextBlock>();
+        foreach (var textBlock in textBlocks)
+        {
+            textBlock.Text = textBlock.Text + "!";
+            textBlock.Text = textBlock.Text.TrimEnd('!');
+        }
     }
 }

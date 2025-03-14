@@ -38,7 +38,7 @@ public partial class TransactionViewModel(Item item) : ObservableObject
     public void ToggleWideMode(bool isWide)
     {
         SpinButtonPlacementMode = isWide ? NumberBoxSpinButtonPlacementMode.Inline : NumberBoxSpinButtonPlacementMode.Hidden;
-        QuantityColumnDefinition = isWide ? new(130, GridUnitType.Pixel) : new(60, GridUnitType.Pixel);
+        QuantityColumnDefinition = isWide ? new(130, GridUnitType.Pixel) : new(65, GridUnitType.Pixel);
     }
 
     [ObservableProperty]
@@ -50,5 +50,5 @@ public partial class TransactionViewModel(Item item) : ObservableObject
     public partial NumberBoxSpinButtonPlacementMode SpinButtonPlacementMode { get; set; } = NumberBoxSpinButtonPlacementMode.Hidden;
 
     [ObservableProperty]
-    public partial GridLength QuantityColumnDefinition { get; set; } = new(60, GridUnitType.Pixel);
+    public partial GridLength QuantityColumnDefinition { get; set; } = new(65, GridUnitType.Pixel);
 }

@@ -9,7 +9,7 @@ public partial class RecordReportViewModel(Record record)
 
     public IEnumerable<RecordReportItemsViewModel> RecordReportItemsViewModels { get; } = record.Transactions.Select(x => new RecordReportItemsViewModel(x));
 
-    public string TimestampText { get; } = record.Timestamp.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss.fff");
+    public string TimestampText { get; } = record.Timestamp.ToLocalTime().ToString("yyyy/MM/dd HH:mm:ss");
     public int TotalPrice { get; } = record.TotalPrice;
     public int TotalQuantity { get; } = record.TotalQuantity;
     public string TotalPriceText { get; } = record.TotalPrice.ToString("N0");

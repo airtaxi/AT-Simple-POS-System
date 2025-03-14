@@ -17,17 +17,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <SelectorBar x:Name="RecordsReportSelectorBar" SelectionChanged="OnRecordsReportSelectorBarSelectionChanged">
-                <SelectorBarItem
-                    x:Uid="/ReportPage/RecordsReportSelectorBarItem"
-                    Icon="{ic:SymbolIcon Symbol=Timeline}"
-                    IsSelected="True" />
-            </SelectorBar>
-            <SelectorBar x:Name="ItemsReportSelectorBar" SelectionChanged="OnItemsReportSelectorBarSelectionChanged">
-                <SelectorBarItem x:Uid="/ReportPage/ItemsReportSelectorBarItem" Icon="{ic:SymbolIcon Symbol=TrayItemAdd}" />
-            </SelectorBar>
-        </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <SelectorBar x:Name="RecordsReportSelectorBar" SelectionChanged="OnRecordsReportSelectorBarSelectionChanged">
+                    <SelectorBarItem
+                        x:Uid="/ReportPage/RecordsReportSelectorBarItem"
+                        Icon="{ic:SymbolIcon Symbol=Timeline}"
+                        IsSelected="True" />
+                </SelectorBar>
+                <SelectorBar x:Name="ItemsReportSelectorBar" SelectionChanged="OnItemsReportSelectorBarSelectionChanged">
+                    <SelectorBarItem x:Uid="/ReportPage/ItemsReportSelectorBarItem" Icon="{ic:SymbolIcon Symbol=TrayItemAdd}" />
+                </SelectorBar>
+            </StackPanel>
+        </ScrollViewer>
 
         <Frame x:Name="MainFrame" Grid.Row="1" />
 

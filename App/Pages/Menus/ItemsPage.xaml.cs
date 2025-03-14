@@ -202,7 +202,7 @@ public sealed partial class ItemsPage : Page
 
         GdPay.CornerRadius = _isWide ? new CornerRadius(10, 0, 0, 10) : new CornerRadius(10, 10, 0, 0);
 
-        QuantityColumnDefinition.Width = _isWide ? new GridLength(130, GridUnitType.Pixel) : new GridLength(60, GridUnitType.Pixel);
+        QuantityColumnDefinition.Width = _isWide ? new GridLength(130, GridUnitType.Pixel) : new GridLength(65, GridUnitType.Pixel);
         foreach (var viewModel in TransactionViewModels) viewModel.ToggleWideMode(_isWide);
     }
 

@@ -58,14 +58,46 @@ public sealed partial class MainPage : Page
     {
         if (args.IsSettingsSelected)
         {
+            MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/SettingsMenuText");
             Navigate(typeof(SettingsPage));
             return;
         }
 
         var selectedItem = sender.SelectedItem as NavigationViewItem;
 
-        if (selectedItem == ItemsNavigationViewItem) Navigate(typeof(ItemsPage));
-        else if (selectedItem == ManageNavigationViewItem) Navigate(typeof(ManagePage));
-        else if (selectedItem == ManageRecordsNavigationViewItem) Navigate(typeof(ReportPage));
+        if (selectedItem == ItemsNavigationViewItem)
+        {
+            MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/ItemsMenuText");
+            Navigate(typeof(ItemsPage));
+        }
+        else if (selectedItem == ManageNavigationViewItem)
+        {
+            MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/ManageMenuText");
+            Navigate(typeof(ManagePage));
+        }
+        else if (selectedItem == ManageRecordsNavigationViewItem)
+        {
+            MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/ManageRecordsMenuText");
+            Navigate(typeof(ReportPage));
+        }
+    }
+
+    private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        var width = e.NewSize.Width;
+        var isWide = width > 650;
+
+        if (isWide)
+        {
+            MainNavigationView.PaneDisplayMode = NavigationViewPaneDisplayMode.LeftCompact;
+            MainFrame.Margin = new(0);
+            MenuNameGrid.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            MainNavigationView.PaneDisplayMode = NavigationViewPaneDisplayMode.LeftMinimal;
+            MainFrame.Margin = new(0, 48, 0, 0);
+            MenuNameGrid.Visibility = Visibility.Visible;
+        }
     }
 }

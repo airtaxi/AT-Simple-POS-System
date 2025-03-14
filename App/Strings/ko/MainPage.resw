@@ -132,4 +132,16 @@
   <data name="MainNavigationView.PaneTitle" xml:space="preserve">
     <value>AT POS</value>
   </data>
+  <data name="ItemsMenuText" xml:space="preserve">
+    <value>품목</value>
+  </data>
+  <data name="ManageMenuText" xml:space="preserve">
+    <value>관리</value>
+  </data>
+  <data name="ManageRecordsMenuText" xml:space="preserve">
+    <value>보고서</value>
+  </data>
+  <data name="SettingsMenuText" xml:space="preserve">
+    <value>설정</value>
+  </data>
 </root>

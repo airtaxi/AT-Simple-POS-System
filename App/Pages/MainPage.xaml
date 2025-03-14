@@ -13,8 +13,9 @@
         utu:SafeArea.Mode="Margin"
         IsBackButtonVisible="Collapsed"
         IsSettingsVisible="True"
-        PaneDisplayMode="LeftCompact"
-        SelectionChanged="OnNavigationViewSelectionChanged">
+        PaneDisplayMode="LeftMinimal"
+        SelectionChanged="OnNavigationViewSelectionChanged"
+        SizeChanged="OnSizeChanged">
         <NavigationView.MenuItems>
             <NavigationViewItem
                 x:Name="ItemsNavigationViewItem"
@@ -30,7 +31,21 @@
                 Icon="{ic:SymbolIcon Symbol=ChartMultiple}" />
         </NavigationView.MenuItems>
         <Grid utu:SafeArea.Insets="SoftInput" utu:SafeArea.Mode="Padding">
-            <Frame x:Name="MainFrame" />
+            <Grid
+                x:Name="MenuNameGrid"
+                Height="48"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                BorderBrush="#AAAAAA"
+                BorderThickness="0,0,0,1">
+                <TextBlock
+                    x:Name="MenuNameTextBlock"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    HorizontalTextAlignment="Center" />
+            </Grid>
+            <Frame x:Name="MainFrame" Margin="0,48,0,0" />
             <Grid
                 x:Name="LoadingGrid"
                 IsHitTestVisible="False"
