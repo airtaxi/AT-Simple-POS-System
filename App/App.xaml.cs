@@ -42,14 +42,12 @@ public partial class App : Application
         //MainWindow.UseStudio();
 #endif
 
-
         // Do not repeat app initialization when the Window already has content,
         // just ensure that the window is active
         if (MainWindow.Content is not Frame rootFrame)
         {
             // Create a Frame to act as the navigation context and navigate to the first page
             rootFrame = new Frame();
-
             // Place the frame in the current Window
             MainWindow.Content = rootFrame;
 
