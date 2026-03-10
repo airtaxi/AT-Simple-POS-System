@@ -52,9 +52,6 @@
       <ProvisioningType>automatic</ProvisioningType>
     </PropertyGroup>
     <ItemGroup>
-      <None Include="ViewModels\ItemReportViewModel.cs" />
-    </ItemGroup>
-    <ItemGroup>
         <PackageReference Include="ClosedXML" />
         <PackageReference Include="CommunityToolkit.Mvvm" />
         <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
