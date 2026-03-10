@@ -55,11 +55,11 @@ public static class Localization
     public static void OverrideLanguage(Language language)
     {
 #if HAS_UNO
-        if (language == Language.Korean) Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "ko-KR";
-        else if (language == Language.English) Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US";
+        if (language == Language.Korean) Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "ko";
+        else if (language == Language.English) Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en";
 #else
-        if (language == Language.Korean) Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "ko-KR";
-        else if (language == Language.English) Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US";
+        if (language == Language.Korean) Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "ko";
+        else if (language == Language.English) Microsoft.Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en";
 #endif
     }
 
