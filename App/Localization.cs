@@ -12,7 +12,7 @@ namespace App;
 public static class Localization
 {
 #if !HAS_UNO
-    private static Microsoft.Windows.ApplicationModel.Resources.ResourceManager s_resourceManager = new();
+    private static readonly Microsoft.Windows.ApplicationModel.Resources.ResourceManager s_resourceManager = new();
 
 #endif
     public static Language GetLanguage()
