@@ -2,7 +2,6 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using App.DataTypes;
 using App.ViewModels;
-using Microsoft.UI.Xaml.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -12,19 +11,22 @@ namespace App.Pages.Menus;
 /// </summary>
 public sealed partial class ItemsPage : Page
 {
-    private ObservableCollection<TransactionViewModel> TransactionViewModels => IrTransactions.ItemsSource as ObservableCollection<TransactionViewModel>;
-    private ObservableCollection<ItemViewModel> ItemViewModels => IrItems.ItemsSource as ObservableCollection<ItemViewModel>;
+    private ObservableCollection<TransactionViewModel> TransactionViewModels { get; }
+    private ObservableCollection<ItemViewModel> ItemViewModels { get; }
 
     public ItemsPage()
     {
         this.InitializeComponent();
 
         var items = ItemManager.GetItems();
-        var itemViewModels = new ObservableCollection<ItemViewModel>(items.Select(item => new ItemViewModel(item.Id)));
-        IrItems.ItemsSource = itemViewModels;
+        ItemViewModels = new ObservableCollection<ItemViewModel>(items.Select(item =>
+        {
+            var viewModel = new ItemViewModel(item.Id);
+            viewModel.Tapped += OnItemTapped;
+            return viewModel;
+        }));
 
-        var transactionViewModels = new ObservableCollection<TransactionViewModel>();
-        IrTransactions.ItemsSource = transactionViewModels;
+        TransactionViewModels = new ObservableCollection<TransactionViewModel>();
     }
 
     private void UpdateTotal()
@@ -145,9 +147,9 @@ public sealed partial class ItemsPage : Page
         UpdateTotal();
     }
 
-    private void OnItemTapped(object sender, TappedRoutedEventArgs e)
+    private void OnItemTapped(object sender, EventArgs e)
     {
-        var itemViewModel = ((FrameworkElement)sender).DataContext as ItemViewModel;
+        var itemViewModel = sender as ItemViewModel;
 
         var items = ItemManager.GetItems();
         var item = items.FirstOrDefault(x => x.Id == itemViewModel.ItemId);
@@ -204,14 +206,5 @@ public sealed partial class ItemsPage : Page
 
         QuantityColumnDefinition.Width = _isWide ? new GridLength(130, GridUnitType.Pixel) : new GridLength(65, GridUnitType.Pixel);
         foreach (var viewModel in TransactionViewModels) viewModel.ToggleWideMode(_isWide);
-    }
-
-    // Uno bug workaround
-    private async void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
-    {
-        await Task.Delay(100);
-        var image = sender as Image;
-        var viewModel = image.DataContext as ItemViewModel;
-        viewModel.Refresh();
     }
 }

@@ -1,18 +1,22 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.UI;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace App.ViewModels;
 
 public partial class ItemViewModel : ObservableObject
 {
-    public string ItemId;
+	public string ItemId;
+	public event EventHandler Tapped;
 
 	public ItemViewModel(string itemId)
 	{
 		ItemId = itemId;
 		Refresh();
 	}
+
+	public void OnTapped(object sender, TappedRoutedEventArgs e) => Tapped?.Invoke(this, EventArgs.Empty);
 
 	public void Refresh()
 	{
@@ -37,6 +41,13 @@ public partial class ItemViewModel : ObservableObject
 
     [ObservableProperty]
     public partial string Name { get; set; }
+
+    // Uno bug workaround
+    public async void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
+    {
+        await Task.Delay(100);
+        Refresh();
+    }
 
     [ObservableProperty]
     public partial ImageSource Image { get; set; }

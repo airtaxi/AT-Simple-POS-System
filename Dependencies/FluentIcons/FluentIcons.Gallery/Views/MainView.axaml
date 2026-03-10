@@ -1,0 +1,520 @@
+<UserControl
+    x:Class="FluentIcons.Gallery.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FluentIcons.Gallery.Views"
+    xmlns:c="clr-namespace:FluentIcons.Gallery.Controls"
+    xmlns:ic="clr-namespace:FluentIcons.Avalonia.Fluent;assembly=FluentIcons.Avalonia.Fluent"
+    xmlns:icx="clr-namespace:FluentIcons.Avalonia.Fluent.Markup;assembly=FluentIcons.Avalonia.Fluent"
+    xmlns:m="clr-namespace:FluentIcons.Gallery.Models"
+    xmlns:ui="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+    xmlns:vm="clr-namespace:FluentIcons.Gallery.ViewModels"
+    x:DataType="vm:MainViewModel" d:DesignHeight="800" d:DesignWidth="800"
+    SizeChanged="OnSizeChanged"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <vm:MainViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ControlTheme
+                x:Key="CompactTabStripItemTheme"
+                BasedOn="{StaticResource AlternateTabStripItemTheme}"
+                TargetType="TabStripItem">
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="Height" Value="33" />
+            </ControlTheme>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="RootGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" MinHeight="72" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="*" MinHeight="72" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" MinWidth="288" />
+            <ColumnDefinition Width="12" />
+            <ColumnDefinition
+                Width="*" MinWidth="320" MaxWidth="400" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="3" Background="{DynamicResource SolidBackgroundFillColorSecondary}">
+            <Grid ColumnDefinitions="Auto,8,*,8,Auto,8,Auto" Margin="8">
+                <TabStrip SelectionChanged="UsesSymbol_SelectionChanged" Theme="{DynamicResource AlternateTabStripTheme}">
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="FluentIcon">
+                        <ic:FluentIcon FlowDirection="{CompiledBinding FlowDirection}" Icon="TextFontSize" />
+                    </TabStripItem>
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="SymbolIcon">
+                        <ic:SymbolIcon FlowDirection="{CompiledBinding FlowDirection}" Symbol="TextFontSize" />
+                    </TabStripItem>
+                </TabStrip>
+                <AutoCompleteBox
+                    Grid.Column="2"
+                    Text="{CompiledBinding SearchText, Mode=TwoWay}"
+                    Watermark="Search…" />
+                <TabStrip
+                    Grid.Column="4"
+                    SelectionChanged="FlowDirection_SelectionChanged"
+                    Theme="{DynamicResource AlternateTabStripTheme}">
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="LTR">
+                        <c:FlexibleIcon
+                            FlowDirection="LeftToRight" Icon="TextDirectionHorizontal"
+                            Symbol="TextDirectionHorizontalRight" UsesSymbol="{CompiledBinding UsesSymbol}" />
+                    </TabStripItem>
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="RTL">
+                        <c:FlexibleIcon
+                            FlowDirection="RightToLeft" Icon="TextDirectionHorizontal"
+                            Symbol="TextDirectionHorizontalLeft" UsesSymbol="{CompiledBinding UsesSymbol}" />
+                    </TabStripItem>
+                </TabStrip>
+                <TabStrip
+                    Grid.Column="6"
+                    SelectionChanged="IconVariant_SelectionChanged"
+                    Theme="{DynamicResource AlternateTabStripTheme}">
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="Regular">
+                        <c:FlexibleIcon
+                            Icon="PaintBrush" Symbol="PaintBrush"
+                            UsesSymbol="{CompiledBinding UsesSymbol}" />
+                    </TabStripItem>
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="Filled">
+                        <c:FlexibleIcon
+                            Icon="PaintBrush" IconVariant="Filled" Symbol="PaintBrush"
+                            UsesSymbol="{CompiledBinding UsesSymbol}" />
+                    </TabStripItem>
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="Color">
+                        <c:FlexibleIcon
+                            Icon="PaintBrush" IconVariant="Color" Symbol="PaintBrush"
+                            UsesSymbol="{CompiledBinding UsesSymbol}" />
+                    </TabStripItem>
+                    <TabStripItem Theme="{DynamicResource CompactTabStripItemTheme}" ToolTip.Tip="Light">
+                        <c:FlexibleIcon
+                            Icon="PaintBrush" IconVariant="Light" Symbol="PaintBrush"
+                            UsesSymbol="{CompiledBinding UsesSymbol}" />
+                    </TabStripItem>
+                </TabStrip>
+            </Grid>
+        </Border>
+
+        <ScrollViewer
+            x:Name="Primary"
+            Grid.Row="1" Grid.RowSpan="3">
+            <ItemsRepeater ItemsSource="{CompiledBinding Icons}">
+                <ItemsRepeater.Layout>
+                    <UniformGridLayout MinItemHeight="36" MinItemWidth="36" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate DataType="m:IconInfo">
+                        <ToggleButton
+                            Padding="8"
+                            Command="{CompiledBinding ((vm:MainViewModel)DataContext).SelectIconCommand,
+                                                      RelativeSource={RelativeSource FindAncestor,
+                                                                                     AncestorType=local:MainView}}"
+                            CommandParameter="{CompiledBinding}"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            IsChecked="{CompiledBinding IsSelected}"
+                            Theme="{DynamicResource TransparentToggleButton}"
+                            ToolTip.Tip="{CompiledBinding Name}">
+                            <c:FlexibleIcon
+                                FlowDirection="{CompiledBinding ((vm:MainViewModel)DataContext).FlowDirection,
+                                                             RelativeSource={RelativeSource FindAncestor,
+                                                                                            AncestorType=local:MainView}}"
+                                Icon="{CompiledBinding Value}"
+                                IconVariant="{CompiledBinding ((vm:MainViewModel)DataContext).IconVariant,
+                                                              RelativeSource={RelativeSource FindAncestor,
+                                                                                             AncestorType=local:MainView}}"
+                                Symbol="{CompiledBinding SymbolValue}"
+                                UsesSymbol="{CompiledBinding ((vm:MainViewModel)DataContext).UsesSymbol,
+                                                             RelativeSource={RelativeSource FindAncestor,
+                                                                                            AncestorType=local:MainView}}" />
+                        </ToggleButton>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </ScrollViewer>
+
+        <GridSplitter
+            x:Name="Splitter"
+            Grid.Row="1" Grid.RowSpan="3" Grid.Column="1"
+            ResizeDirection="Columns" />
+
+        <ScrollViewer
+            x:Name="Info"
+            Grid.Row="1" Grid.RowSpan="3" Grid.Column="2">
+
+            <Grid RowDefinitions="*,12,Auto" Margin="16">
+
+                <Grid.Resources>
+                    <ControlTheme
+                        x:Key="PropertyTextBlockStyle"
+                        BasedOn="{StaticResource FluentCaptionTextBlockStyle}"
+                        TargetType="TextBlock">
+                        <Setter Property="FontFamily" Value="fonts:Inter#Inter" />
+                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondary}" />
+                    </ControlTheme>
+                </Grid.Resources>
+
+                <Grid.Styles>
+                    <Style Selector="SelectableTextBlock">
+                        <Setter Property="FontFamily" Value="fonts:JetBrainsMono#JetBrains Mono" />
+                        <Setter Property="TextWrapping" Value="Wrap" />
+                        <Setter Property="LineHeight" Value="{StaticResource BodyTextBlockLineHeight}" />
+                    </Style>
+                </Grid.Styles>
+
+                <Border
+                    HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Background="{DynamicResource SolidBackgroundFillColorTertiary}"
+                    CornerRadius="6">
+                    <c:FlexibleIcon
+                        FlowDirection="{CompiledBinding FlowDirection}"
+                        FontSize="96"
+                        Icon="{CompiledBinding Selected.Value}"
+                        IconVariant="{CompiledBinding IconVariant}"
+                        Symbol="{CompiledBinding Selected.SymbolValue}"
+                        UsesSymbol="{CompiledBinding UsesSymbol}" />
+                </Border>
+
+                <StackPanel Spacing="12">
+
+                    <StackPanel Margin="0,0,108,0">
+                        <TextBlock Text="Name" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                        <SelectableTextBlock Text="{CompiledBinding Selected.Name}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,108,0" Spacing="2">
+                        <TextBlock Text="Resizable" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                        <StackPanel
+                            Grid.Column="2"
+                            Orientation="Horizontal" Spacing="4">
+                            <c:FlexibleIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                Icon="{CompiledBinding Selected.Value}"
+                                Symbol="{CompiledBinding Selected.SymbolValue}"
+                                UsesSymbol="{CompiledBinding UsesSymbol}" />
+                            <c:FlexibleIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconVariant="Filled"
+                                Symbol="{CompiledBinding Selected.SymbolValue}"
+                                UsesSymbol="{CompiledBinding UsesSymbol}" />
+                            <c:FlexibleIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconVariant="Color"
+                                Symbol="{CompiledBinding Selected.SymbolValue}"
+                                UsesSymbol="{CompiledBinding UsesSymbol}" />
+                            <c:FlexibleIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconVariant="Light"
+                                Symbol="{CompiledBinding Selected.SymbolValue}"
+                                UsesSymbol="{CompiledBinding UsesSymbol}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="XAML" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <Button
+                                Padding="0"
+                                Command="{CompiledBinding CopyXamlCommand}"
+                                Theme="{DynamicResource TransparentButton}"
+                                ToolTip.Tip="Copy">
+                                <ic:FluentIcon
+                                    FontSize="16" Icon="Copy" IconSize="Size16" />
+                            </Button>
+                        </StackPanel>
+                        <SelectableTextBlock Text="{CompiledBinding Xaml}" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="XAML extension" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <Button
+                                Padding="0"
+                                Command="{CompiledBinding CopyXamlExtensionCommand}"
+                                Theme="{DynamicResource TransparentButton}"
+                                ToolTip.Tip="Copy">
+                                <ic:FluentIcon
+                                    FontSize="16" Icon="Copy" IconSize="Size16" />
+                            </Button>
+                        </StackPanel>
+                        <SelectableTextBlock Text="{CompiledBinding XamlExtension}" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="C#" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <Button
+                                Padding="0"
+                                Command="{CompiledBinding CopyCSharpCommand}"
+                                Theme="{DynamicResource TransparentButton}"
+                                ToolTip.Tip="Copy">
+                                <ic:FluentIcon
+                                    FontSize="16" Icon="Copy" IconSize="Size16" />
+                            </Button>
+                        </StackPanel>
+                        <SelectableTextBlock Text="{CompiledBinding CSharp}" />
+                    </StackPanel>
+
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <TextBlock Text="C# markup" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <Button
+                                Padding="0"
+                                Command="{CompiledBinding CopyCSharpMarkupCommand}"
+                                Theme="{DynamicResource TransparentButton}"
+                                ToolTip.Tip="Copy">
+                                <ic:FluentIcon
+                                    FontSize="16" Icon="Copy" IconSize="Size16" />
+                            </Button>
+                        </StackPanel>
+                        <SelectableTextBlock Text="{CompiledBinding CSharpMarkup}" />
+                    </StackPanel>
+
+                    <Grid ColumnDefinitions="5*,12,6*,12,8*">
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Size 10" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="10"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size10" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="10"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size10" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="10"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size10" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FontSize="10"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size10" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Spacing="2">
+                            <TextBlock Text="Size 12" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="12"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size12" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="12"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size12" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="12"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size12" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="12"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size12" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4" Spacing="2">
+                            <TextBlock Text="Size 16" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="16"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size16" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="16"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size16" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="16"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size16" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="16"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size16" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid RowDefinitions="Auto,16,Auto" ColumnDefinitions="7*,12,8*">
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Size 20" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="20"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size20" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="20"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size20" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="20"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size20" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="20"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size20" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Spacing="2">
+                            <TextBlock Text="Size 24" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="24"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size24" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="24"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size24" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="24"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size24" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="24"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size24" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Spacing="2">
+                            <TextBlock Text="Size 28" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="28"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size28" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="28"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size28" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="28"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size28" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="28"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size28" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Row="2" Grid.Column="2"
+                            Spacing="2">
+                            <TextBlock Text="Size 32" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="32"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size32" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="32"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size32" IconVariant="Filled" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="32"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size32" IconVariant="Color" />
+                                <ic:FluentIcon
+                                    FlowDirection="{CompiledBinding FlowDirection}"
+                                    FontSize="32"
+                                    Icon="{CompiledBinding Selected.Value}"
+                                    IconSize="Size32" IconVariant="Light" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Column="2" Spacing="2">
+                        <TextBlock Text="Size 48" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                        <StackPanel Orientation="Horizontal" Spacing="4">
+                            <ic:FluentIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                FontSize="48"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconSize="Size48" />
+                            <ic:FluentIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                FontSize="48"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconSize="Size48" IconVariant="Filled" />
+                            <ic:FluentIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                FontSize="48"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconSize="Size48" IconVariant="Color" />
+                            <ic:FluentIcon
+                                FlowDirection="{CompiledBinding FlowDirection}"
+                                FontSize="48"
+                                Icon="{CompiledBinding Selected.Value}"
+                                IconSize="Size48" IconVariant="Light" />
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <Grid Grid.Row="2" ColumnDefinitions="*,16,*">
+                    <StackPanel>
+                        <TextBlock Text="GitHub repository" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                        <HyperlinkButton
+                            Padding="0"
+                            NavigateUri="https://github.com/davidxuang/FluentIcons"
+                            Theme="{DynamicResource TransparentButton}">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock FontFamily="fonts:JetBrainsMono#JetBrains Mono" Text="FluentIcons" />
+                                <ic:SymbolIcon FontSize="16" Symbol="Open" />
+                            </StackPanel>
+                        </HyperlinkButton>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Library version" Theme="{DynamicResource PropertyTextBlockStyle}" />
+                        <SelectableTextBlock Text="{CompiledBinding Version}" />
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

@@ -42,6 +42,13 @@ public partial class ManageItemViewModel : ObservableObject
         else Image = null; // Reset image if it binary is null
     }
 
+    // Uno bug workaround
+    public async void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
+    {
+        await Task.Delay(100);
+        LoadImage();
+    }
+
     [ObservableProperty]
     public partial string Name { get; set; }
 

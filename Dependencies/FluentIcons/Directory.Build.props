@@ -1,0 +1,48 @@
+<Project>
+
+  <PropertyGroup>
+    <VersionPrefix>2.0.320</VersionPrefix>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <Authors>davidxuang</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Fluent;UI;Icon</PackageTags>
+    <RepositoryUrl>https://github.com/davidxuang/FluentIcons</RepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- for MAUI -->
+    <CheckEolWorkloads>false</CheckEolWorkloads>
+    <!-- PolySharp -->
+    <PolySharpIncludeGeneratedTypes>System.Diagnostics.CodeAnalysis.ExperimentalAttribute</PolySharpIncludeGeneratedTypes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ANDROID_SDK_ROOT)' != ''">
+    <AndroidSdkDirectory>$(ANDROID_SDK_ROOT)</AndroidSdkDirectory>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(VERSION_SUFFIX)' != ''">
+    <VersionSuffix>$(VERSION_SUFFIX)</VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <NoWarn>$(NoWarn);Uno0001</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(OutputType)' != 'Exe' and '$(OutputType)' != 'WinExe'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Assets\Icon.png" Pack="true" PackagePath="" />
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>

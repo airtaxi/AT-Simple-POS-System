@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>FluentUI System Icons resources package for Uno.</Description>
+    <TargetsForTfmSpecificContentInPackage>
+      $(TargetsForTfmSpecificContentInPackage);IncludeAssetsInNuGetPackage
+    </TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <Target Name="IncludeAssetsInNuGetPackage" Condition="'$(IncludeBuildOutput)' != 'false'" DependsOnTargets="GetNuGetShortFolderName">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="Assets\*.otf">
+        <Link>Assets/%(Filename)%(Extension)</Link>
+        <PackagePath>lib/$(NuGetShortFolderName)/$(PackageId)/%(Link)</PackagePath>
+      </TfmSpecificPackageFile>
+      <TfmSpecificPackageFile Include="FluentIcons.Resources.Uno.uprimarker">
+        <PackagePath>lib/$(NuGetShortFolderName)/</PackagePath>
+      </TfmSpecificPackageFile>
+    </ItemGroup>
+  </Target>
+
+  <ItemGroup>
+    <Compile Remove="**\*.cs" />
+    <Compile Include="**\*.Uno.cs" />
+  </ItemGroup>
+
+</Project>

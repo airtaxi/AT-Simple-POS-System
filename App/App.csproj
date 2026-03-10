@@ -43,7 +43,7 @@
         </UnoFeatures>  
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
-    <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' and '$(Configuration)' == 'Release'">
+    <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
         <UseMonoRuntime>false</UseMonoRuntime>
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
@@ -60,7 +60,12 @@
         <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
         <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
         <PackageReference Include="CommunityToolkit.WinUI.Extensions" />
-        <PackageReference Include="FluentIcons.WinUI" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\Dependencies\FluentIcons\seagull-icons\assets\*.otf" LinkBase="Assets" Pack="true" PackagePath="contentTransitive/$(PackageId)/Assets">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+      <ProjectReference Include="..\Dependencies\FluentIcons\FluentIcons.WinUI\FluentIcons.WinUI.csproj" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Pages\Menus\ReportPage.xaml.cs">

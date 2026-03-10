@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFrameworks>net462;net6.0-windows</TargetFrameworks>
+    <Description>FluentUI System Icons control library for WPF.</Description>
+    <PackageTags>$(PackageTags);WPF</PackageTags>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PolySharp" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentIcons.Common\FluentIcons.Common.csproj" ExactVersion="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\seagull-icons\assets\*.otf">
+      <Link>Assets/%(FileName)%(Extension)</Link>
+    </Resource>
+  </ItemGroup>
+
+</Project>

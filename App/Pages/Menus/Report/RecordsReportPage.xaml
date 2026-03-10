@@ -47,7 +47,7 @@
             <ItemsRepeater x:Name="IvRecords" VerticalAlignment="Stretch">
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate x:DataType="vm:RecordReportViewModel">
-                        <Grid Margin="0,5,0,5" Unloaded="OnViewModelUnloaded">
+                        <Grid Margin="0,5,0,5" Unloaded="{x:Bind OnUnloaded}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2.5*" />
                                 <ColumnDefinition Width="*" />
@@ -129,7 +129,7 @@
                                 VerticalAlignment="Stretch"
                                 Background="Transparent"
                                 BorderThickness="0"
-                                Click="OnViewModelDeleteButtonClicked">
+                                Click="{x:Bind OnDeleteButtonClicked}">
                                 <SymbolIcon Symbol="Delete" />
                             </Button>
                         </Grid>

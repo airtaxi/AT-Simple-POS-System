@@ -1,13 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using App.DataTypes;
 using App.ViewModels;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SkiaSharp;
-using Uno.UI.Helpers;
 using Windows.Storage.Pickers;
 
 namespace App.Pages.Menus;
@@ -294,15 +292,6 @@ public sealed partial class ManagePage : Page
 
     [GeneratedRegex("[^0-9]")]
     private static partial Regex NumberOnlyRegex();
-
-    // Uno bug workaround
-    private async void OnImageFailed(object sender, ExceptionRoutedEventArgs e)
-    {
-        await Task.Delay(100);
-        var image = sender as Image;
-        var viewModel = image.DataContext as ManageItemViewModel;
-        viewModel.LoadImage();
-    }
 
     // --- Seller Shares ---
 

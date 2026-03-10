@@ -1,0 +1,13 @@
+<Project>
+
+  <Import Project="..\Directory.Build.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentIcons.Common\FluentIcons.Common.csproj" ExactVersion="true" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <Description>FluentUI System Icons control library for FluentAvalonia.</Description>
+    <PackageTags>$(PackageTags);Avalonia</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);FLUENT_AVALONIA</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentAvaloniaUI" />
+    <PackageReference Include="PolySharp" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FluentIcons.Common\FluentIcons.Common.csproj" ExactVersion="true" />
+    <ProjectReference Include="..\FluentIcons.Resources\FluentIcons.Resources.Avalonia.csproj" ExactVersion="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\FluentIcons.Avalonia\*Icon.cs" />
+    <Compile Include="..\FluentIcons.Avalonia\Outline.cs" />
+    <Compile Include="..\FluentIcons.Avalonia\Internals\GenericIcon.cs" LinkBase="Internals" />
+    <Compile Include="..\FluentIcons.Avalonia\Markup\*IconExtension.cs" LinkBase="Markup" />
+  </ItemGroup>
+
+</Project>

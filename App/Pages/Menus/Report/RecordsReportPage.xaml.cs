@@ -17,18 +17,4 @@ public sealed partial class RecordsReportPage : Page
         TotalPriceTextBlock.Text = viewModels.Sum(x => x.TotalPrice).ToString("N0");
         TotalQuantityTextBlock.Text = viewModels.Sum(x => x.TotalQuantity).ToString("N0");
     }
-
-    private void OnViewModelUnloaded(object sender, RoutedEventArgs e)
-    {
-        var item = sender as FrameworkElement;
-        var viewModel = item.DataContext as RecordReportViewModel;
-        viewModel.OnUnloaded(sender, e);
-    }
-
-    private void OnViewModelDeleteButtonClicked(object sender, RoutedEventArgs e)
-    {
-        var item = sender as FrameworkElement;
-        var viewModel = item.DataContext as RecordReportViewModel;
-        viewModel.OnDeleteButtonClicked(sender, e);
-    }
 }
