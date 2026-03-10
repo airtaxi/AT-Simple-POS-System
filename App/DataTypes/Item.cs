@@ -1,5 +1,5 @@
-
 using App;
+using App.DataTypes;
 
 public class Item
 {
@@ -20,4 +20,6 @@ public class Item
     public bool IsSoldout => SalesQuantity >= StockQuantity || IsManuallySoldout;
 
     public byte[] ImageBinary { get; set; }
+
+    public List<ItemSellerShare> Shares { get; set; } = [];
 }

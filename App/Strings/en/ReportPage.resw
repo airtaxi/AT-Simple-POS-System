@@ -175,4 +175,31 @@ Quantity: #P3</value>
   <data name="ItemsReportSelectorBarItem.Text" xml:space="preserve">
     <value>Sales report by item</value>
   </data>
+  <data name="SellersReportSelectorBarItem.Text" xml:space="preserve">
+    <value>Sales report by seller</value>
+  </data>
+  <data name="SellersReportWorksheet" xml:space="preserve">
+    <value>Sales report by seller</value>
+  </data>
+  <data name="SellersReportWorksheetSellerNameCellText" xml:space="preserve">
+    <value>Seller</value>
+  </data>
+  <data name="SellersReportWorksheetItemNameCellText" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="SellersReportWorksheetSharePercentageCellText" xml:space="preserve">
+    <value>Share %</value>
+  </data>
+  <data name="SellersReportWorksheetQuantityCellText" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="SellersReportWorksheetShareAmountCellText" xml:space="preserve">
+    <value>Share Amount</value>
+  </data>
+  <data name="SellersReportWorksheetTotalCellText" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="SellersReportWorksheetUnassignedSellerName" xml:space="preserve">
+    <value>Unassigned</value>
+  </data>
 </root>

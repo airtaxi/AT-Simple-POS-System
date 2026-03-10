@@ -144,4 +144,10 @@
   <data name="SettingsMenuText" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="SellersNavigationViewItem.Content" xml:space="preserve">
+    <value>Sellers</value>
+  </data>
+  <data name="SellersMenuText" xml:space="preserve">
+    <value>Sellers</value>
+  </data>
 </root>

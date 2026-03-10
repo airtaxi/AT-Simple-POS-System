@@ -183,4 +183,25 @@
   <data name="ItemIsManuallySoldoutCheckBox.Content" xml:space="preserve">
     <value>Set to soldout</value>
   </data>
+  <data name="ShareSectionHeader" xml:space="preserve">
+    <value>Seller Shares</value>
+  </data>
+  <data name="ShareNoSellersText" xml:space="preserve">
+    <value>Add sellers first to assign shares.</value>
+  </data>
+  <data name="ShareAddButtonContent" xml:space="preserve">
+    <value>Add Share</value>
+  </data>
+  <data name="SharePercentageHeader" xml:space="preserve">
+    <value>Share %</value>
+  </data>
+  <data name="ShareSellerHeader" xml:space="preserve">
+    <value>Seller</value>
+  </data>
+  <data name="ShareTotalPercentageText" xml:space="preserve">
+    <value>Total: #P1%</value>
+  </data>
+  <data name="MessageDialogSharePercentageWarningMessage" xml:space="preserve">
+    <value>The total share percentage is #P1%, not 100%. Do you want to save anyway?</value>
+  </data>
 </root>

@@ -75,6 +75,11 @@ public sealed partial class MainPage : Page
             MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/ManageMenuText");
             Navigate(typeof(ManagePage));
         }
+        else if (selectedItem == SellersNavigationViewItem)
+        {
+            MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/SellersMenuText");
+            Navigate(typeof(SellersPage));
+        }
         else if (selectedItem == ManageRecordsNavigationViewItem)
         {
             MenuNameTextBlock.Text = Localization.GetLocalizedString("/MainPage/ManageRecordsMenuText");

@@ -28,6 +28,9 @@
                 <SelectorBar x:Name="ItemsReportSelectorBar" SelectionChanged="OnItemsReportSelectorBarSelectionChanged">
                     <SelectorBarItem x:Uid="/ReportPage/ItemsReportSelectorBarItem" Icon="{ic:SymbolIcon Symbol=TrayItemAdd}" />
                 </SelectorBar>
+                <SelectorBar x:Name="SellersReportSelectorBar" SelectionChanged="OnSellersReportSelectorBarSelectionChanged">
+                    <SelectorBarItem x:Uid="/ReportPage/SellersReportSelectorBarItem" Icon="{ic:SymbolIcon Symbol=People}" />
+                </SelectorBar>
             </StackPanel>
         </ScrollViewer>
 

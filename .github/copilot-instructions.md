@@ -25,8 +25,9 @@ Pages (XAML + code-behind)
             └─ Configuration (thread-safe JSON read/write → %LOCALAPPDATA%\AT POS\settings.json)
 ```
 
-- **ItemManager / TransactionManager** — static classes providing CRUD over items and transactions via `Configuration`.
+- **ItemManager / TransactionManager / SellerManager** — static classes providing CRUD over items, transactions, and sellers via `Configuration`.
 - **RecordManager** — computes `Record` objects on-the-fly by grouping transactions by `RecordId`. Records are never persisted directly.
+- **SellerManager** — manages seller CRUD. Removing a seller cascades to remove that seller's share entries from all items.
 - **Configuration** — single JSON file persistence with an in-memory `Dictionary` cache, a `Lock` for thread safety, and a 50ms debounced write buffer. All reads/writes go through `GetValue<T>` / `SetValue`.
 
 ### Navigation
@@ -39,11 +40,13 @@ Frame-based navigation through `MainPage.Navigate(Type pageType)` and `MainPage.
 |------|---------|
 | `MainPage` | Root shell with NavigationView |
 | `Menus/ItemsPage` | POS shopping interface (cart, totals, payment) |
-| `Menus/ManagePage` | Item CRUD with image upload |
+| `Menus/ManagePage` | Item CRUD with image upload and per-item seller share editing |
+| `Menus/SellersPage` | Seller CRUD with empty-state UI |
 | `Menus/SettingsPage` | App configuration |
-| `Menus/ReportPage` | Report menu |
+| `Menus/ReportPage` | Report menu with tabs for items, records, and sellers |
 | `Menus/Report/ItemsReportPage` | Item sales summary with Excel export (ClosedXML) |
 | `Menus/Report/RecordsReportPage` | Transaction record listing |
+| `Menus/Report/SellersReportPage` | Per-seller revenue breakdown with item detail |
 
 ## Conventions
 
@@ -55,9 +58,10 @@ Frame-based navigation through `MainPage.Navigate(Type pageType)` and `MainPage.
 
 ### Data models
 
-- `Item`, `Transaction`, `Record` are plain C# classes in `App/DataTypes/`.
-- `Transaction.Id` and `Item.Id` are GUIDs. `Transaction.RecordId` groups transactions into logical records.
+- `Item`, `Transaction`, `Record`, `Seller`, `ItemSellerShare` are plain C# classes in `App/DataTypes/`.
+- `Transaction.Id`, `Item.Id`, and `Seller.Id` are GUIDs. `Transaction.RecordId` groups transactions into logical records.
 - `Item.SalesQuantity` and `Item.IsSoldout` are computed properties (not stored).
+- `Item.Shares` holds a list of `ItemSellerShare` (SellerId + Percentage) for multi-seller revenue splitting.
 - Item images are stored as `byte[]` (`ImageBinary`).
 
 ### Serialization

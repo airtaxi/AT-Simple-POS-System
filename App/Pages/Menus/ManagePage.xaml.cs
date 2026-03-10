@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using App.DataTypes;
 using App.ViewModels;
 using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -16,10 +17,13 @@ public sealed partial class ManagePage : Page
     private readonly ObservableCollection<ManageItemViewModel> _viewModels = new();
     private ManageItemViewModel _currentItemViewModel;
     private byte[] _currentItemImageBinary;
+    private readonly List<Seller> _sellers;
 
     public ManagePage()
     {
         this.InitializeComponent();
+
+        _sellers = SellerManager.GetSellers();
 
         // Setup items
         var items = ItemManager.GetItems();
@@ -58,6 +62,9 @@ public sealed partial class ManagePage : Page
         CbxManuallySoldout.IsChecked = false;
         BtSave.Content = Localization.GetLocalizedString("/ManagePage/AddButtonContent");
 
+        // Reset shares
+        SetupShareSection([]);
+
         // Show the item view
         SvItem.Visibility = Visibility.Visible;
     }
@@ -77,6 +84,16 @@ public sealed partial class ManagePage : Page
     {
         var isAdd = _currentItemViewModel == null;
 
+        // Collect shares from UI
+        var shares = CollectSharesFromUI();
+        var totalPercentage = shares.Sum(x => x.Percentage);
+        if (shares.Count > 0 && totalPercentage != 100)
+        {
+            var warningMessage = Localization.GetLocalizedString("/ManagePage/MessageDialogSharePercentageWarningMessage").Replace("#P1", totalPercentage.ToString());
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, warningMessage, Constants.MessageDialogYes, Constants.MessageDialogNo);
+            if (result != ContentDialogResult.Primary) return;
+        }
+
         var item = _currentItemViewModel?.Item ?? new();
         item.Name = TbxName.Text;
 #if HAS_UNO
@@ -90,6 +107,7 @@ public sealed partial class ManagePage : Page
         item.Price = int.Parse(numberOnlyText);
         item.StockQuantity = (int)NbxStockQuantity.Value;
         item.IsManuallySoldout = CbxManuallySoldout.IsChecked == true;
+        item.Shares = shares;
         ItemManager.SaveItem(item);
 
         if (isAdd)
@@ -150,7 +168,7 @@ public sealed partial class ManagePage : Page
 
             int newHeight = 192;
             int newWidth = (int)(skBitmap.Width * ((double)newHeight / skBitmap.Height));
-            using var resized = skBitmap.Resize(new SKImageInfo(newWidth, newHeight), SKFilterQuality.Medium);
+            using var resized = skBitmap.Resize(new SKImageInfo(newWidth, newHeight), new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
             if(resized == null)
             {
                 await this.ShowMessageDialogAsync(Constants.MessageDialogError, Localization.GetLocalizedString("/ManagePage/MessageDialogResizeImageErrorMessage"), Constants.MessageDialogOk);
@@ -212,6 +230,9 @@ public sealed partial class ManagePage : Page
         NbxStockQuantity.Value = selectedItem.Item.StockQuantity;
         CbxManuallySoldout.IsChecked = selectedItem.Item.IsManuallySoldout;
         BtSave.Content = Localization.GetLocalizedString("/ManagePage/SaveButtonContent");
+
+        // Setup shares
+        SetupShareSection(selectedItem.Item.Shares ?? []);
 
         // Show the item view
         SvItem.Visibility = Visibility.Visible;
@@ -281,5 +302,118 @@ public sealed partial class ManagePage : Page
         var image = sender as Image;
         var viewModel = image.DataContext as ManageItemViewModel;
         viewModel.LoadImage();
+    }
+
+    // --- Seller Shares ---
+
+    private void SetupShareSection(List<ItemSellerShare> shares)
+    {
+        ShareItemsPanel.Children.Clear();
+
+        if (_sellers.Count == 0)
+        {
+            ShareNoSellersTextBlock.Visibility = Visibility.Visible;
+            BtAddShare.Visibility = Visibility.Collapsed;
+            ShareTotalTextBlock.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        ShareNoSellersTextBlock.Visibility = Visibility.Collapsed;
+        BtAddShare.Visibility = Visibility.Visible;
+        BtAddShare.Content = Localization.GetLocalizedString("/ManagePage/ShareAddButtonContent");
+        ShareTotalTextBlock.Visibility = Visibility.Visible;
+
+        foreach (var share in shares) AddShareRow(share.SellerId, share.Percentage);
+
+        UpdateShareTotal();
+    }
+
+    private void AddShareRow(string sellerId = null, int percentage = 0)
+    {
+        var grid = new Grid { ColumnSpacing = 5 };
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(80) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(32) });
+
+        var comboBox = new ComboBox
+        {
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            DisplayMemberPath = "Name",
+            ItemsSource = _sellers
+        };
+        if (sellerId != null)
+        {
+            var selectedSeller = _sellers.FirstOrDefault(x => x.Id == sellerId);
+            if (selectedSeller != null) comboBox.SelectedItem = selectedSeller;
+        }
+        Grid.SetColumn(comboBox, 0);
+
+        var numberBox = new NumberBox
+        {
+            Value = percentage,
+            Minimum = 0,
+            Maximum = 100,
+            SmallChange = 1,
+            LargeChange = 10,
+            SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Compact
+        };
+        numberBox.ValueChanged += (_, _) => UpdateShareTotal();
+        Grid.SetColumn(numberBox, 1);
+
+        var deleteButton = new Button
+        {
+            Content = new SymbolIcon(Symbol.Delete),
+            Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent),
+            BorderThickness = new Thickness(0),
+            Padding = new Thickness(4)
+        };
+        deleteButton.Click += (_, _) =>
+        {
+            ShareItemsPanel.Children.Remove(grid);
+            UpdateShareTotal();
+        };
+        Grid.SetColumn(deleteButton, 2);
+
+        grid.Children.Add(comboBox);
+        grid.Children.Add(numberBox);
+        grid.Children.Add(deleteButton);
+
+        ShareItemsPanel.Children.Add(grid);
+        UpdateShareTotal();
+    }
+
+    private void OnAddShareButtonClicked(object sender, RoutedEventArgs e) =>
+        AddShareRow();
+
+    private void UpdateShareTotal()
+    {
+        var total = 0;
+        foreach (var child in ShareItemsPanel.Children)
+        {
+            if (child is not Grid grid) continue;
+            var numberBox = grid.Children.OfType<NumberBox>().FirstOrDefault();
+            if (numberBox != null && !double.IsNaN(numberBox.Value))
+                total += (int)numberBox.Value;
+        }
+
+        ShareTotalTextBlock.Text = Localization.GetLocalizedString("/ManagePage/ShareTotalPercentageText").Replace("#P1", total.ToString());
+    }
+
+    private List<ItemSellerShare> CollectSharesFromUI()
+    {
+        var shares = new List<ItemSellerShare>();
+        foreach (var child in ShareItemsPanel.Children)
+        {
+            if (child is not Grid grid) continue;
+            var comboBox = grid.Children.OfType<ComboBox>().FirstOrDefault();
+            var numberBox = grid.Children.OfType<NumberBox>().FirstOrDefault();
+
+            if (comboBox?.SelectedItem is not Seller seller) continue;
+            var percentage = numberBox != null && !double.IsNaN(numberBox.Value) ? (int)numberBox.Value : 0;
+            if (percentage <= 0) continue;
+
+            shares.Add(new ItemSellerShare { SellerId = seller.Id, Percentage = percentage });
+        }
+        return shares;
     }
 }

@@ -40,14 +40,13 @@
             Toolkit;
             Skia;
             ThemeService;
-        </UnoFeatures>
+        </UnoFeatures>  
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-android' AND '$(Configuration)' == 'Release'">
-        <EnableLLVM>true</EnableLLVM>
-        <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android' and '$(Configuration)' == 'Release'">
+        <UseMonoRuntime>false</UseMonoRuntime>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
+    <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
       <CodesignKey>Apple Development: Created via API (FXDKK32DDS)</CodesignKey>
       <CodesignProvision>VS: com.arcstar.atpos Development</CodesignProvision>
       <ProvisioningType>automatic</ProvisioningType>

@@ -175,4 +175,31 @@
   <data name="ItemsReportSelectorBarItem.Text" xml:space="preserve">
     <value>품목별 판매 실적 보고</value>
   </data>
+  <data name="SellersReportSelectorBarItem.Text" xml:space="preserve">
+    <value>판매자별 판매 실적 보고</value>
+  </data>
+  <data name="SellersReportWorksheet" xml:space="preserve">
+    <value>판매자별 판매 실적 보고</value>
+  </data>
+  <data name="SellersReportWorksheetSellerNameCellText" xml:space="preserve">
+    <value>판매자</value>
+  </data>
+  <data name="SellersReportWorksheetItemNameCellText" xml:space="preserve">
+    <value>상품</value>
+  </data>
+  <data name="SellersReportWorksheetSharePercentageCellText" xml:space="preserve">
+    <value>지분 %</value>
+  </data>
+  <data name="SellersReportWorksheetQuantityCellText" xml:space="preserve">
+    <value>수량</value>
+  </data>
+  <data name="SellersReportWorksheetShareAmountCellText" xml:space="preserve">
+    <value>지분 금액</value>
+  </data>
+  <data name="SellersReportWorksheetTotalCellText" xml:space="preserve">
+    <value>계</value>
+  </data>
+  <data name="SellersReportWorksheetUnassignedSellerName" xml:space="preserve">
+    <value>미지정</value>
+  </data>
 </root>

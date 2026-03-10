@@ -29,6 +29,7 @@ public sealed partial class ReportPage : Page
 {
     private readonly ObservableCollection<RecordReportViewModel> _recordViewModels = [];
     private readonly ObservableCollection<ItemReportViewModel> _itemViewModels = [];
+    private readonly ObservableCollection<SellerReportViewModel> _sellerViewModels = [];
 
     public ReportPage()
     {
@@ -52,6 +53,10 @@ public sealed partial class ReportPage : Page
 
         // Newer records first
         _recordViewModels = [.. _recordViewModels.OrderByDescending(x => x.Timestamp)];
+
+        // Setup seller report view models
+        var sellerReports = SellerReportViewModel.BuildAll();
+        foreach (var sellerReport in sellerReports) _sellerViewModels.Add(sellerReport);
     }
 
     private async void OnRecordDeleted(object sender, EventArgs e)
@@ -147,6 +152,53 @@ public sealed partial class ReportPage : Page
             worksheet.Column(4).Width = 15;
         }
 
+        // Sellers Report
+        {
+            var worksheet = workbook.Worksheets.Add(Localization.GetLocalizedString("/ReportPage/SellersReportWorksheet"));
+
+            // Set the header
+            worksheet.Cell("A1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetSellerNameCellText");
+            worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetItemNameCellText");
+            worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetSharePercentageCellText");
+            worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetQuantityCellText");
+            worksheet.Cell("E1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetShareAmountCellText");
+
+            var row = 2;
+            foreach (var sellerViewModel in _sellerViewModels)
+            {
+                // Seller name row
+                worksheet.Cell($"A{row}").Value = sellerViewModel.SellerName;
+                worksheet.Cell($"A{row}").Style.Font.Bold = true;
+
+                foreach (var itemViewModel in sellerViewModel.Items)
+                {
+                    worksheet.Cell($"B{row}").Value = itemViewModel.ItemName;
+                    worksheet.Cell($"C{row}").Value = itemViewModel.Percentage;
+                    worksheet.Cell($"D{row}").Value = itemViewModel.Quantity;
+                    worksheet.Cell($"E{row}").Value = itemViewModel.ShareAmount;
+                    row++;
+                }
+
+                // Seller subtotal
+                worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetTotalCellText");
+                worksheet.Cell($"E{row}").Value = sellerViewModel.TotalShareAmount;
+                worksheet.Cell($"E{row}").Style.Font.Bold = true;
+                row++;
+            }
+
+            // Format number (N0)
+            worksheet.Column(3).Style.NumberFormat.Format = "#,##0";
+            worksheet.Column(4).Style.NumberFormat.Format = "#,##0";
+            worksheet.Column(5).Style.NumberFormat.Format = "#,##0";
+
+            // Adjust the column width
+            worksheet.Column(1).Width = 20;
+            worksheet.Column(2).Width = 25;
+            worksheet.Column(3).Width = 10;
+            worksheet.Column(4).Width = 10;
+            worksheet.Column(5).Width = 15;
+        }
+
         // Save the workbook
         var savePicker = new FileSavePicker();
 #if WINDOWS
@@ -174,6 +226,7 @@ public sealed partial class ReportPage : Page
         if (sender.SelectedItem != null)
         {
             RecordsReportSelectorBar.SelectedItem = null;
+            SellersReportSelectorBar.SelectedItem = null;
 
 #if WINDOWS
             MainFrame.Navigate(typeof(ItemsReportPage), _itemViewModels, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
@@ -188,11 +241,27 @@ public sealed partial class ReportPage : Page
         if (sender.SelectedItem != null)
         {
             ItemsReportSelectorBar.SelectedItem = null;
+            SellersReportSelectorBar.SelectedItem = null;
 
 #if WINDOWS
             MainFrame.Navigate(typeof(RecordsReportPage), _recordViewModels, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
 #else
             MainFrame.Navigate(typeof(RecordsReportPage), _recordViewModels);
+#endif
+        }
+    }
+
+    private void OnSellersReportSelectorBarSelectionChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
+    {
+        if (sender.SelectedItem != null)
+        {
+            RecordsReportSelectorBar.SelectedItem = null;
+            ItemsReportSelectorBar.SelectedItem = null;
+
+#if WINDOWS
+            MainFrame.Navigate(typeof(SellersReportPage), _sellerViewModels, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+#else
+            MainFrame.Navigate(typeof(SellersReportPage), _sellerViewModels);
 #endif
         }
     }

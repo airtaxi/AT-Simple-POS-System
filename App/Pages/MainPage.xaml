@@ -26,6 +26,10 @@
                 x:Uid="/MainPage/ManageNavigationViewItem"
                 Icon="{ic:SymbolIcon Symbol=Toolbox}" />
             <NavigationViewItem
+                x:Name="SellersNavigationViewItem"
+                x:Uid="/MainPage/SellersNavigationViewItem"
+                Icon="{ic:SymbolIcon Symbol=People}" />
+            <NavigationViewItem
                 x:Name="ManageRecordsNavigationViewItem"
                 x:Uid="/MainPage/ManageRecordsNavigationViewItem"
                 Icon="{ic:SymbolIcon Symbol=ChartMultiple}" />
