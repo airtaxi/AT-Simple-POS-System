@@ -95,7 +95,7 @@
 
             <CommandBar
                 Grid.Row="1"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Right"
                 Background="{ThemeResource LayerOnMicaBaseAltFillColorTertiaryBrush}"
                 DefaultLabelPosition="Right">
                 <AppBarButton

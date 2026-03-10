@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using App.DataTypes;
 using App.ViewModels;
+using CommunityToolkit.WinUI;
 
 namespace App.Pages.Menus;
 
@@ -143,6 +144,19 @@ public sealed partial class SellersPage : Page
             Grid.SetRow(SellersGrid, 0);
             Grid.SetRow(SvSeller, 1);
             SvSeller.CornerRadius = new CornerRadius(10, 10, 0, 0);
+        }
+    }
+
+    // Android, iOS bugfix
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+        await Task.Delay(20);
+        var textBlocks = (Content as FrameworkElement).FindDescendants().OfType<TextBlock>();
+        foreach (var textBlock in textBlocks)
+        {
+            textBlock.Text = textBlock.Text + "!";
+            textBlock.Text = textBlock.Text.TrimEnd('!');
         }
     }
 }

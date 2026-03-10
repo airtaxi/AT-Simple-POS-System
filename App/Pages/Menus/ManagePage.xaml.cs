@@ -405,4 +405,17 @@ public sealed partial class ManagePage : Page
         }
         return shares;
     }
+
+    // Android, iOS bugfix
+    protected override async void OnNavigatedTo(NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+        await Task.Delay(20);
+        var textBlocks = (Content as FrameworkElement).FindDescendants().OfType<TextBlock>();
+        foreach (var textBlock in textBlocks)
+        {
+            textBlock.Text = textBlock.Text + "!";
+            textBlock.Text = textBlock.Text.TrimEnd('!');
+        }
+    }
 }

@@ -38,6 +38,7 @@
 
         <CommandBar
             Grid.Row="2"
+            HorizontalAlignment="Right"
             DefaultLabelPosition="Right"
             OverflowButtonVisibility="Collapsed">
             <AppBarButton
