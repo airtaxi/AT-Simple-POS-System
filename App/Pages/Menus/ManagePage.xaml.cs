@@ -321,7 +321,7 @@ public sealed partial class ManagePage : Page
     {
         var grid = new Grid { ColumnSpacing = 5 };
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(80) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(72) });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(32) });
 
         var comboBox = new ComboBox
@@ -342,9 +342,10 @@ public sealed partial class ManagePage : Page
             Value = percentage,
             Minimum = 0,
             Maximum = 100,
-            SmallChange = 1,
-            LargeChange = 10,
-            SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Compact
+            SmallChange = 5,
+            LargeChange = 5,
+            Style = Application.Current.Resources["NumberBoxWithNoDeleteButtonStyle"] as Style,
+            SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Hidden
         };
         numberBox.ValueChanged += (_, _) => UpdateShareTotal();
         Grid.SetColumn(numberBox, 1);
