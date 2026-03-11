@@ -46,11 +46,11 @@
                 FontWeight="SemiBold" />
         </Grid>
 
-        <ScrollViewer Grid.Row="1" Margin="0,5,0,5">
+        <ScrollViewer Grid.Row="1" Margin="0,4,0,4">
             <ItemsRepeater x:Name="IvRecords" VerticalAlignment="Stretch">
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate x:DataType="vm:RecordReportViewModel">
-                        <Grid Margin="0,5,0,5" Unloaded="{x:Bind OnUnloaded}">
+                        <Grid Margin="0,4,0,4" Unloaded="{x:Bind OnUnloaded}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2.5*" />
                                 <ColumnDefinition Width="*" />

@@ -13,15 +13,19 @@
 
     <Grid x:Name="MainGrid" SizeChanged="OnMainGridSizeChanged">
         <ScrollViewer x:Name="SvItems">
-            <ItemsRepeater Margin="0,5,0,5" ItemsSource="{x:Bind ItemViewModels}">
+            <ItemsRepeater Margin="0,4,0,4" ItemsSource="{x:Bind ItemViewModels}">
                 <ItemsRepeater.Layout>
-                    <controls:StaggeredLayout ItemsStretch="Fill" />
+                    <controls:StaggeredLayout
+                        ColumnSpacing="4"
+                        DesiredColumnWidth="200"
+                        ItemsStretch="Fill"
+                        RowSpacing="4" />
                 </ItemsRepeater.Layout>
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate x:DataType="vm:ItemViewModel">
                         <Grid
                             Height="80"
-                            Margin="5"
+                            Margin="4"
                             not_win:AreDimensionsConstrained="True"
                             ColumnSpacing="10"
                             Tapped="{x:Bind OnTapped}"
@@ -117,7 +121,7 @@
                         <ItemsRepeater.ItemTemplate>
                             <DataTemplate x:DataType="vm:TransactionViewModel">
                                 <Grid
-                                    Margin="0,0,0,5"
+                                    Margin="0,0,0,4"
                                     ColumnSpacing="8"
                                     Unloaded="{x:Bind OnUnloaded}">
                                     <Grid.ColumnDefinitions>
@@ -129,7 +133,7 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock
                                         Grid.Column="0"
-                                        Margin="0,0,5,0"
+                                        Margin="0,0,4,0"
                                         VerticalAlignment="Center"
                                         Text="{x:Bind ItemName}"
                                         TextTrimming="CharacterEllipsis" />

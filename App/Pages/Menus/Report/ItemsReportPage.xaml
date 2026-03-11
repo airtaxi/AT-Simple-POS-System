@@ -50,11 +50,11 @@
                 FontWeight="SemiBold" />
         </Grid>
 
-        <ScrollViewer Grid.Row="1" Margin="0,5,0,5">
+        <ScrollViewer Grid.Row="1" Margin="0,4,0,4">
             <ItemsRepeater x:Name="IvItems" VerticalAlignment="Stretch">
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate x:DataType="vm:ItemReportViewModel">
-                        <Grid Margin="0,5,0,5">
+                        <Grid Margin="0,4,0,4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1.5*" />
                                 <ColumnDefinition Width="*" />
