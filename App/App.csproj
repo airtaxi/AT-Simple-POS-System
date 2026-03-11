@@ -44,6 +44,8 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     <PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+        <ApplicationId>com.kck4156.pos</ApplicationId>
+        <ApplicationPublisher>Howon Lee (@airtaxi)</ApplicationPublisher>
         <UseMonoRuntime>false</UseMonoRuntime>
     </PropertyGroup>
     <PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
