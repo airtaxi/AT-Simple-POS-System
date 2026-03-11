@@ -17,7 +17,7 @@
                 <ItemsRepeater.Layout>
                     <controls:StaggeredLayout
                         ColumnSpacing="4"
-                        DesiredColumnWidth="200"
+                        DesiredColumnWidth="300"
                         ItemsStretch="Fill"
                         RowSpacing="4" />
                 </ItemsRepeater.Layout>
