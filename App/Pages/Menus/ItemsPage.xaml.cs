@@ -163,6 +163,12 @@ public sealed partial class ItemsPage : Page
         var existingViewModel = TransactionViewModels.FirstOrDefault(x => x.Item.Id == item.Id);
         if (existingViewModel is not null)
         {
+            if (item.SalesQuantity + existingViewModel.Quantity + 1 > item.StockQuantity)
+            {
+                var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ItemsPage/MessageDialogExceedStockWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+                if (result != ContentDialogResult.Primary) return;
+            }
+
             existingViewModel.IncreaseQuantity();
             existingViewModel.InvokeQuantityChangedEvent();
             return;

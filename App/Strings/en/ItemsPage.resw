@@ -168,4 +168,7 @@
   <data name="MessageDialogAddSoldoutItemWarningMessage" xml:space="preserve">
     <value>This item is sold out. Do you still want to add it?</value>
   </data>
+  <data name="MessageDialogExceedStockWarningMessage" xml:space="preserve">
+    <value>Adding this item will exceed the stock quantity. Do you want to continue?</value>
+  </data>
 </root>
