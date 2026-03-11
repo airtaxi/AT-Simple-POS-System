@@ -86,8 +86,19 @@ public sealed partial class SettingsPage : Page
 
         var file = await openPicker.PickSingleFileAsync();
         if (file == null) return;
+
+        var languageBeforeImport = Localization.GetLanguage();
         var jsonText = await FileIO.ReadTextAsync(file);
         Configuration.Import(jsonText);
+
+        var languageAfterImport = Localization.GetLanguage();
+        if (languageBeforeImport == languageAfterImport) return;
+
+        var restartResult = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/SettingsPage/MessageDialogImportLanguageChangeRestartMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+        if (restartResult != ContentDialogResult.Primary) return;
+
+        Configuration.WriteBuffer();
+        Environment.Exit(0);
     }
 
     private async void OnClearRecordsButtonClicked(object sender, RoutedEventArgs e)

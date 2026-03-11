@@ -183,4 +183,7 @@
   <data name="DataManagementSettingsTextBlock.Text" xml:space="preserve">
     <value>데이터 관리</value>
   </data>
+  <data name="MessageDialogImportLanguageChangeRestartMessage" xml:space="preserve">
+    <value>불러온 설정에 다른 언어가 포함되어 있습니다. 변경 사항을 적용하기 위해 재시작하시겠습니까?</value>
+  </data>
 </root>

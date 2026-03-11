@@ -183,4 +183,7 @@
   <data name="DataManagementSettingsTextBlock.Text" xml:space="preserve">
     <value>Data Management</value>
   </data>
+  <data name="MessageDialogImportLanguageChangeRestartMessage" xml:space="preserve">
+    <value>The imported settings contain a different language. Do you want to restart to apply the change?</value>
+  </data>
 </root>
