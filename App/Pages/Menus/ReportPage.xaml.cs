@@ -88,6 +88,7 @@ public sealed partial class ReportPage : Page
             worksheet.Cell("A1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetTimestampCellText");
             worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetPriceCellText");
             worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetQuantityCellText");
+            worksheet.Row(1).Style.Font.Bold = true;
 
             // Set the data
             var row = 2;
@@ -103,6 +104,7 @@ public sealed partial class ReportPage : Page
             worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/RecordsReportWorksheetTotalPriceCellText");
             worksheet.Cell($"B{row}").FormulaA1 = $"SUM(B2:B{row - 1})";
             worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
+            worksheet.Row(row).Style.Font.Bold = true;
 
             // Format number (N0)
             worksheet.Column(2).Style.NumberFormat.Format = "#,##0";
@@ -123,6 +125,7 @@ public sealed partial class ReportPage : Page
             worksheet.Cell("B1").Value = Localization.GetLocalizedString("/ReportPage/ItemsReportWorksheetItemPriceCellText");
             worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ReportPage/ItemsReportWorksheetItemQuantityCellText");
             worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ReportPage/ItemsReportWorksheetItemTotalPriceCellText");
+            worksheet.Row(1).Style.Font.Bold = true;
 
             // Set the data
             var row = 2;
@@ -139,6 +142,7 @@ public sealed partial class ReportPage : Page
             worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/ItemsReportWorksheetTotalPriceCellText");
             worksheet.Cell($"C{row}").FormulaA1 = $"SUM(C2:C{row - 1})";
             worksheet.Cell($"D{row}").FormulaA1 = $"SUM(D2:D{row - 1})";
+            worksheet.Row(row).Style.Font.Bold = true;
 
             // Format number (N0)
             worksheet.Column(2).Style.NumberFormat.Format = "#,##0";
@@ -162,6 +166,7 @@ public sealed partial class ReportPage : Page
             worksheet.Cell("C1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetSharePercentageCellText");
             worksheet.Cell("D1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetQuantityCellText");
             worksheet.Cell("E1").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetShareAmountCellText");
+            worksheet.Row(1).Style.Font.Bold = true;
 
             var row = 2;
             foreach (var sellerViewModel in _sellerViewModels)
@@ -181,6 +186,7 @@ public sealed partial class ReportPage : Page
 
                 // Seller subtotal
                 worksheet.Cell($"A{row}").Value = Localization.GetLocalizedString("/ReportPage/SellersReportWorksheetTotalCellText");
+                worksheet.Cell($"A{row}").Style.Font.Bold = true;
                 worksheet.Cell($"E{row}").Value = sellerViewModel.TotalShareAmount;
                 worksheet.Cell($"E{row}").Style.Font.Bold = true;
                 row++;

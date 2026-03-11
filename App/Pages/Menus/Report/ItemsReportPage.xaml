@@ -28,22 +28,26 @@
             <TextBlock
                 x:Uid="/ItemsReportPage/ItemNameTextBlock"
                 Grid.Column="0"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Left"
+                FontWeight="SemiBold" />
 
             <TextBlock
                 x:Uid="/ItemsReportPage/ItemPriceTimestampTextBlock"
                 Grid.Column="1"
-                HorizontalAlignment="Center" />
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold" />
 
             <TextBlock
                 x:Uid="/ItemsReportPage/ItemQuantityTextBlock"
                 Grid.Column="2"
-                HorizontalAlignment="Center" />
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold" />
 
             <TextBlock
                 x:Uid="/ItemsReportPage/ItemTotalPriceTimestampTextBlock"
                 Grid.Column="3"
-                HorizontalAlignment="Center" />
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold" />
         </Grid>
 
         <ScrollViewer Grid.Row="1" Margin="0,5,0,5">
@@ -94,16 +98,19 @@
             <TextBlock
                 x:Uid="/ItemsReportPage/TotalTextBlock"
                 Grid.Column="0"
-                HorizontalAlignment="Left" />
+                HorizontalAlignment="Left"
+                FontWeight="Bold" />
 
             <TextBlock
                 x:Name="TotalQuantityTextBlock"
                 Grid.Column="2"
-                HorizontalAlignment="Center" />
+                HorizontalAlignment="Center"
+                FontWeight="Bold" />
             <TextBlock
                 x:Name="TotalPriceTextBlock"
                 Grid.Column="3"
-                HorizontalAlignment="Center" />
+                HorizontalAlignment="Center"
+                FontWeight="Bold" />
         </Grid>
     </Grid>
 </Page>
