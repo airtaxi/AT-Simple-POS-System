@@ -207,4 +207,7 @@
   <data name="MessageDialogNoAvailableSellersMessage" xml:space="preserve">
     <value>모든 판매자에게 이미 지분이 할당되어 있습니다.</value>
   </data>
+  <data name="MessageDialogZeroPercentageShareErrorMessage" xml:space="preserve">
+    <value>지분이 0%인 판매자가 있습니다. 비율을 지정하거나 제거해주세요.</value>
+  </data>
 </root>

@@ -84,6 +84,13 @@ public sealed partial class ManagePage : Page
     {
         var isAdd = _currentItemViewModel == null;
 
+        // Validate zero-percentage shares
+        if (ShareItemViewModels.Any(x => x.SelectedSeller != null && x.Percentage <= 0))
+        {
+            await this.ShowMessageDialogAsync(Constants.MessageDialogError, Localization.GetLocalizedString("/ManagePage/MessageDialogZeroPercentageShareErrorMessage"));
+            return;
+        }
+
         // Collect shares from UI
         var shares = CollectSharesFromUI();
         var totalPercentage = shares.Sum(x => x.Percentage);

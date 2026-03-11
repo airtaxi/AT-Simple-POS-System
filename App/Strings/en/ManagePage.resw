@@ -207,4 +207,7 @@
   <data name="MessageDialogNoAvailableSellersMessage" xml:space="preserve">
     <value>All sellers have already been assigned a share.</value>
   </data>
+  <data name="MessageDialogZeroPercentageShareErrorMessage" xml:space="preserve">
+    <value>Some sellers have a share of 0%. Please assign a percentage or remove them.</value>
+  </data>
 </root>
