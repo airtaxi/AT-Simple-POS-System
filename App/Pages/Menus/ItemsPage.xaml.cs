@@ -147,12 +147,18 @@ public sealed partial class ItemsPage : Page
         UpdateTotal();
     }
 
-    private void OnItemTapped(object sender, EventArgs e)
+    private async void OnItemTapped(object sender, EventArgs e)
     {
         var itemViewModel = sender as ItemViewModel;
 
         var items = ItemManager.GetItems();
         var item = items.FirstOrDefault(x => x.Id == itemViewModel.ItemId);
+
+        if (item.IsSoldout)
+        {
+            var result = await this.ShowMessageDialogAsync(Constants.MessageDialogWarning, Localization.GetLocalizedString("/ItemsPage/MessageDialogAddSoldoutItemWarningMessage"), Constants.MessageDialogYes, Constants.MessageDialogNo);
+            if (result != ContentDialogResult.Primary) return;
+        }
 
         var existingViewModel = TransactionViewModels.FirstOrDefault(x => x.Item.Id == item.Id);
         if (existingViewModel is not null)

@@ -165,4 +165,7 @@
   <data name="ItemViewModelSoldOutText" xml:space="preserve">
     <value>품절</value>
   </data>
+  <data name="MessageDialogAddSoldoutItemWarningMessage" xml:space="preserve">
+    <value>이 품목은 품절되었습니다. 그래도 추가하시겠습니까?</value>
+  </data>
 </root>

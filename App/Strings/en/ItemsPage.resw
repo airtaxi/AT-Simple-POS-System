@@ -165,4 +165,7 @@
   <data name="ItemViewModelSoldOutText" xml:space="preserve">
     <value>Soldout</value>
   </data>
+  <data name="MessageDialogAddSoldoutItemWarningMessage" xml:space="preserve">
+    <value>This item is sold out. Do you still want to add it?</value>
+  </data>
 </root>
