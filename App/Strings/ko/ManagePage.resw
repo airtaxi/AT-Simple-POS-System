@@ -204,4 +204,7 @@
   <data name="MessageDialogSharePercentageWarningMessage" xml:space="preserve">
     <value>지분 합계가 #P1%로 100%가 아닙니다. 그래도 저장하시겠습니까?</value>
   </data>
+  <data name="MessageDialogNoAvailableSellersMessage" xml:space="preserve">
+    <value>모든 판매자에게 이미 지분이 할당되어 있습니다.</value>
+  </data>
 </root>

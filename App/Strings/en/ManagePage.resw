@@ -204,4 +204,7 @@
   <data name="MessageDialogSharePercentageWarningMessage" xml:space="preserve">
     <value>The total share percentage is #P1%, not 100%. Do you want to save anyway?</value>
   </data>
+  <data name="MessageDialogNoAvailableSellersMessage" xml:space="preserve">
+    <value>All sellers have already been assigned a share.</value>
+  </data>
 </root>

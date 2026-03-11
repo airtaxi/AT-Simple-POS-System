@@ -193,7 +193,46 @@
                         x:Uid="/ManagePage/ShareNoSellersText"
                         Opacity="0.6"
                         Visibility="Collapsed" />
-                    <StackPanel x:Name="ShareItemsPanel" Spacing="4" />
+                    <ItemsRepeater x:Name="ShareItemsRepeater" ItemsSource="{x:Bind ShareItemViewModels}">
+                        <ItemsRepeater.Layout>
+                            <StackLayout Spacing="4" />
+                        </ItemsRepeater.Layout>
+                        <ItemsRepeater.ItemTemplate>
+                            <DataTemplate x:DataType="vm:ShareItemViewModel">
+                                <Grid ColumnSpacing="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="72" />
+                                        <ColumnDefinition Width="32" />
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Stretch"
+                                        DisplayMemberPath="Name"
+                                        DropDownOpened="{x:Bind OnDropDownOpened}"
+                                        ItemsSource="{x:Bind Sellers}"
+                                        SelectedItem="{x:Bind SelectedSeller, Mode=TwoWay}" />
+                                    <NumberBox
+                                        Grid.Column="1"
+                                        LargeChange="5"
+                                        Maximum="100"
+                                        Minimum="0"
+                                        SmallChange="5"
+                                        SpinButtonPlacementMode="Hidden"
+                                        Style="{StaticResource NumberBoxWithNoDeleteButtonStyle}"
+                                        Value="{x:Bind Percentage, Mode=TwoWay}" />
+                                    <Button
+                                        Grid.Column="2"
+                                        Padding="4"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Click="{x:Bind Delete}">
+                                        <SymbolIcon Symbol="Delete" />
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsRepeater.ItemTemplate>
+                    </ItemsRepeater>
                     <TextBlock x:Name="ShareTotalTextBlock" Opacity="0.7" />
                     <Button
                         x:Name="BtAddShare"
